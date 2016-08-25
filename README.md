@@ -6,4 +6,4 @@ Run `install.bat` and `run.bat` commands in series. Change port if you want in t
 
 Open `localhost:{PORT}` in browser - default is 3001
 
-[Broken](https://projects-tracker.herokuapp.com/) vs [Working example](http://screencast.com/t/Nni6J1UlK)
+[Broken](https://dev-project-tracker.herokuapp.com) vs [Working example](http://screencast.com/t/Nni6J1UlK)
