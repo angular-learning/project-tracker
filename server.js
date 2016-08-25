@@ -8,7 +8,7 @@ var database = require('./config/database'); 			// load the database config
 // configuration ===============================================================
 mongoose.connect(database.url, function (err) {
 	if (err) {
-		console.error('Connection to db failed: ' + err);
+		return console.error('Connection to db failed: ' + err);
 	}
 	console.log('database connected successfully');
 }); 	// connect to mongoDB database on modulus.io
