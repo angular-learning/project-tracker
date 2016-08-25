@@ -6,7 +6,12 @@ var port  	 = process.env.PORT || 8080; 				// set the port
 var database = require('./config/database'); 			// load the database config
 
 // configuration ===============================================================
-mongoose.connect(database.url); 	// connect to mongoDB database on modulus.io
+mongoose.connect(database.url, function (err) {
+	if (err) {
+		return console.error('Connection to db failed: ' + err + '; ' + (err.stack || ''));
+	}
+	console.log('database connected successfully');
+}); 	// connect to mongoDB database on modulus.io
 
 app.configure(function() {
 	app.use(express.static(__dirname + '/public')); 		// set the static files location /public/img will be /img for users
