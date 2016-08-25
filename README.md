@@ -4,4 +4,6 @@
 
 Run `install.bat` and `run.bat` commands in series. Change port if you want in the `run` script.
 
+Open `localhost:{PORT}` in browser - default is 3001
+
 [Working example](http://screencast.com/t/Nni6J1UlK)
