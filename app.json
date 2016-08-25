@@ -1,16 +1,13 @@
 {
-  "name": "project-tracker",
-  "scripts": {
-  },
-  "env": {
-    "MONGODB": "TO_BE_SET"
-  },
-  "formation": {
-  },
-  "addons": [
-
+  "name": "projects-tracker",
+  "description": "An app written using Node.js, Angular and MongoDB is supposed to be learning modern technologies app",
+  "keywords": [
+    "node",
+    "angular",
+    "mongodb"
   ],
-  "buildpacks": [
-
+  "image": "heroku/node",
+  "addons": [
+    "mongolab"
   ]
 }

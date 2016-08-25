@@ -2,6 +2,6 @@
 
 ## Development
 
-Run `local.bat` file to run server. Change port if you want in the script.
+Run `install.bat` and `run.bat` commands in series. Change port if you want in the `run` script.
 
 [Working example](http://screencast.com/t/Nni6J1UlK)
