@@ -1,29 +1,65 @@
-// set up ======================================================================
-var express  = require('express');
-var app      = express(); 								// create our app w/ express
-var mongoose = require('mongoose'); 					// mongoose for mongodb
-var port  	 = process.env.PORT || 8080; 				// set the port
+// dependencies
+var path = require('path');
+var express = require('express');
+var morgan = require('morgan');
+var mongoose = require('mongoose');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var serverBuilder = require('./app/server.builder');
+
 var database = require('./config/database'); 			// load the database config
 
-// configuration ===============================================================
-mongoose.connect(database.url, function (err) {
-	if (err) {
-		return console.error('Connection to db failed: ' + err + '; ' + (err.stack || ''));
-	}
-	console.log('database connected successfully');
-}); 	// connect to mongoDB database on modulus.io
+var port  	 = process.env.PORT || 3000; 				// set the port
+var env  	 = process.env.NODE_ENV;
 
-app.configure(function() {
-	app.use(express.static(__dirname + '/public')); 		// set the static files location /public/img will be /img for users
-	app.use(express.logger('dev')); 						// log every request to the console
-	app.use(express.bodyParser()); 							// pull information from html in POST
-	app.use(express.methodOverride()); 						// simulate DELETE and PUT
+console.log("env - " + env);
+
+mongoose.connect(database.url, function (err) {
+    if (err) {
+        console.error('Connection to db failed: ' + err + '; ' + (err.stack || ''));
+        process.exit(1);
+    }
+    console.log('database connected successfully');
 });
 
-// routes ======================================================================
-require('./app/routes.js')(app);
+var app = express();
 
-// listen (start app with node server.js) ======================================
-app.listen(port);
+app.set('port', serverBuilder.normalizePort(port));
 
-console.log("App listening on port " + port);
+if (env === "dev") {
+    app.use(morgan('dev'));
+}
+else {
+    app.use(morgan('combined'));
+}
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+var todoRouterGetter = require('./app/core/todo/routes');
+app.use('/api', todoRouterGetter());
+
+// load the single view file (angular will handle the page changes on the front-end)
+app.route('/*')
+    .get(function (req, res) {
+        res.sendFile(path.join(__dirname, './public/index.html'));
+    });
+
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
+
+// error handlers
+app.use(function (err, req, res, next) {
+    console.error(err);
+
+    res.status(err.status || 500).end();
+});
+
+serverBuilder.startServer(serverBuilder.normalizePort(port), app);
