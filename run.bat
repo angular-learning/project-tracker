@@ -1,1 +1,1 @@
-SET PORT=3001 && node server
+SET NODE_ENV=dev& SET PORT=3001& node server
