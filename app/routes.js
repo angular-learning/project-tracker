@@ -7,7 +7,7 @@ module.exports = function (app) {
     app.get('/api/todo', function (req, res) {
 
         // use mongoose to get all todos in the database
-        Todo.find({ done: false }, function (err, todos) {
+        Todo.find(/*{ done: false },*/ function (err, todos) {
 
             // if there is an error retrieving, send the error. nothing after res.send(err) will execute
             if (err)
@@ -45,10 +45,34 @@ module.exports = function (app) {
     });
 
     // delete a todo
-    app.delete('/api/todo/:id', function (req, res) {
+    app.post('/api/enable/:id', function (req, res) {
         Todo.update({
             _id: req.params.id
         }, { $set: { done: true } }, function (err, todo) {
+            if (err)
+                return res.send(err);
+
+            // return removed todo's id
+            res.json({ id: req.params.id });
+        });
+    });
+
+    app.post('/api/disable/:id', function (req, res) {
+        Todo.update({
+            _id: req.params.id
+        }, { $set: { done: false } }, function (err, todo) {
+            if (err)
+                return res.send(err);
+
+            // return removed todo's id
+            res.json({ id: req.params.id });
+        });
+    });
+
+    app.post('/api/delete/:id', function (req, res) {
+        Todo.remove({
+            _id: req.params.id
+        }, function (err, todo) {
             if (err)
                 return res.send(err);
 

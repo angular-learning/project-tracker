@@ -16,6 +16,7 @@
 		html 					{ overflow-y:scroll; }
 		body 					{ padding-top:50px; }
 		#todo-list 				{ margin-bottom:30px; }
+        #finished-todo-list 	{ margin-bottom:30px;text-decoration: line-through;}
 		#todo-form 	 			{ margin-bottom:50px; }
 	</style>
     
@@ -38,10 +39,10 @@
 
 	    <div id="todo-list" class="row">
 	        <div class="col-sm-4 col-sm-offset-4">
-
 	            <div class="checkbox" ng-repeat="todo in todos">
 	                <label>
-	                    <input type="checkbox" ng-click="deleteTodo(todo.id)"> {{ todo.text }}
+	                    <input type="checkbox" ng-model="todo.done" ng-click="switchTodo(todo)"> {{ todo.text }}
+                        <button ng-click="deleteTodo(todo)">Delete</button>
 	                </label>
 	            </div>
 
@@ -51,20 +52,41 @@
 
 	        </div>
 	    </div>
+        
+        <div id="todo-form" class="row">
+            <div class="col-sm-8 col-sm-offset-2 text-center">
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control input-lg text-center" placeholder="I want more todos" ng-model="newTodo.text">
+                    </div>
 
-		<div id="todo-form" class="row">
-			<div class="col-sm-8 col-sm-offset-2 text-center">
-				<form>
-					<div class="form-group">
-						<input type="text" class="form-control input-lg text-center" placeholder="I want more todos" ng-model="newTodo.text">
-					</div>
+                    <button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
+                </form>
+            </div>
+        </div>
 
-					<button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
-				</form>
-			</div>
-		</div>
+	    <div class="jumbotron text-center">
+            <h5>Already done :) <span class="label label-info">{{ dones.length }}</span></h5>
+        </div>
 
-	</div>
+	    <div id="finished-todo-list" class="row">
+            <div class="col-sm-4 col-sm-offset-4">
 
-</body>
+                <div class="checkbox" ng-repeat="done in dones">
+                    <del>
+                        <label>
+                            <input type="checkbox" ng-model="done.done" ng-click="switchTodo(done)"> {{ done.text }}
+                            <button ng-click="deleteTodo(done)">Delete</button>
+                        </label>
+                    </del>
+                </div>
+
+                <p class="text-center" ng-show="loading">
+                    <span class="fa fa-spinner fa-spin fa-3x"></span>
+                </p>
+
+            </div>
+        </div>
+        </div>
+    </body>
 </html>
