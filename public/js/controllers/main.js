@@ -1,7 +1,7 @@
-angular.module('todo', [])
+angular.module('main', [])
     .controller('mainController', function ($scope, $state, $http, Todo) {
 
-        $scope.newTodo = {};
+        $scope.newTodo = "";
         $scope.loading = true;
 
         Todo.get().success(function (data) {
@@ -12,10 +12,11 @@ angular.module('todo', [])
         $scope.createTodo = function (newTodo) {
             $scope.loading = true;
 
-            if (newTodo.text !== undefined) {
+            if (newTodo.text !== "") {
                 Todo.create(newTodo).success(function (data) {
-                    $scope.newTodo = {};
+                    $scope.newTodo = "";
                     $scope.todos = data;
+                    $scope.loading = false;
                 });
             }
         };
@@ -24,7 +25,7 @@ angular.module('todo', [])
             $scope.loading = true;
 
             Todo.delete(id).success(function (data) {
-
+                $scope.loading = false;
             });
         };
-    });
+});

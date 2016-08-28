@@ -1,7 +1,15 @@
-<!doctype html>
+﻿<!doctype html>
+
+<script src="vendors/angular/angular.js"></script><!-- load angular -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+<!--<script src="js/services/todo.services.js"></script>-->
+ <!-- load our todo service -->
+<!--<script src="js/controllers/main.js"></script>-->
+ <!-- load up our controller -->
+<script src="js/core.js"></script> <!-- load our main application -->
 
 <!-- ASSIGN OUR ANGULAR MODULE -->
-<html ng-app="todo">
+<html ng-app="project-tracker">
 <head>
 	<!-- META -->
 	<meta charset="utf-8">
@@ -19,11 +27,6 @@
 		#todo-form 	 			{ margin-bottom:50px; }
 	</style>
 
-	<script src="vendors/angular/angular.js"></script><!-- load angular -->
-
-	<script src="js/controllers/main.js"></script> <!-- load up our controller -->
-	<script src="js/services/todos.js"></script> <!-- load our todo service -->
-	<script src="js/core.js"></script> <!-- load our main application -->
 
 </head>
 
@@ -40,7 +43,7 @@
 
 				<div class="checkbox" ng-repeat="todo in todos">
 					<label>
-						<input type="checkbox" ng-click="deleteTodo(item.id)"> {{ item.text }}
+						<input type="checkbox" ng-click="deleteTodo(todo.id)"> {{ todo.text }}
 					</label>
 				</div>
 
@@ -55,7 +58,7 @@
 			<div class="col-sm-8 col-sm-offset-2 text-center">
 				<form>
 					<div class="form-group">
-						<input type="text" class="form-control input-lg text-center" placeholder="I want more todos" ng-model="formData.text">
+						<input type="text" class="form-control input-lg text-center" placeholder="I want more todos" ng-model="newTodo.text">
 					</div>
 
 					<button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
