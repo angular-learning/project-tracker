@@ -1,7 +1,7 @@
 angular.module('main', [])
-    .controller('mainController', function ($scope, $state, $http, Todo) {
+    .controller("mainController", function ($scope, $state, Todo) {
 
-        $scope.newTodo = "";
+        $scope.newTodo = { text: "" };
         $scope.loading = true;
 
         Todo.get().success(function (data) {
@@ -9,15 +9,19 @@ angular.module('main', [])
             $scope.loading = false;
         });
 
-        $scope.createTodo = function (newTodo) {
+        $scope.createTodo = function () {
             $scope.loading = true;
+            if ($scope.newTodo.text !== "") {
+                Todo.create($scope.newTodo)
+                    .success(function (data) {
+                        $scope.newTodo = { text: "" };
 
-            if (newTodo.text !== "") {
-                Todo.create(newTodo).success(function (data) {
-                    $scope.newTodo = "";
-                    $scope.todos = data;
-                    $scope.loading = false;
-                });
+                        var todos = $scope.todos;
+                        todos.push(data);
+
+                        $scope.loading = false;
+                    })
+                    .error(function (data, status) { $scope.loading = false; });
             }
         };
 
@@ -25,7 +29,16 @@ angular.module('main', [])
             $scope.loading = true;
 
             Todo.delete(id).success(function (data) {
+                var index = 0;
+                var todos = $scope.todos;
+                todos.some(function (entry, i) {
+                    if (entry.id === id) {
+                        index = i;
+                        return true;
+                    }
+                });
+                todos.splice(index, 1);
                 $scope.loading = false;
             });
         };
-});
+    });

@@ -20,6 +20,7 @@
     <Content Include="bower.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />
+    <Compile Include="public\js\config.js" />
     <Compile Include="server.js" />
     <Compile Include="app\routes.js" />
     <Compile Include="config\database.js" />

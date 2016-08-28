@@ -1,11 +1,14 @@
 angular.module('todo.services', [])
-	.factory('Todo', function() {
-		return {
-			get : function() {
-				return $http.get('/api/todos');
-			},
-			create : function(todoData) {
-				return $http.post('/api/todos', { data: todoData });
-			}
-		};
-	});
+    .factory('Todo', function ($http) {
+        return {
+            get: function () {
+                return $http.get('/api/todo');
+            },
+            create: function (todoData) {
+                return $http.post('/api/todo', { data: todoData });
+            },
+            delete: function (id) {
+                return $http.delete('/api/todo/' + id);
+            }
+        };
+    });
