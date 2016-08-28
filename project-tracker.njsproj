@@ -27,8 +27,8 @@
     <Content Include="public\index.html" />
     <Compile Include="app\models\todo.js" />
     <Compile Include="public\js\core.js" />
-    <Compile Include="public\js\controllers\main.js" />
-    <Compile Include="public\js\services\todo.services.js" />
+    <Compile Include="public\js\controllers\main.controller.js" />
+    <Compile Include="public\js\services\todo.service.js" />
     <Content Include="public\vendors\angular\angular-csp.css" />
     <Content Include="public\vendors\angular\.bower.json" />
     <Content Include="public\vendors\angular\bower.json" />

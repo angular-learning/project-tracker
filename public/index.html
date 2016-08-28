@@ -1,16 +1,5 @@
 ﻿<!doctype html>
 
-<script src="vendors/angular/angular.js"></script><!-- load angular -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
-<script src="js/services/todo.services.js"></script>
- <!-- load our todo service -->
-<script src="js/controllers/main.js"></script>
-
-<script src="js/config.js"></script>
-
-<!-- load up our controller -->
-<script src="js/core.js"></script> <!-- load our main application -->
-
 <!-- ASSIGN OUR ANGULAR MODULE -->
 <html ng-app="project-tracker">
 <head>
@@ -29,7 +18,13 @@
 		#todo-list 				{ margin-bottom:30px; }
 		#todo-form 	 			{ margin-bottom:50px; }
 	</style>
-
+    
+    <script src="vendors/angular/angular.js"></script><!-- load angular -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script><!-- load ui router -->
+    <script src="js/services/todo.service.js"></script><!-- load our todo service -->
+    <script src="js/controllers/main.controller.js"></script><!-- load up our controller -->
+    <script src="js/config.js"></script><!-- load up provider configuration -->
+    <script src="js/core.js"></script> <!-- load our main.controller application -->
 
 </head>
 

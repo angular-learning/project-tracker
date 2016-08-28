@@ -1,7 +1,7 @@
-angular.module('main', [])
+angular.module('main.controller', [])
     .controller("mainController", function ($scope, $state, Todo) {
 
-        $scope.newTodo = { text: "" };
+        $scope.newTodo = {};
         $scope.loading = true;
 
         Todo.get().success(function (data) {
@@ -11,14 +11,13 @@ angular.module('main', [])
 
         $scope.createTodo = function () {
             $scope.loading = true;
-            if ($scope.newTodo.text !== "") {
+            if ($scope.newTodo.text !== undefined) {
                 Todo.create($scope.newTodo)
                     .success(function (data) {
-                        $scope.newTodo = { text: "" };
-
                         var todos = $scope.todos;
                         todos.push(data);
 
+                        $scope.newTodo = {};
                         $scope.loading = false;
                     })
                     .error(function (data, status) { $scope.loading = false; });
@@ -31,6 +30,7 @@ angular.module('main', [])
             Todo.delete(id).success(function (data) {
                 var index = 0;
                 var todos = $scope.todos;
+                //TODO: maybe there is more elegant solution to find index of content matching element 
                 todos.some(function (entry, i) {
                     if (entry.id === id) {
                         index = i;
