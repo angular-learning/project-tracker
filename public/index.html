@@ -38,21 +38,21 @@
 			<h1>Todo App Now and Project Tracker in the near future :) <span class="label label-info">{{ todos.length }}</span></h1>
 		</div>
 
-		<div id="todo-list" class="row">
-			<div class="col-sm-4 col-sm-offset-4">
+	    <div id="todo-list" class="row">
+	        <div class="col-sm-4 col-sm-offset-4">
 
-				<div class="checkbox" ng-repeat="todo in todos">
-					<label>
-						<input type="checkbox" ng-click="deleteTodo(todo.id)"> {{ todo.text }}
-					</label>
-				</div>
+	            <div class="checkbox" ng-repeat="todo in todos">
+	                <label>
+	                    <input type="checkbox" ng-click="deleteTodo(todo.id)"> {{ todo.text }}
+	                </label>
+	            </div>
 
-				<p class="text-center" ng-show="loading">
-					<span class="fa fa-spinner fa-spin fa-3x"></span>
-				</p>
+	            <p class="text-center" ng-show="loading">
+	                <span class="fa fa-spinner fa-spin fa-3x"></span>
+	            </p>
 
-			</div>
-		</div>
+	        </div>
+	    </div>
 
 		<div id="todo-form" class="row">
 			<div class="col-sm-8 col-sm-offset-2 text-center">

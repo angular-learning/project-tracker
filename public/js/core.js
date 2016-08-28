@@ -25,9 +25,9 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
 });
 
-app.controller('mainController', function ($scope, $state, Todo) {
+app.controller("mainController", function ($scope, $state, Todo) {
 
-    $scope.newTodo = { text: '' };
+    $scope.newTodo = { text: "" };
     $scope.loading = true;
 
     Todo.get().success(function (data) {
@@ -37,12 +37,14 @@ app.controller('mainController', function ($scope, $state, Todo) {
 
     $scope.createTodo = function () {
         $scope.loading = true;
-
-        if ($scope.newTodo.text !== '') {
+        if ($scope.newTodo.text !== "") {
             Todo.create($scope.newTodo)
                 .success(function (data) {
-                    $scope.newTodo = { text: '' };
-                    $scope.todos = data;
+                    $scope.newTodo = { text: "" };
+
+                    var todos = $scope.todos;
+                    todos.push(data);
+
                     $scope.loading = false;
                 })
                 .error(function (data, status) { $scope.loading = false; });
@@ -53,8 +55,16 @@ app.controller('mainController', function ($scope, $state, Todo) {
         $scope.loading = true;
 
         Todo.delete(id).success(function (data) {
-            var index = $.grep($scope.todos, function (e) { return e._id == data; });
-            $scope.todos.splice(index, 1);
+            //TODO: get working code to detect index of deleted item
+            var index = 0;
+            var todos = $scope.todos; 
+            todos.some(function (entry, i) {
+                if (entry.id === id) {
+                    index = i;
+                    return true;
+                }
+            });
+            todos.splice(index, 1);
             $scope.loading = false;
         });
     };
