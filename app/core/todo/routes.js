@@ -1,5 +1,4 @@
 // dependencies
-
 var express = require('express');
 var Todo = require('./models/todo');
 
@@ -16,8 +15,6 @@ module.exports = function () {
 
     return router;
 };
-
-// private functions
 
 function _getAll(req, res) {
     Todo.find(function (err, todos) {
@@ -37,7 +34,7 @@ function _getAll(req, res) {
 
 function _create(req, res) {
     Todo.create({
-        text: req.body.todo.text,
+        text: req.body.text,
         done: false
     }, function (err, todo) {
         if (err) {

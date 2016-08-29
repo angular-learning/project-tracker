@@ -6,7 +6,7 @@ angular.module('todo.service', [])
                 return $http.get('/api/todo');
             },
             create: function (todo) {
-                return $http.post('/api/todo', { todo });
+                return $http.post('/api/todo', todo);
             },
             enable: function (id) {
                 return $http.post('/api/todo/enable/' + id);

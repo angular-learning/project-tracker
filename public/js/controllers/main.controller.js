@@ -41,7 +41,7 @@ angular.module('main.controller', [])
             array.splice(index, 1);
         }
 
-        function replaceItem (sourceArray, destArray, item) {
+        function moveItemBetweenArrays (sourceArray, destArray, item) {
             removeItemFromArray(sourceArray, item);
             destArray.push(item);
         }
@@ -52,11 +52,13 @@ angular.module('main.controller', [])
             if (!todo.done) {
                 Todo.disable(todo.id).success(function (data) {
                     replaceItem($scope.dones, $scope.todos, todo);
+                }).finally(function () {
                     $scope.loading = false;
-                }); 
+                });
             } else {
                 Todo.enable(todo.id).success(function (data) {
-                    replaceItem($scope.todos, $scope.dones, todo);
+                    moveItemBetweenArrays($scope.todos, $scope.dones, todo);
+                }).finally(function () {
                     $scope.loading = false;
                 });
             }
@@ -71,6 +73,7 @@ angular.module('main.controller', [])
                 } else {
                     removeItemFromArray($scope.dones, todo);
                 }
+            }).finally(function () {
                 $scope.loading = false;
             });
         }
