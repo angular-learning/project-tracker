@@ -4,17 +4,17 @@ angular.module('todo.service', [])
             get: function () {
                 return $http.get('/api/todo');
             },
-            create: function (todoData) {
-                return $http.post('/api/todo', { data: todoData });
+            create: function (todo) {
+                return $http.post('/api/todo', { todo });
             },
             enable: function (id) {
-                return $http.post('/api/enable/' + id);
+                return $http.post('/api/todo/enable/' + id);
             },
             disable: function (id) {
-                return $http.post('/api/disable/' + id);
+                return $http.post('/api/todo/disable/' + id);
             },
             delete: function (id) {
-                return $http.post('/api/delete/' + id);
+                return $http.delete('/api/todo/' + id);
             }
         };
     });
