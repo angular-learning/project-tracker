@@ -11,6 +11,10 @@ module.exports = function () {
     router.post('/todo', _create);
     router.delete('/todo/:id', _delete);
 
+    router.post('/todo/enable/:id', _getUpdater(true));
+    router.post('/todo/disable/:id', _getUpdater(false));
+    router.delete('/todo/delete/:id', _delete);
+
     return router;
 };
 
@@ -49,13 +53,25 @@ function _create(req, res) {
     });
 }
 
+function _getUpdater(done) {
+    return function _update(req, res) {
+        Todo.update({
+            _id: req.params.id
+        }, { $set: { done: done } }, function (err, todo) {
+            if (err)
+                return res.send(err);
+
+            res.json({ id: req.params.id });
+        });
+    };
+}
+
 function _delete(req, res) {
-    Todo.update({
+    Todo.remove({
         _id: req.params.id
-    }, { $set: { done: true } }, function (err, todo) {
-        if (err) {
+    }, function (err, todo) {
+        if (err)
             return res.send(err);
-        }
 
         res.json({ id: req.params.id });
     });
