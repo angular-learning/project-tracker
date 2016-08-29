@@ -30,14 +30,7 @@ angular.module('main.controller', [])
         };
 
         function removeItemFromArray (array, item) {
-            var index = 0;
-            array.some(function (entry, i) {
-                            if (entry.id === item.id) {
-                                index = i;
-                                return true;
-                            }
-            });
-
+            var index = _.findIndex(array, function (i) { return i.id === item.id; });
             array.splice(index, 1);
         }
 
@@ -65,10 +58,10 @@ angular.module('main.controller', [])
             $scope.loading = true;
             
             Todo.delete(todo.id).success(function (data) {
-                if (!todo.done) {
-                    removeItemFromArray($scope.todos, todo);
-                } else {
+                if (todo.done) {
                     removeItemFromArray($scope.dones, todo);
+                } else {
+                    removeItemFromArray($scope.todos, todo);
                 }
             }).finally(function () {
                 $scope.loading = false;
