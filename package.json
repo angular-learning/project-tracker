@@ -7,7 +7,7 @@
   },
   "license": "MIT",
   "description": "An app written using Node.js, Angular and MongoDB is supposed to be learning modern technologies app",
-  "main": "server.js",
+  "main.controller": "server.js",
   "dependencies": {
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",

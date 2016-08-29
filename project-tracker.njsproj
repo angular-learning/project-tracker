@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{dcf4ef45-fe91-4d66-a544-5c917b7e0869}</ProjectGuid>
     <ProjectHome />
-    <ProjectView>ShowAllFiles</ProjectView>
+    <ProjectView>ProjectFiles</ProjectView>
     <StartupFile>server.js</StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -20,14 +20,15 @@
     <Content Include="bower.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />
+    <Compile Include="public\js\config.js" />
     <Compile Include="server.js" />
     <Compile Include="app\routes.js" />
     <Compile Include="config\database.js" />
     <Content Include="public\index.html" />
     <Compile Include="app\models\todo.js" />
     <Compile Include="public\js\core.js" />
-    <Compile Include="public\js\controllers\main.js" />
-    <Compile Include="public\js\services\todo.js" />
+    <Compile Include="public\js\controllers\main.controller.js" />
+    <Compile Include="public\js\services\todo.service.js" />
     <Content Include="public\vendors\angular\angular-csp.css" />
     <Content Include="public\vendors\angular\.bower.json" />
     <Content Include="public\vendors\angular\bower.json" />
