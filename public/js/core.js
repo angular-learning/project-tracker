@@ -1,1 +1,1 @@
-angular.module('project-tracker', ['ui.router', 'todo.service', 'main.controller', 'config']);
+angular.module('project-tracker', ['todo.service', 'main.controller']);

@@ -1,5 +1,5 @@
 angular.module('main.controller', [])
-    .controller("mainController", function ($scope, $state, Todo) {
+    .controller("mainController", function ($scope, Todo) {
 
         $scope.newTodo = {};
         $scope.loading = true;
@@ -26,6 +26,8 @@ angular.module('main.controller', [])
                         $scope.loading = false;
                         $scope.error = status;
                     });
+            } else {
+                $scope.loading = false;
             }
         };
 

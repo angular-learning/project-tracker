@@ -45,10 +45,10 @@ module.exports = function (app) {
     });
 
     // delete a todo
-    app.post('/api/enable/:id', function (req, res) {
+    app.post('/api/:id', function (req, res) {
         Todo.update({
             _id: req.params.id
-        }, { $set: { done: true } }, function (err, todo) {
+        }, req.body.data, function (err, todo) {
             if (err)
                 return res.send(err);
 
