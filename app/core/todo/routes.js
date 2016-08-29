@@ -33,7 +33,12 @@ function _getAll(req, res) {
 function _update(req, res) {
     Todo.update({
         _id: req.body.id
-    }, { $set: { done: req.body.done } }, function (err, todo) {
+    }, {
+        $set: {
+            text: req.body.text,
+            done: req.body.done
+        }
+        }, function (err, todo) {
         if (err)
             return res.send(err);
 
