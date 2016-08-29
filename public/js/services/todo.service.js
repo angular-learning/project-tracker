@@ -1,3 +1,4 @@
+//TODO: Check comment about service naming
 angular.module('todo.service', [])
     .factory('Todo', function ($http) {
         return {

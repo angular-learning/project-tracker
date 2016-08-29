@@ -29,7 +29,7 @@ angular.module('main.controller', [])
                 });
         };
 
-        $scope.removeItemFromArray = function (array, item) {
+        function removeItemFromArray (array, item) {
             var index = 0;
             array.some(function (entry, i) {
                             if (entry.id === item.id) {
@@ -41,24 +41,22 @@ angular.module('main.controller', [])
             array.splice(index, 1);
         }
 
-        $scope.replaceItem = function (sourceArray, destArray, item) {
-            $scope.removeItemFromArray(sourceArray, item);
+        function replaceItem (sourceArray, destArray, item) {
+            removeItemFromArray(sourceArray, item);
             destArray.push(item);
         }
 
         $scope.switchTodo = function (todo) {
             $scope.loading = true;
-            var todos = $scope.todos;
-            var dones = $scope.dones;
 
             if (!todo.done) {
                 Todo.disable(todo.id).success(function (data) {
-                    $scope.replaceItem(dones, todos, todo);
+                    replaceItem($scope.dones, $scope.todos, todo);
                     $scope.loading = false;
                 }); 
             } else {
                 Todo.enable(todo.id).success(function (data) {
-                    $scope.replaceItem(todos, dones, todo);
+                    replaceItem($scope.todos, $scope.dones, todo);
                     $scope.loading = false;
                 });
             }
@@ -66,14 +64,12 @@ angular.module('main.controller', [])
 
         $scope.deleteTodo = function(todo) {
             $scope.loading = true;
-            var todos = $scope.todos;
-            var dones = $scope.dones;
             
             Todo.delete(todo.id).success(function (data) {
                 if (!todo.done) {
-                    $scope.removeItemFromArray(todos, todo);
+                    removeItemFromArray($scope.todos, todo);
                 } else {
-                    $scope.removeItemFromArray(dones, todo);
+                    removeItemFromArray($scope.dones, todo);
                 }
                 $scope.loading = false;
             });

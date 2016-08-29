@@ -19,71 +19,72 @@
         #finished-todo-list 	{ margin-bottom:30px;text-decoration: line-through;}
 		#todo-form 	 			{ margin-bottom:50px; }
 	</style>
+</head>
+
+<!-- SET THE CONTROLLER -->
+<body ng-controller="mainController">
+<div class="container">
+
+    <div class="jumbotron text-center">
+        <h1>Todo App Now and Project Tracker in the near future :) <span class="label label-info">{{ todos.length }}</span></h1>
+    </div>
+
+    <div id="todo-list" class="row">
+        <div class="col-sm-4 col-sm-offset-4">
+            <div class="checkbox" ng-repeat="todo in todos">
+                <label>
+                    <input type="checkbox" ng-model="todo.done" ng-click="switchTodo(todo)"> {{ todo.text }}
+                    <button ng-click="deleteTodo(todo)">Delete</button>
+                </label>
+            </div>
+
+            <p class="text-center" ng-show="loading">
+                <span class="fa fa-spinner fa-spin fa-3x"></span>
+            </p>
+
+        </div>
+    </div>
+        
+    <div id="todo-form" class="row">
+        <div class="col-sm-8 col-sm-offset-2 text-center">
+            <form>
+                <div class="form-group">
+                    <input type="text" class="form-control input-lg text-center" placeholder="I want more todos" ng-model="newTodo.text">
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="jumbotron text-center">
+        <h5>Already done :) <span class="label label-info">{{ dones.length }}</span></h5>
+    </div>
+
+    <div id="finished-todo-list" class="row">
+        <div class="col-sm-4 col-sm-offset-4">
+
+            <div class="checkbox" ng-repeat="todo in dones">
+                <del>
+                    <label>
+                        <input type="checkbox" ng-model="todo.done" ng-click="switchTodo(done)"> {{ todo.text }}
+                        <button ng-click="deleteTodo(todo)">Delete</button>
+                    </label>
+                </del>
+            </div>
+
+            <p class="text-center" ng-show="loading">
+                <span class="fa fa-spinner fa-spin fa-3x"></span>
+            </p>
+
+        </div>
+    </div>
+</div>
     
     <script src="vendors/angular/angular.js"></script><!-- load angular -->
     <script src="js/services/todo.service.js"></script><!-- load our todo service -->
     <script src="js/controllers/main.controller.js"></script><!-- load up our controller -->
     <script src="js/core.js"></script> <!-- load our main application -->
-</head>
 
-<!-- SET THE CONTROLLER -->
-<body ng-controller="mainController">
-	<div class="container">
-
-		<div class="jumbotron text-center">
-			<h1>Todo App Now and Project Tracker in the near future :) <span class="label label-info">{{ todos.length }}</span></h1>
-		</div>
-
-	    <div id="todo-list" class="row">
-	        <div class="col-sm-4 col-sm-offset-4">
-	            <div class="checkbox" ng-repeat="todo in todos">
-	                <label>
-	                    <input type="checkbox" ng-model="todo.done" ng-click="switchTodo(todo)"> {{ todo.text }}
-                        <button ng-click="deleteTodo(todo)">Delete</button>
-	                </label>
-	            </div>
-
-	            <p class="text-center" ng-show="loading">
-	                <span class="fa fa-spinner fa-spin fa-3x"></span>
-	            </p>
-
-	        </div>
-	    </div>
-        
-        <div id="todo-form" class="row">
-            <div class="col-sm-8 col-sm-offset-2 text-center">
-                <form>
-                    <div class="form-group">
-                        <input type="text" class="form-control input-lg text-center" placeholder="I want more todos" ng-model="newTodo.text">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
-                </form>
-            </div>
-        </div>
-
-	    <div class="jumbotron text-center">
-            <h5>Already done :) <span class="label label-info">{{ dones.length }}</span></h5>
-        </div>
-
-	    <div id="finished-todo-list" class="row">
-            <div class="col-sm-4 col-sm-offset-4">
-
-                <div class="checkbox" ng-repeat="done in dones">
-                    <del>
-                        <label>
-                            <input type="checkbox" ng-model="done.done" ng-click="switchTodo(done)"> {{ done.text }}
-                            <button ng-click="deleteTodo(done)">Delete</button>
-                        </label>
-                    </del>
-                </div>
-
-                <p class="text-center" ng-show="loading">
-                    <span class="fa fa-spinner fa-spin fa-3x"></span>
-                </p>
-
-            </div>
-        </div>
-        </div>
-    </body>
+</body>
 </html>

@@ -20,7 +20,7 @@ module.exports = function () {
 // private functions
 
 function _getAll(req, res) {
-    Todo.find({ done: false }, function (err, todos) {
+    Todo.find(function (err, todos) {
         if (err) {
             return res.send(err);
         }
