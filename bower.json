@@ -1,7 +1,7 @@
 {
   "name": "project-tracker",
   "description": "An app written using Node.js, Angular and MongoDB is supposed to be learning modern technologies app",
-  "main.controller": "server.js",
+  "main": "server.js",
   "authors": [],
   "license": "MIT",
   "keywords": [

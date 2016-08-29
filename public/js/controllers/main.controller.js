@@ -1,5 +1,5 @@
 angular.module('main.controller', [])
-    .controller("mainController", function ($scope, Todo) {
+    .controller('mainController', function ($scope, Todo) {
 
         $scope.newTodo = {};
         $scope.loading = true;
@@ -11,24 +11,22 @@ angular.module('main.controller', [])
         });
 
         $scope.createTodo = function () {
-            $scope.loading = true;
-            if ($scope.newTodo.text !== undefined) {
-                Todo.create($scope.newTodo)
-                    .success(function (data) {
-                        var todos = $scope.todos;
-                        todos.push(data);
+            if (!$scope.newTodo.text)
+                return;
 
-                        $scope.newTodo = {};
-                        $scope.loading = false;
-                    })
-                    //TODO: it would be nice if we can bind error status right to the view
-                    .error(function(data, status) {
-                        $scope.loading = false;
-                        $scope.error = status;
-                    });
-            } else {
-                $scope.loading = false;
-            }
+            $scope.loading = true;
+
+            Todo.create($scope.newTodo)
+                .success(function(data) {
+                    $scope.todos.push(data);
+                    $scope.newTodo = {};
+                })
+                .error(function(data, status) {
+                    $scope.error = status;
+                })
+                .finally(function() {
+                    $scope.loading = false;
+                });
         };
 
         $scope.removeItemFromArray = function (array, item) {

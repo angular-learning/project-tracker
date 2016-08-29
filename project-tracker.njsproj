@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{dcf4ef45-fe91-4d66-a544-5c917b7e0869}</ProjectGuid>
     <ProjectHome />
-    <ProjectView>ProjectFiles</ProjectView>
+    <ProjectView>ShowAllFiles</ProjectView>
     <StartupFile>server.js</StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -23,7 +23,6 @@
     <Compile Include="app\core\todo\models\todo.js" />
     <Compile Include="app\core\todo\routes.js" />
     <Compile Include="app\server.builder.js" />
-    <Compile Include="public\js\config.js" />
     <Compile Include="server.js" />
     <Compile Include="config\database.js" />
     <Content Include="public\index.html" />
