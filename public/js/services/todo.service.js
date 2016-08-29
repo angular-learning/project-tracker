@@ -8,11 +8,8 @@ angular.module('todo.service', [])
             create: function (todo) {
                 return $http.post('/api/todo', todo);
             },
-            enable: function (id) {
-                return $http.post('/api/todo/enable/' + id);
-            },
-            disable: function (id) {
-                return $http.post('/api/todo/disable/' + id);
+            update: function (todo) {
+                return $http.post('/api/todo/update/', todo);
             },
             delete: function (id) {
                 return $http.delete('/api/todo/' + id);

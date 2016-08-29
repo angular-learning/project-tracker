@@ -48,20 +48,17 @@ angular.module('main.controller', [])
 
         $scope.switchTodo = function (todo) {
             $scope.loading = true;
-
-            if (!todo.done) {
-                Todo.disable(todo.id).success(function (data) {
-                    replaceItem($scope.dones, $scope.todos, todo);
-                }).finally(function () {
-                    $scope.loading = false;
-                });
-            } else {
-                Todo.enable(todo.id).success(function (data) {
+            
+            Todo.update(todo).success(function (data) {
+                if (todo.done) {
                     moveItemBetweenArrays($scope.todos, $scope.dones, todo);
-                }).finally(function () {
-                    $scope.loading = false;
-                });
-            }
+                } else {
+                    moveItemBetweenArrays($scope.dones, $scope.todos, todo);
+                }
+                
+            }).finally(function () {
+                $scope.loading = false;
+            });
         };
 
         $scope.deleteTodo = function(todo) {

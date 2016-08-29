@@ -67,7 +67,7 @@
             <div class="checkbox" ng-repeat="todo in dones">
                 <del>
                     <label>
-                        <input type="checkbox" ng-model="todo.done" ng-click="switchTodo(done)"> {{ todo.text }}
+                        <input type="checkbox" ng-model="todo.done" ng-click="switchTodo(todo)"> {{ todo.text }}
                         <button ng-click="deleteTodo(todo)">Delete</button>
                     </label>
                 </del>

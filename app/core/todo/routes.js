@@ -9,9 +9,7 @@ module.exports = function () {
     router.get('/todo', _getAll);
     router.post('/todo', _create);
     router.delete('/todo/:id', _delete);
-
-    router.post('/todo/enable/:id', _getUpdater(true));
-    router.post('/todo/disable/:id', _getUpdater(false));
+    router.post('/todo/:id', _update);
 
     return router;
 };
@@ -29,6 +27,17 @@ function _getAll(req, res) {
                 text: todo.text
             };
         }));
+    });
+}
+
+function _update(req, res) {
+    Todo.update({
+        _id: req.body.id
+    }, { $set: { done: req.body.done } }, function (err, todo) {
+        if (err)
+            return res.send(err);
+
+        res.json({ id: todo._id });
     });
 }
 
@@ -58,17 +67,4 @@ function _delete(req, res) {
 
         res.json({ id: req.params.id });
     });
-}
-
-function _getUpdater(done) {
-    return function _update(req, res) {
-        Todo.update({
-            _id: req.params.id
-        }, { $set: { done: done } }, function (err, todo) {
-            if (err)
-                return res.send(err);
-
-            res.json({ id: req.params.id });
-        });
-    };
 }
