@@ -26,10 +26,14 @@
 <div class="container">
 
     <div class="jumbotron text-center">
-        <h1>Todo App Now and Project Tracker in the near future :) <span class="label label-info">{{ ctrl.todos.length }}</span></h1>
+        <h1>Todo App Now and Project Tracker in the near future :) 
+            <div ng-show="ctrl.isArrayCounterVisible(ctrl.todos)">
+                <span class="label label-info">{{ ctrl.todos.length }}</span>
+            </div>
+        </h1>
     </div>
 
-    <div id="todo-list" class="row">
+    <div id="todo-list" class="row" ng-show="ctrl.isArrayElementsListVisible(ctrl.todos)">
         <div class="col-sm-4 col-sm-offset-4">
             <div class="checkbox" ng-repeat="item in ctrl.todos">
                 <label>
@@ -52,16 +56,23 @@
                     <input type="text" class="form-control input-lg text-center" placeholder="I want more todos" ng-model="ctrl.newTodo.text">
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-lg" ng-click="ctrl.createTodo()">Add</button>
+                <button type="submit" 
+                        class="btn btn-primary btn-lg" 
+                        ng-click="ctrl.createTodo()"
+                        ng-show="ctrl.isAddButtonVisible()">Add</button>
             </form>
         </div>
     </div>
 
     <div class="jumbotron text-center">
-        <h5>Already done :) <span class="label label-info">{{ ctrl.dones.length }}</span></h5>
+        <h5>Already done :) 
+            <div ng-show="ctrl.isArrayCounterVisible(ctrl.dones)">
+                <span class="label label-info">{{ ctrl.dones.length }}</span>
+            </div>
+        </h5>
     </div>
 
-    <div id="finished-todo-list" class="row">
+    <div id="finished-todo-list" class="row" ng-show="ctrl.isArrayElementsListVisible(ctrl.dones)">
         <div class="col-sm-4 col-sm-offset-4">
 
             <div class="checkbox" ng-repeat="item in ctrl.dones">

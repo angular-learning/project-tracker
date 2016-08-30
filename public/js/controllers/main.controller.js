@@ -29,7 +29,7 @@ angular
                 .finally(function() {
                     self.loading = false;
                 });
-        }
+        };
 
         self.updateTodo = function (todo) {
             self.loading = true;
@@ -44,7 +44,7 @@ angular
             }).finally(function () {
                 self.loading = false;
             });
-        }
+        };
 
         self.deleteTodo = function(todo) {
             self.loading = true;
@@ -58,7 +58,19 @@ angular
             }).finally(function () {
                 self.loading = false;
             });
-        }
+        };
+
+        self.isAddButtonVisible = function() {
+            return self.newTodo.text ? true : false;
+        };
+
+        self.isArrayCounterVisible = function(array) {
+            return array.length === 0 ? false : true;
+        };
+
+        self.isArrayElementsListVisible = function(array) {
+            return array.length === 0 ? false : true;
+        };
 
         function _removeItemFromArray (array, item) {
             var index = _.findIndex(array, function (i) { return i.id === item.id; });
