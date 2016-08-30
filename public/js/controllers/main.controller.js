@@ -29,44 +29,44 @@ angular
                 .finally(function() {
                     self.loading = false;
                 });
-        };
-
-        function removeItemFromArray (array, item) {
-            var index = _.findIndex(array, function (i) { return i.id === item.id; });
-            array.splice(index, 1);
         }
 
-        function moveItemBetweenArrays (sourceArray, destArray, item) {
-            removeItemFromArray(sourceArray, item);
-            destArray.push(item);
-        }
-
-        self.switchTodo = function (todo) {
+        self.updateTodo = function (todo) {
             self.loading = true;
             
             Todo.update(todo).success(function (data) {
                 if (todo.done) {
-                    moveItemBetweenArrays(self.todos, self.dones, todo);
+                    _moveItemBetweenArrays(self.todos, self.dones, todo);
                 } else {
-                    moveItemBetweenArrays(self.dones, self.todos, todo);
+                    _moveItemBetweenArrays(self.dones, self.todos, todo);
                 }
                 
             }).finally(function () {
                 self.loading = false;
             });
-        };
+        }
 
         self.deleteTodo = function(todo) {
             self.loading = true;
             
             Todo.delete(todo.id).success(function (data) {
                 if (todo.done) {
-                    removeItemFromArray(self.dones, todo);
+                    _removeItemFromArray(self.dones, todo);
                 } else {
-                    removeItemFromArray(self.todos, todo);
+                    _removeItemFromArray(self.todos, todo);
                 }
             }).finally(function () {
                 self.loading = false;
             });
+        }
+
+        function _removeItemFromArray (array, item) {
+            var index = _.findIndex(array, function (i) { return i.id === item.id; });
+            array.splice(index, 1);
+        }
+
+        function _moveItemBetweenArrays (sourceArray, destArray, item) {
+            _removeItemFromArray(sourceArray, item);
+            destArray.push(item);
         }
     });

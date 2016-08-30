@@ -16,7 +16,7 @@
 		html 					{ overflow-y:scroll; }
 		body 					{ padding-top:50px; }
 		#todo-list 				{ margin-bottom:30px; }
-        #finished-todo-list 	{ margin-bottom:30px;text-decoration: line-through;}
+        #finished-todo-list 	{ margin-bottom:30px; }
 		#todo-form 	 			{ margin-bottom:50px; }
 	</style>
 </head>
@@ -31,10 +31,10 @@
 
     <div id="todo-list" class="row">
         <div class="col-sm-4 col-sm-offset-4">
-            <div class="checkbox" ng-repeat="todo in ctrl.todos">
+            <div class="checkbox" ng-repeat="item in ctrl.todos">
                 <label>
-                    <input type="checkbox" ng-model="todo.done" ng-click="ctrl.switchTodo(todo)"> {{ todo.text }}
-                    <button ng-click="ctrl.deleteTodo(todo)">Delete</button>
+                    <input type="checkbox" ng-model="item.done" ng-click="ctrl.updateTodo(item)"> {{ item.text }}
+                    <button ng-click="ctrl.deleteTodo(item)">Delete</button>
                 </label>
             </div>
 
@@ -64,11 +64,11 @@
     <div id="finished-todo-list" class="row">
         <div class="col-sm-4 col-sm-offset-4">
 
-            <div class="checkbox" ng-repeat="todo in ctrl.dones">
+            <div class="checkbox" ng-repeat="item in ctrl.dones">
                 <del>
                     <label>
-                        <input type="checkbox" ng-model="todo.done" ng-click="ctrl.switchTodo(todo)"> {{ todo.text }}
-                        <button ng-click="ctrl.deleteTodo(todo)">Delete</button>
+                        <input type="checkbox" ng-model="item.done" ng-click="ctrl.updateTodo(item)"> {{ item.text }}
+                        <button ng-click="ctrl.deleteTodo(item)">Delete</button>
                     </label>
                 </del>
             </div>
