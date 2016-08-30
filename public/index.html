@@ -25,29 +25,7 @@
 <body ng-controller="mainController as ctrl">
 <div class="container">
 
-    <div class="jumbotron text-center">
-        <h1>Todo App Now and Project Tracker in the near future :) 
-            <div ng-show="ctrl.isArrayCounterVisible(ctrl.todos)">
-                <span class="label label-info">{{ ctrl.todos.length }}</span>
-            </div>
-        </h1>
-    </div>
-
-    <div id="todo-list" class="row" ng-show="ctrl.isArrayElementsListVisible(ctrl.todos)">
-        <div class="col-sm-4 col-sm-offset-4">
-            <div class="checkbox" ng-repeat="item in ctrl.todos">
-                <label>
-                    <input type="checkbox" ng-model="item.done" ng-click="ctrl.updateTodo(item)"> {{ item.text }}
-                    <button ng-click="ctrl.deleteTodo(item)">Delete</button>
-                </label>
-            </div>
-
-            <p class="text-center" ng-show="loading">
-                <span class="fa fa-spinner fa-spin fa-3x"></span>
-            </p>
-
-        </div>
-    </div>
+    <pt-todo-list array="ctrl.todos"></pt-todo-list>
         
     <div id="todo-form" class="row">
         <div class="col-sm-8 col-sm-offset-2 text-center">
@@ -97,5 +75,6 @@
     <script src="js/core.js"></script> <!-- load our main application -->
     <script src="js/controllers/main.controller.js"></script><!-- load up our controller -->
     <script src="js/factories/todo.factory.js"></script><!-- load our todo factory -->
+    <script src="js/directives/todo.list.directive.js"></script><!-- load our todo factory -->
 </body>
 </html>
