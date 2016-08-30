@@ -1,5 +1,5 @@
-//TODO: Check comment about service naming
-angular.module('todo.service', [])
+angular
+    .module('project-tracker')
     .factory('Todo', function ($http) {
         return {
             get: function () {

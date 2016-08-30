@@ -22,19 +22,19 @@
 </head>
 
 <!-- SET THE CONTROLLER -->
-<body ng-controller="mainController">
+<body ng-controller="mainController as ctrl">
 <div class="container">
 
     <div class="jumbotron text-center">
-        <h1>Todo App Now and Project Tracker in the near future :) <span class="label label-info">{{ todos.length }}</span></h1>
+        <h1>Todo App Now and Project Tracker in the near future :) <span class="label label-info">{{ ctrl.todos.length }}</span></h1>
     </div>
 
     <div id="todo-list" class="row">
         <div class="col-sm-4 col-sm-offset-4">
-            <div class="checkbox" ng-repeat="todo in todos">
+            <div class="checkbox" ng-repeat="todo in ctrl.todos">
                 <label>
-                    <input type="checkbox" ng-model="todo.done" ng-click="switchTodo(todo)"> {{ todo.text }}
-                    <button ng-click="deleteTodo(todo)">Delete</button>
+                    <input type="checkbox" ng-model="todo.done" ng-click="ctrl.switchTodo(todo)"> {{ todo.text }}
+                    <button ng-click="ctrl.deleteTodo(todo)">Delete</button>
                 </label>
             </div>
 
@@ -49,26 +49,26 @@
         <div class="col-sm-8 col-sm-offset-2 text-center">
             <form>
                 <div class="form-group">
-                    <input type="text" class="form-control input-lg text-center" placeholder="I want more todos" ng-model="newTodo.text">
+                    <input type="text" class="form-control input-lg text-center" placeholder="I want more todos" ng-model="ctrl.newTodo.text">
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
+                <button type="submit" class="btn btn-primary btn-lg" ng-click="ctrl.createTodo()">Add</button>
             </form>
         </div>
     </div>
 
     <div class="jumbotron text-center">
-        <h5>Already done :) <span class="label label-info">{{ dones.length }}</span></h5>
+        <h5>Already done :) <span class="label label-info">{{ ctrl.dones.length }}</span></h5>
     </div>
 
     <div id="finished-todo-list" class="row">
         <div class="col-sm-4 col-sm-offset-4">
 
-            <div class="checkbox" ng-repeat="todo in dones">
+            <div class="checkbox" ng-repeat="todo in ctrl.dones">
                 <del>
                     <label>
-                        <input type="checkbox" ng-model="todo.done" ng-click="switchTodo(todo)"> {{ todo.text }}
-                        <button ng-click="deleteTodo(todo)">Delete</button>
+                        <input type="checkbox" ng-model="todo.done" ng-click="ctrl.switchTodo(todo)"> {{ todo.text }}
+                        <button ng-click="ctrl.deleteTodo(todo)">Delete</button>
                     </label>
                 </del>
             </div>
@@ -83,9 +83,8 @@
     
     <script src="vendors/angular/angular.js"></script><!-- load angular -->
     <script src="vendors/lodash/lodash.js"></script>
-    <script src="js/services/todo.service.js"></script><!-- load our todo service -->
-    <script src="js/controllers/main.controller.js"></script><!-- load up our controller -->
     <script src="js/core.js"></script> <!-- load our main application -->
-
+    <script src="js/controllers/main.controller.js"></script><!-- load up our controller -->
+    <script src="js/factories/todo.factory.js"></script><!-- load our todo factory -->
 </body>
 </html>

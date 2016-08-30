@@ -1,31 +1,33 @@
-angular.module('main.controller', [])
-    .controller('mainController', function ($scope, Todo) {
+angular
+    .module('project-tracker')
+    .controller('mainController', function (Todo) {
+        var self = this;
 
-        $scope.newTodo = {};
-        $scope.loading = true;
+        self.newTodo = {};
+        self.loading = true;
 
         Todo.get().success(function (data) {
-            $scope.todos = data.filter(function (e) { return !e.done; });
-            $scope.dones = data.filter(function (e) { return e.done; });
-            $scope.loading = false;
+            self.todos = data.filter(function (e) { return !e.done; });
+            self.dones = data.filter(function (e) { return e.done; });
+            self.loading = false;
         });
 
-        $scope.createTodo = function () {
-            if (!$scope.newTodo.text)
+        self.createTodo = function () {
+            if (!self.newTodo.text)
                 return;
 
-            $scope.loading = true;
+            self.loading = true;
 
-            Todo.create($scope.newTodo)
+            Todo.create(self.newTodo)
                 .success(function(data) {
-                    $scope.todos.push(data);
-                    $scope.newTodo = {};
+                    self.todos.push(data);
+                    self.newTodo = {};
                 })
                 .error(function(data, status) {
-                    $scope.error = status;
+                    self.error = status;
                 })
                 .finally(function() {
-                    $scope.loading = false;
+                    self.loading = false;
                 });
         };
 
@@ -39,32 +41,32 @@ angular.module('main.controller', [])
             destArray.push(item);
         }
 
-        $scope.switchTodo = function (todo) {
-            $scope.loading = true;
+        self.switchTodo = function (todo) {
+            self.loading = true;
             
             Todo.update(todo).success(function (data) {
                 if (todo.done) {
-                    moveItemBetweenArrays($scope.todos, $scope.dones, todo);
+                    moveItemBetweenArrays(self.todos, self.dones, todo);
                 } else {
-                    moveItemBetweenArrays($scope.dones, $scope.todos, todo);
+                    moveItemBetweenArrays(self.dones, self.todos, todo);
                 }
                 
             }).finally(function () {
-                $scope.loading = false;
+                self.loading = false;
             });
         };
 
-        $scope.deleteTodo = function(todo) {
-            $scope.loading = true;
+        self.deleteTodo = function(todo) {
+            self.loading = true;
             
             Todo.delete(todo.id).success(function (data) {
                 if (todo.done) {
-                    removeItemFromArray($scope.dones, todo);
+                    removeItemFromArray(self.dones, todo);
                 } else {
-                    removeItemFromArray($scope.todos, todo);
+                    removeItemFromArray(self.todos, todo);
                 }
             }).finally(function () {
-                $scope.loading = false;
+                self.loading = false;
             });
         }
     });
