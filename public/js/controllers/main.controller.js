@@ -65,11 +65,11 @@ angular
         };
 
         self.isArrayCounterVisible = function(array) {
-            return array.length === 0 ? false : true;
+            return array && array.length !== 0 ? true : false;
         };
 
         self.isArrayElementsListVisible = function(array) {
-            return array.length === 0 ? false : true;
+            return array && array.length !== 0 ? true : false;
         };
 
         function _removeItemFromArray (array, item) {
