@@ -14,6 +14,8 @@ module.exports = function () {
     return router;
 };
 
+// private functions
+
 function _getAll(req, res) {
     Todo.find(function (err, todos) {
         if (err) {

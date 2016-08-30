@@ -20,42 +20,43 @@
     <Content Include="bower.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />
-    <Compile Include="app\core\todo\models\todo.js" />
-    <Compile Include="app\core\todo\routes.js" />
-    <Compile Include="app\server.builder.js" />
     <Compile Include="server.js" />
+    <Compile Include="app\routes.js" />
     <Compile Include="config\database.js" />
     <Content Include="public\index.html" />
+    <Compile Include="app\models\todo.js" />
     <Compile Include="public\js\core.js" />
-    <Compile Include="public\js\controllers\main.controller.js" />
-    <Compile Include="public\js\services\todo.service.js" />
+    <Compile Include="public\js\controllers\main.js" />
+    <Compile Include="public\js\services\todo.js" />
+    <Content Include="public\vendors\angular\angular-csp.css" />
+    <Content Include="public\vendors\angular\.bower.json" />
+    <Content Include="public\vendors\angular\bower.json" />
+    <Content Include="public\vendors\angular\package.json" />
+    <Content Include="public\vendors\angular\LICENSE.md" />
+    <Content Include="public\vendors\angular\README.md" />
+    <Compile Include="public\vendors\angular\angular.js" />
+    <Compile Include="public\vendors\angular\angular.min.js" />
+    <Compile Include="public\vendors\angular\index.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app" />
-    <Folder Include="app\core\" />
-    <Folder Include="app\core\todo\" />
-    <Folder Include="app\core\todo\models\" />
+    <Folder Include="app\models" />
     <Folder Include="config" />
     <Folder Include="public" />
     <Folder Include="public\js" />
     <Folder Include="public\js\controllers" />
     <Folder Include="public\js\services" />
     <Folder Include="public\vendors" />
+    <Folder Include="public\vendors\angular" />
     <Folder Include="typings\" />
     <Folder Include="typings\globals\" />
-    <Folder Include="typings\globals\body-parser\" />
-    <Folder Include="typings\globals\cookie-parser\" />
     <Folder Include="typings\globals\express\" />
     <Folder Include="typings\globals\mongoose\" />
-    <Folder Include="typings\globals\morgan\" />
     <Folder Include="typings\globals\node\" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="typings\globals\body-parser\index.d.ts" />
-    <TypeScriptCompile Include="typings\globals\cookie-parser\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\express\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\mongoose\index.d.ts" />
-    <TypeScriptCompile Include="typings\globals\morgan\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\node\index.d.ts" />
     <TypeScriptCompile Include="typings\index.d.ts" />
   </ItemGroup>
