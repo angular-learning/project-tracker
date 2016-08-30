@@ -1,1 +1,1 @@
-angular.module('project-tracker', ['todos', 'todoService']);
+angular.module('project-tracker', []);

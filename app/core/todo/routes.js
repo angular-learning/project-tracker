@@ -1,5 +1,4 @@
 // dependencies
-
 var express = require('express');
 var Todo = require('./models/todo');
 
@@ -10,14 +9,13 @@ module.exports = function () {
     router.get('/todo', _getAll);
     router.post('/todo', _create);
     router.delete('/todo/:id', _delete);
+    router.post('/todo/:id', _update);
 
     return router;
 };
 
-// private functions
-
 function _getAll(req, res) {
-    Todo.find({ done: false }, function (err, todos) {
+    Todo.find(function (err, todos) {
         if (err) {
             return res.send(err);
         }
@@ -29,6 +27,22 @@ function _getAll(req, res) {
                 text: todo.text
             };
         }));
+    });
+}
+
+function _update(req, res) {
+    Todo.update({
+        _id: req.body.id
+    }, {
+        $set: {
+            text: req.body.text,
+            done: req.body.done
+        }
+        }, function (err, todo) {
+        if (err)
+            return res.send(err);
+
+        res.json({ id: todo._id });
     });
 }
 
@@ -50,12 +64,11 @@ function _create(req, res) {
 }
 
 function _delete(req, res) {
-    Todo.update({
+    Todo.remove({
         _id: req.params.id
-    }, { $set: { done: true } }, function (err, todo) {
-        if (err) {
+    }, function (err, todo) {
+        if (err)
             return res.send(err);
-        }
 
         res.json({ id: req.params.id });
     });
