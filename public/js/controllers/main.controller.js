@@ -55,26 +55,17 @@ angular
             
             Todo.delete(todo.id).success(function (data) {
                 if (todo.done) {
-                    _removeItemFromArray(self.dones, todo);
+                    _.remove(self.dones, {id: todo.id});
                 } else {
-                    _removeItemFromArray(self.todos, todo);
+                    _.remove(self.todos, {id: todo.id});
                 }
             }).finally(function () {
                 self.loading = false;
             });
         }
 
-        function _removeItemFromArray (array, item) {
-            var index = _.findIndex(array, function (i) { return i.id === item.id; });
-            array.splice(index, 1);
-        }
-
         function _moveItemBetweenArrays (sourceArray, destArray, item) {
-            _removeItemFromArray(sourceArray, item);
+            _.remove(sourceArray, {id: item.id});
             destArray.push(item);
-        }
-
-        function _isAddButtonDisabled() {
-            return self.newTodo.text ? false : true;
         }
     });
