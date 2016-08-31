@@ -16,6 +16,8 @@ angular
         self.updateTodo = _updateTodo;
         self.deleteTodo = _deleteTodo;
 
+        self.isAddButtonDisabled = _isAddButtonDisabled;
+
         function _createTodo() {
             if (!self.newTodo.text)
                 return;
@@ -72,5 +74,9 @@ angular
         function _moveItemBetweenArrays (sourceArray, destArray, item) {
             _removeItemFromArray(sourceArray, item);
             destArray.push(item);
+        }
+
+        function _isAddButtonDisabled() {
+            return self.newTodo.text ? false : true;
         }
     });
