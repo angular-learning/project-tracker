@@ -1,25 +1,24 @@
 ﻿<div>
     <div class="jumbotron text-center">
         <h1>Todo App Now and Project Tracker in the near future :)
-            <div ng-show="ctrl.isArrayCounterVisible(ctrl.todos)">
-                <span class="label label-info">{{ ctrl.todos.length }}</span>
+            <div>
+                <span class="label label-info">{{ self.items.length }}</span>
             </div>
         </h1>
     </div>
 
-    <div id="todo-list" class="row" ng-show="ctrl.isArrayElementsListVisible(ctrl.todos)">
+    <div id="todo-list" class="row">
         <div class="col-sm-4 col-sm-offset-4">
-            <div class="checkbox" ng-repeat="item in ctrl.todos">
+            <div class="checkbox" ng-repeat="item in self.items">
                 <label>
-                    <input type="checkbox" ng-model="item.done" ng-click="ctrl.updateTodo(item)"> {{ item.text }}
-                    <button ng-click="ctrl.deleteTodo(item)">Delete</button>
+                    <input type="checkbox" ng-model="item.done" ng-click="self.update(item)"> {{ item.text }}
+                    <button ng-click="self.delete(item)">Delete</button>
                  </label>
             </div>
 
             <p class="text-center" ng-show="loading">
                 <span class="fa fa-spinner fa-spin fa-3x"></span>
             </p>
-
         </div>
     </div>
 </div>

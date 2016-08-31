@@ -12,7 +12,9 @@ angular
             self.loading = false;
         });
 
-        self.createTodo = function () {
+        self.createTodo = _createTodo;
+
+        function _createTodo() {
             if (!self.newTodo.text)
                 return;
 
@@ -29,22 +31,22 @@ angular
                 .finally(function() {
                     self.loading = false;
                 });
-        };
+        }
 
-        self.updateTodo = function (todo) {
-            self.loading = true;
+        // self.updateTodo = function (todo) {
+        //     self.loading = true;
             
-            Todo.update(todo).success(function (data) {
-                if (todo.done) {
-                    _moveItemBetweenArrays(self.todos, self.dones, todo);
-                } else {
-                    _moveItemBetweenArrays(self.dones, self.todos, todo);
-                }
+        //     Todo.update(todo).success(function (data) {
+        //         if (todo.done) {
+        //             _moveItemBetweenArrays(self.todos, self.dones, todo);
+        //         } else {
+        //             _moveItemBetweenArrays(self.dones, self.todos, todo);
+        //         }
                 
-            }).finally(function () {
-                self.loading = false;
-            });
-        };
+        //     }).finally(function () {
+        //         self.loading = false;
+        //     });
+        // };
 
         self.deleteTodo = function(todo) {
             self.loading = true;
