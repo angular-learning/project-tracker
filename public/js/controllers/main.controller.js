@@ -13,6 +13,8 @@ angular
         });
 
         self.createTodo = _createTodo;
+        self.updateTodo = _updateTodo;
+        self.deleteTodo = _deleteTodo;
 
         function _createTodo() {
             if (!self.newTodo.text)
@@ -33,22 +35,22 @@ angular
                 });
         }
 
-        // self.updateTodo = function (todo) {
-        //     self.loading = true;
+        function _updateTodo(todo) {
+            self.loading = true;
             
-        //     Todo.update(todo).success(function (data) {
-        //         if (todo.done) {
-        //             _moveItemBetweenArrays(self.todos, self.dones, todo);
-        //         } else {
-        //             _moveItemBetweenArrays(self.dones, self.todos, todo);
-        //         }
+            Todo.update(todo).success(function (data) {
+                if (todo.done) {
+                    _moveItemBetweenArrays(self.todos, self.dones, todo);
+                } else {
+                    _moveItemBetweenArrays(self.dones, self.todos, todo);
+                }
                 
-        //     }).finally(function () {
-        //         self.loading = false;
-        //     });
-        // };
+            }).finally(function () {
+                self.loading = false;
+            });
+        }
 
-        self.deleteTodo = function(todo) {
+        function _deleteTodo(todo) {
             self.loading = true;
             
             Todo.delete(todo.id).success(function (data) {
@@ -60,19 +62,7 @@ angular
             }).finally(function () {
                 self.loading = false;
             });
-        };
-
-        self.isAddButtonVisible = function() {
-            return self.newTodo.text ? true : false;
-        };
-
-        self.isArrayCounterVisible = function(array) {
-            return array && array.length !== 0 ? true : false;
-        };
-
-        self.isArrayElementsListVisible = function(array) {
-            return array && array.length !== 0 ? true : false;
-        };
+        }
 
         function _removeItemFromArray (array, item) {
             var index = _.findIndex(array, function (i) { return i.id === item.id; });

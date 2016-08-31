@@ -1,47 +1,33 @@
 angular
     .module('project-tracker')
     .directive('ptTodoList', function() {
-        var controller = function (Todo) {
+        var controller = function () {
 
             var self = this;
 
-            _init();
-
-            self.update = _update;
+            self.updateTodo = _update;
+            self.deleteTodo = _delete;
             
             function _update(todo) {
                 self.loading = true;
-                
-                Todo.update(todo).success(function (data) {
-                    if (todo.done) {
-                        _moveItemBetweenArrays(self.todos, self.dones, todo);
-                    } else {
-                        _moveItemBetweenArrays(self.dones, self.todos, todo);
-                    }                    
-                }).finally(function () {
-                    self.loading = false;
-                });
+                self.update()(todo);
+                self.loading = false;
             }
 
-            function _init() {
-                self.items = angular.copy(self.datasource);
-            }
-
-            function _removeItemFromArray(array, item) {
-                var index = _.findIndex(array, function (i) { return i.id === item.id; });
-                array.splice(index, 1);
-            }
-
-            function _moveItemBetweenArrays(sourceArray, destArray, item) {
-                _removeItemFromArray(sourceArray, item);
-                destArray.push(item);
+            function _delete(todo) {
+                self.loading = true;
+                self.delete()(todo);
+                self.loading = false;
             }
         };
         
         return {            
             restrict: 'EA',
             scope: {
+                title: '@',
                 datasource: '=',
+                update: '&',
+                delete: '&'
             },
             controller: controller,
             controllerAs: 'self',

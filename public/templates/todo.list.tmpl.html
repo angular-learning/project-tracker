@@ -1,18 +1,15 @@
 ﻿<div>
     <div class="jumbotron text-center">
-        <h1>Todo App Now and Project Tracker in the near future :)
-            <div>
-                <span class="label label-info">{{ self.items.length }}</span>
-            </div>
-        </h1>
+        <h2>{{ self.title }} <span class="label label-info">{{ self.datasource.length }}</span>
+        </h2>
     </div>
 
     <div id="todo-list" class="row">
         <div class="col-sm-4 col-sm-offset-4">
-            <div class="checkbox" ng-repeat="item in self.items">
+            <div class="checkbox" ng-repeat="item in self.datasource">
                 <label>
-                    <input type="checkbox" ng-model="item.done" ng-click="self.update(item)"> {{ item.text }}
-                    <button ng-click="self.delete(item)">Delete</button>
+                    <input type="checkbox" ng-model="item.done" ng-click="self.updateTodo(item)"> {{ item.text }}
+                    <button ng-click="self.deleteTodo(item)">Delete</button>
                  </label>
             </div>
 
