@@ -31,7 +31,7 @@ angular
                     self.newTodo = {};
                 })
                 .finally(function() {
-                    //self.loading = false;
+                    self.loading = false;
                 });
         }
 
