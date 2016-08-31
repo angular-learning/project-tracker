@@ -1,6 +1,6 @@
 angular
     .module('project-tracker')
-    .controller('mainController', function (Todo) {
+    .controller('MainController', function (Todo) {
         var self = this;
 
         self.newTodo = {};

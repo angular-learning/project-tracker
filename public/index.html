@@ -21,7 +21,7 @@
 </head>
 
 <!-- SET THE CONTROLLER -->
-<body ng-controller="mainController as ctrl">
+<body ng-controller="MainController as ctrl">
 <div class="container">
     <div class="text-center">
         <h1>Todo App Now and Project Tracker in the near future :)</h1>
@@ -61,9 +61,9 @@
     
     <script src="vendors/angular/angular.js"></script><!-- load angular -->
     <script src="vendors/lodash/lodash.js"></script>
-    <script src="js/core.js"></script> <!-- load our main application -->
+    <script src="js/app.module.js"></script> <!-- load our main application -->
     <script src="js/controllers/main.controller.js"></script><!-- load up our controller -->
-    <script src="js/factories/todo.factory.js"></script><!-- load our todo factory -->
-    <script src="js/directives/todo.list.directive.js"></script><!-- load our todo factory -->
+    <script src="js/services/todo.factory.js"></script><!-- load our todo factory -->
+    <script src="js/directives/todo-list.directive.js"></script><!-- load pt-todo-list directive-->
 </body>
 </html>
