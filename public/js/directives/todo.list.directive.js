@@ -9,15 +9,11 @@ angular
             self.deleteTodo = _delete;
             
             function _update(todo) {
-                self.loading = true;
                 self.update()(todo);
-                self.loading = false;
             }
 
             function _delete(todo) {
-                self.loading = true;
                 self.delete()(todo);
-                self.loading = false;
             }
         };
         
@@ -26,8 +22,9 @@ angular
             scope: {
                 title: '@',
                 datasource: '=',
+                loading: '=',
                 update: '&',
-                delete: '&'
+                delete: '&'                
             },
             controller: controller,
             controllerAs: 'self',

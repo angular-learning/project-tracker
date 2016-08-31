@@ -24,13 +24,10 @@ angular
 
             self.loading = true;
 
-            Todo.create(self.newTodo)
+            return Todo.create(self.newTodo)
                 .success(function(data) {
                     self.todos.push(data);
                     self.newTodo = {};
-                })
-                .error(function(data, status) {
-                    self.error = status;
                 })
                 .finally(function() {
                     self.loading = false;
