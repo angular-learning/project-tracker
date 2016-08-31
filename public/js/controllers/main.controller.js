@@ -4,12 +4,13 @@ angular
         var self = this;
 
         self.newTodo = {};
-        self.loading = true;
+        self.initializing = true;
 
         Todo.get().success(function (data) {
             self.todos = data.filter(function (e) { return !e.done; });
             self.dones = data.filter(function (e) { return e.done; });
-            self.loading = false;
+        }).finally(function () {
+            self.initializing = false;
         });
 
         self.createTodo = _createTodo;
@@ -30,7 +31,7 @@ angular
                     self.newTodo = {};
                 })
                 .finally(function() {
-                    self.loading = false;
+                    //self.loading = false;
                 });
         }
 

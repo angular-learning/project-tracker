@@ -30,6 +30,7 @@
     <div pt-todo-list 
          title="Tasks to do:"
          datasource="ctrl.todos" 
+         initializing="ctrl.initializing"
          loading="ctrl.loading"
          update="ctrl.updateTodo"
          delete="ctrl.deleteTodo"></div>
@@ -52,6 +53,7 @@
     <div pt-todo-list 
          title="Tasks already done:"
          datasource="ctrl.dones" 
+         initializing="ctrl.initializing"
          loading="ctrl.loading"
          update="ctrl.updateTodo"
          delete="ctrl.deleteTodo"></div>

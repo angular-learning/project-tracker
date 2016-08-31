@@ -22,6 +22,7 @@ angular
             scope: {
                 title: '@',
                 datasource: '=',
+                initializing: '=',
                 loading: '=',
                 update: '&',
                 delete: '&'                
