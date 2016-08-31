@@ -17,8 +17,6 @@ angular
         self.updateTodo = _updateTodo;
         self.deleteTodo = _deleteTodo;
 
-        self.isAddButtonDisabled = _isAddButtonDisabled;
-
         function _createTodo() {
             if (!self.newTodo.text)
                 return;
