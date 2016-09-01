@@ -1,37 +1,39 @@
 angular
     .module('project-tracker')
-    .controller('mainController', function (Todo) {
+    .controller('MainController', function (Todo) {
         var self = this;
 
         self.newTodo = {};
-        self.loading = true;
+        self.initializing = true;
 
         Todo.get().success(function (data) {
             self.todos = data.filter(function (e) { return !e.done; });
             self.dones = data.filter(function (e) { return e.done; });
-            self.loading = false;
+        }).finally(function () {
+            self.initializing = false;
         });
 
-        self.createTodo = function () {
+        self.createTodo = _createTodo;
+        self.updateTodo = _updateTodo;
+        self.deleteTodo = _deleteTodo;
+
+        function _createTodo() {
             if (!self.newTodo.text)
                 return;
 
             self.loading = true;
 
-            Todo.create(self.newTodo)
+            return Todo.create(self.newTodo)
                 .success(function(data) {
                     self.todos.push(data);
                     self.newTodo = {};
-                })
-                .error(function(data, status) {
-                    self.error = status;
                 })
                 .finally(function() {
                     self.loading = false;
                 });
         }
 
-        self.updateTodo = function (todo) {
+        function _updateTodo(todo) {
             self.loading = true;
             
             Todo.update(todo).success(function (data) {
@@ -46,27 +48,22 @@ angular
             });
         }
 
-        self.deleteTodo = function(todo) {
+        function _deleteTodo(todo) {
             self.loading = true;
             
             Todo.delete(todo.id).success(function (data) {
                 if (todo.done) {
-                    _removeItemFromArray(self.dones, todo);
+                    _.remove(self.dones, {id: todo.id});
                 } else {
-                    _removeItemFromArray(self.todos, todo);
+                    _.remove(self.todos, {id: todo.id});
                 }
             }).finally(function () {
                 self.loading = false;
             });
         }
 
-        function _removeItemFromArray (array, item) {
-            var index = _.findIndex(array, function (i) { return i.id === item.id; });
-            array.splice(index, 1);
-        }
-
         function _moveItemBetweenArrays (sourceArray, destArray, item) {
-            _removeItemFromArray(sourceArray, item);
+            _.remove(sourceArray, {id: item.id});
             destArray.push(item);
         }
     });
