@@ -10,55 +10,32 @@
 	<title>Todo App Now and Project Tracker in the near future :)</title>
 
     <!-- Bootstrap -->
-    <link href="vendors/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <!-- SET THE CONTROLLER -->
 <body ng-controller="MainController as ctrl">
-<div class="container">
-    <div class="text-center">
-        <h1>Todo App Now and Project Tracker in the near future :)</h1>
+    <div class="navbar">
+      <div class="navbar-inner"><div class="container">
+        <ul class="nav">
+          <li ui-sref-active="active"><a ui-sref="main">Main</a></li>
+          <li ui-sref-active="active"><a ui-sref="tasks">Tasks</a></li>
+        </ul>
     </div>
 
-    <div pt-todo-list 
-         title="Tasks to do:"
-         datasource="ctrl.todos" 
-         initializing="ctrl.initializing"
-         loading="ctrl.loading"
-         update="ctrl.updateTodo"
-         delete="ctrl.deleteTodo"></div>
-        
-    <div id="todo-form" class="row">
-        <div class="col-sm-8 col-sm-offset-2 text-center">
-            <form>
-                <div class="form-group">
-                    <input type="text" class="form-control input-lg text-center" placeholder="I want more todos" ng-model="ctrl.newTodo.text">
-                </div>
-
-                <button type="submit" 
-                        class="btn btn-primary btn-lg" 
-                        ng-click="ctrl.createTodo()"
-                        ng-disabled="!ctrl.newTodo.text">Add</button>
-            </form>
-        </div>
-    </div>
-
-    <div pt-todo-list 
-         title="Tasks already done:"
-         datasource="ctrl.dones" 
-         initializing="ctrl.initializing"
-         loading="ctrl.loading"
-         update="ctrl.updateTodo"
-         delete="ctrl.deleteTodo"></div>
-</div>
+    <div ui-view class="container slide" style="padding-top: 80px;"></div>
+    
     <!-- load jQuery -->
     <script src="vendors/jquery/dist/jquery.min.js"></script>
     <!-- load Bootstrap -->
     <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-
     <script src="vendors/angular/angular.js"></script><!-- load angular -->
+    <script src="vendors/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="vendors/lodash/lodash.js"></script>
+        
+    <script src="js/ui.router.module.js"></script> 
     <script src="js/app.module.js"></script> <!-- load our main application -->
+
     <script src="js/controllers/main.js"></script><!-- load up our controller -->
     <script src="js/services/todo.factory.js"></script><!-- load our todo factory -->
     <script src="js/directives/todo-list.directive.js"></script><!-- load pt-todo-list directive-->
