@@ -9,15 +9,8 @@
 
 	<title>Todo App Now and Project Tracker in the near future :)</title>
 
-	<!-- SCROLLS -->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-	<style>
-		html 					{ overflow-y:scroll; }
-		#todo-list 				{ margin-bottom:30px; }
-        #finished-todo-list 	{ margin-bottom:30px; }
-		#todo-form 	 			{ margin-bottom:50px; }
-	</style>
+    <!-- Bootstrap -->
+    <link href="vendors/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 </head>
 
 <!-- SET THE CONTROLLER -->
@@ -58,7 +51,11 @@
          update="ctrl.updateTodo"
          delete="ctrl.deleteTodo"></div>
 </div>
-    
+    <!-- load jQuery -->
+    <script src="vendors/jquery/dist/jquery.min.js"></script>
+    <!-- load Bootstrap -->
+    <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+
     <script src="vendors/angular/angular.js"></script><!-- load angular -->
     <script src="vendors/lodash/lodash.js"></script>
     <script src="js/app.module.js"></script> <!-- load our main application -->
