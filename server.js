@@ -7,6 +7,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var serverBuilder = require('./app/server.builder');
 
+// Plugging mongoose in Promises Library
+mongoose.Promise = require('q').Promise;
+
 var database = require('./config/database'); 			// load the database config
 
 var port  	 = process.env.PORT || 3000; 				// set the port
@@ -39,8 +42,8 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-var todoRouterGetter = require('./app/core/todo/routes');
-app.use('/api', todoRouterGetter());
+app.use('/api', require('./app/core/todo/routes')());
+app.use('/api', require('./app/core/task/routes')());
 
 // load the single view file (angular will handle the page changes on the front-end)
 app.route('/*')

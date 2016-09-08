@@ -1,1 +1,1 @@
-angular.module('project-tracker', []);
+angular.module('project-tracker', ['uiRouterModule']);
