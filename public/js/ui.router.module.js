@@ -11,9 +11,10 @@ angular.module('uiRouterModule', ['ui.router'])
             $rootScope.$stateParams = $stateParams;
         }
     ])
-    .config(['$stateProvider', '$urlRouterProvider',
-        function ($stateProvider, $urlRouterProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 
+        function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
+            
             /////////////////////////////
             // Redirects and Otherwise //
             /////////////////////////////
@@ -52,6 +53,8 @@ angular.module('uiRouterModule', ['ui.router'])
                 .state('tasks', {
                     url: '/tasks',
                     templateUrl: '../templates/tasks.tmpl.html'
-                })
+                });
+
+                $locationProvider.html5Mode(true);
         }
     ]);
