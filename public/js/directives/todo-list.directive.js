@@ -30,6 +30,6 @@ angular
             controller: controller,
             controllerAs: 'self',
             bindToController: true,
-            templateUrl: '././templates/todo.list.tmpl.html'
+            templateUrl: '/directives-templates/todo.list.tmpl.html'
         }
     });
