@@ -33,14 +33,10 @@ angular
         }
 
         function _updateTask(task) {
+
             self.loading = true;
             
-            return Task.update(task)
-                .success(function(data) {
-                    task = data;
-                })
-                .finally(function () {
-                
+            return Task.update(task).finally(function () {                
                 self.loading = false;
             });
         }

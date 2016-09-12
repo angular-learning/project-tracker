@@ -36,6 +36,7 @@ function _getOne(req, res) {
 function _getAll(req, res) {
     Task
         .find()
+        .sort({createdAt: 1})
         // .populate('features')
         // .populate('createdBy')
         .exec(function (err, tasks) {
@@ -50,13 +51,15 @@ function _getAll(req, res) {
 }
 
 function _update(req, res) {
+    var modifiedAt = new Date();
     Task.update({
         _id: req.params.id
     }, {
         $set: {
             name: req.body.name,
             done: req.body.done,
-            description: req.body.description
+            description: req.body.description,
+            modifiedAt: modifiedAt
         }
     }, function (err, task) {
         if (err)
@@ -72,7 +75,7 @@ function _create(req, res) {
         name: req.body.name,
         description: req.body.description,
         createdAt: createdAt,
-        modifiedAt: createdAt
+        modifiedAt: createdAt        
     }, function (err, task) {
         if (err) {
             return res.send(err);
