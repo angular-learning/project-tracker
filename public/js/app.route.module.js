@@ -17,7 +17,7 @@ angular.module('appRouteModule', ['ui.router'])
                 .state("tasks", {
                     abstract: true,
                     url: '/',
-                    templateUrl: '/index.html'
+                    template: '<ui-view/>'
                 })
                 .state('tasks.list', {
                     url: 'list',
@@ -28,6 +28,16 @@ angular.module('appRouteModule', ['ui.router'])
                     templateUrl: '/templates/tasks.details.tmpl.html'
                 });
 
-                $locationProvider.html5Mode(true);
+            $locationProvider.html5Mode(true);
+            
+            /**
+             * /human
+             *      human.template.html
+             *      human.css
+             *      human.directive.js
+             *      human.controller.js
+             *      human.controller.spec.js
+             *
+             */
         }
     ]);
