@@ -51,7 +51,7 @@ function _getAll(req, res) {
 
 function _update(req, res) {
     Task.update({
-        _id: req.body.id
+        _id: req.params.id
     }, {
         $set: {
             name: req.body.name,
