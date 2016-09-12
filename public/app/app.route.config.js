@@ -18,11 +18,12 @@ angular
                 .state("tasks", {
                     abstract: true,
                     url: '/',
-                    controller: 'appMainController as ctrl',
+                    controller: 'appMainController as mainCtrl',
                     template: '<div ui-view>'
                 })
                 .state('tasks.list', {
                     url: 'list',
+                    controller: 'tasksController as tasksCtrl',
                     templateUrl: '/tasks/tasks.list.tmpl.html'
                 })
                 .state('tasks.details', {

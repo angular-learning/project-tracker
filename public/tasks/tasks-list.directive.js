@@ -5,15 +5,15 @@ angular
 
             var self = this;
 
-            self.updateTodo = _update;
-            self.deleteTodo = _delete;
+            self.updateTask = _update;
+            self.deleteTask = _delete;
             
-            function _update(todo) {
-                self.update()(todo);
+            function _update(task) {
+                self.update()(task);
             }
 
-            function _delete(todo) {
-                self.delete()(todo);
+            function _delete(task) {
+                self.delete()(task);
             }
         };
         

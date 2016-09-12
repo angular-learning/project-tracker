@@ -1,32 +1,32 @@
 <div class="container">
         <div pt-tasks-list 
             title="Tasks to do:"
-            datasource="ctrl.todos" 
-            initializing="ctrl.initializing"
-            loading="ctrl.loading"
-            update="ctrl.updateTodo"
-            delete="ctrl.deleteTodo"></div>
+            datasource="tasksCtrl.tasks" 
+            initializing="tasksCtrl.initializing"
+            loading="tasksCtrl.loading"
+            update="tasksCtrl.updateTask"
+            delete="tasksCtrl.deleteTask"></div>
             
         <div id="todo-form" class="row">
             <div class="col-sm-8 col-sm-offset-2 text-center">
                 <form>
                     <div class="form-group">
-                        <input type="text" class="form-control input-lg text-center" placeholder="I want more todos" ng-model="ctrl.newTodo.text">
+                        <input type="text" class="form-control input-lg text-center" placeholder="Enter new task's name" ng-model="tasksCtrl.newTask.name">
                     </div>
 
                     <button type="submit" 
                             class="btn btn-primary btn-lg" 
-                            ng-click="ctrl.createTodo()"
-                            ng-disabled="!ctrl.newTodo.text">Add</button>
+                            ng-click="tasksCtrl.createTask()"
+                            ng-disabled="!tasksCtrl.newTask.name">Add</button>
                 </form>
             </div>
         </div>
 
-        <div pt-tasks-list 
+        <!--<div pt-tasks-list 
             title="Tasks already done:"
-            datasource="ctrl.dones" 
-            initializing="ctrl.initializing"
-            loading="ctrl.loading"
-            update="ctrl.updateTodo"
-            delete="ctrl.deleteTodo"></div>
+            datasource="tasksCtrl.dones" 
+            initializing="tasksCtrl.initializing"
+            loading="tasksCtrl.loading"
+            update="tasksCtrl.updateTodo"
+            delete="tasksCtrl.deleteTodo"></div>-->
     </div>

@@ -1,18 +1,18 @@
 angular
     .module('projectTracker')
-    .factory('Todo', function ($http) {
+    .factory('Task', function ($http) {
         return {
             get: function () {
-                return $http.get('/api/todo');
+                return $http.get('/api/task');
             },
-            create: function (todo) {
-                return $http.post('/api/todo', todo);
+            create: function (task) {
+                return $http.post('/api/task', task);
             },
-            update: function (todo) {
-                return $http.post('/api/todo/update/', todo);
+            update: function (task) {
+                return $http.post('/api/task/update/', task);
             },
             delete: function (id) {
-                return $http.delete('/api/todo/' + id);
+                return $http.delete('/api/task/' + id);
             }
         };
     });

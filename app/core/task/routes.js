@@ -12,9 +12,9 @@ module.exports = function () {
     router.get('/task/:id', _getOne);
     router.get('/task', _getAll);
     router.post('/task', _create);
+    router.post('/task/:id', _update);
     router.delete('/task/:id', _delete);
-    // router.post('/task/:id', _update);
-
+    
     return router;
 };
 
@@ -44,7 +44,7 @@ function _getAll(req, res) {
             }
 
             res.json(tasks.map(function (task) {
-                return _.pick(task, ['name']);
+                return _.pick(task, ['id','name']);
             }));
         });
 }
@@ -57,11 +57,11 @@ function _update(req, res) {
             name: req.body.name,
             done: req.body.done
         }
-    }, function (err, todo) {
+    }, function (err, task) {
         if (err)
             return res.send(err);
 
-        res.json({ id: todo._id });
+        res.json({ id: task._id });
     });
 }
 
@@ -84,7 +84,7 @@ function _create(req, res) {
 function _delete(req, res) {
     Task.remove({
         _id: req.params.id
-    }, function (err, todo) {
+    }, function (err, task) {
         if (err) {
             return res.send(err);
         }
