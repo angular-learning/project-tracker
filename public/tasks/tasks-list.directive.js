@@ -1,6 +1,6 @@
 angular
-    .module('project-tracker')
-    .directive('ptTodoList', function() {
+    .module('projectTracker')
+    .directive('ptTasksList', function() {
         var controller = function () {
 
             var self = this;
@@ -17,7 +17,7 @@ angular
             }
         };
         
-        return {            
+        return {
             restrict: 'EA',
             scope: {
                 title: '@',
@@ -25,11 +25,11 @@ angular
                 initializing: '=',
                 loading: '=',
                 update: '&',
-                delete: '&'                
+                delete: '&'
             },
             controller: controller,
             controllerAs: 'self',
             bindToController: true,
-            templateUrl: '/directives-templates/todo.list.tmpl.html'
-        }
+            templateUrl: '/tasks/tasks-list.directive.tmpl.html'
+        };
     });

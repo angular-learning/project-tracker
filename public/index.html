@@ -1,7 +1,7 @@
 ﻿<!doctype html>
 
 <!-- ASSIGN OUR ANGULAR MODULE -->
-<html ng-app="project-tracker">
+<html ng-app="projectTracker">
 <head>
 	<!-- META -->
 	<meta charset="utf-8">
@@ -15,7 +15,7 @@
 </head>
 
 <!-- SET THE CONTROLLER -->
-<body ng-controller="MainController as ctrl">
+<body ng-controller="appMainController as ctrl">
     <nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -45,19 +45,17 @@
 
     <ui-view/>
     
-    <!-- load jQuery -->
     <script src="/vendors/jquery/dist/jquery.min.js"></script>
-    <!-- load Bootstrap -->
-    <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="vendors/angular/angular.js"></script><!-- load angular -->
-    <script src="vendors/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script src="vendors/lodash/lodash.js"></script>
+    <script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/vendors/angular/angular.js"></script>
+    <script src="/vendors/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/vendors/lodash/lodash.js"></script>
         
-    <script src="js/app.route.module.js"></script> 
-    <script src="js/app.module.js"></script> <!-- load our main application -->
+    <script src="/app/app.route.config.js"></script> 
+    <script src="/app/app.module.js"></script>
+    <script src="/app/app.main.controller.js"></script>
 
-    <script src="js/controllers/main.js"></script><!-- load up our controller -->
-    <script src="js/services/todo.factory.js"></script><!-- load our todo factory -->
-    <script src="js/directives/todo-list.directive.js"></script><!-- load pt-todo-list directive-->
+    <script src="/tasks/tasks.factory.js"></script>
+    <script src="/tasks/tasks-list.directive.js"></script>
 </body>
 </html>

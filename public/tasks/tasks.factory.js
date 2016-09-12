@@ -1,5 +1,5 @@
 angular
-    .module('project-tracker')
+    .module('projectTracker')
     .factory('Todo', function ($http) {
         return {
             get: function () {
