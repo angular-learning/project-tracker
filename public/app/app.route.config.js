@@ -18,7 +18,8 @@ angular
                 .state("tasks", {
                     abstract: true,
                     url: '/',
-                    template: '<ui-view/>'
+                    controller: 'appMainController as ctrl',
+                    template: '<div ui-view>'
                 })
                 .state('tasks.list', {
                     url: 'list',
