@@ -1,5 +1,5 @@
 angular
     .module('projectTracker')
-    .controller('appMainController', function () {
+    .controller('mainController', function () {
         var self = this;
     });

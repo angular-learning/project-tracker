@@ -29,7 +29,7 @@ function _getOne(req, res) {
             }
 
             var taskModel = { _id: task.id };
-            res.json(_.extend(taskModel, _.pick(task, ['name', 'description', 'features'])));
+            res.json(_.extend(taskModel, _.pick(task, ['name', 'done', 'description', 'features'])));
         });
 }
 
@@ -44,24 +44,25 @@ function _getAll(req, res) {
             }
 
             res.json(tasks.map(function (task) {
-                return _.pick(task, ['id','name']);
+                return _.pick(task, ['id', 'name', 'done']);
             }));
         });
 }
 
 function _update(req, res) {
     Task.update({
-        _id: req.params.id
+        _id: req.body.id
     }, {
         $set: {
             name: req.body.name,
-            done: req.body.done
+            done: req.body.done,
+            description: req.body.description
         }
     }, function (err, task) {
         if (err)
             return res.send(err);
 
-        res.json({ id: task._id });
+        res.json({ id: req.params.id });
     });
 }
 
@@ -77,7 +78,7 @@ function _create(req, res) {
             return res.send(err);
         }
 
-        res.json({ id: task._id });
+        res.json(_.pick(task, ['id', 'name', 'done', 'description', 'features']));
     });
 }
 

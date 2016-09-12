@@ -1,6 +1,6 @@
 angular
     .module('projectTracker')
-    .directive('ptTasksList', function() {
+    .directive('ptTaskList', function() {
         var controller = function () {
 
             var self = this;
@@ -30,6 +30,6 @@ angular
             controller: controller,
             controllerAs: 'self',
             bindToController: true,
-            templateUrl: '/tasks/tasks-list.directive.tmpl.html'
+            templateUrl: '/tasks/task-list.directive.tmpl.html'
         };
     });
