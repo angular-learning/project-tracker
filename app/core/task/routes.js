@@ -9,9 +9,9 @@ var Feature = require('./models/feature');
 module.exports = function () {
     var router = express.Router();
 
-    router.get('/task/:id', _getOne);
-    router.get('/task', _getAll);
+    router.get('/task', _getAll);    
     router.post('/task', _create);
+    router.get('/task/:id', _getOne);
     router.post('/task/:id', _update);
     router.delete('/task/:id', _delete);
     

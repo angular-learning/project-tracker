@@ -11,7 +11,6 @@ angular
         function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
             $urlRouterProvider
-                .when('details', '/details')
                 .otherwise('/list');
 
             $stateProvider

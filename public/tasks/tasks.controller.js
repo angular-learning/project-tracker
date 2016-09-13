@@ -22,7 +22,7 @@ angular
 
             self.loading = true;
 
-            return Task.create(self.newTask)
+            return Task.save(self.newTask)
                 .success(function(data) {
                     self.tasks.push(data);
                     self.newTask = {};

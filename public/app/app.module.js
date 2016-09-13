@@ -1,1 +1,1 @@
-angular.module('projectTracker');
+angular.module('projectTracker', ['ngResource']);
