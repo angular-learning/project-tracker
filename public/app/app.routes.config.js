@@ -23,11 +23,11 @@ angular
                 .state('tasks.list', {
                     url: 'list',
                     controller: 'tasksController as tasksCtrl',
-                    templateUrl: '/tasks/tasks.list.tmpl.html'
+                    templateUrl: '/app/tasks/tasks.list.tmpl.html'
                 })
                 .state('tasks.details', {
                     url: 'details',
-                    templateUrl: '/tasks/tasks.details.tmpl.html'
+                    templateUrl: '/app/tasks/tasks.details.tmpl.html'
                 });
 
             $locationProvider.html5Mode(true);

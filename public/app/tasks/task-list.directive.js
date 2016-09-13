@@ -30,6 +30,6 @@ angular
             controller: controller,
             controllerAs: 'self',
             bindToController: true,
-            templateUrl: '/tasks/task-list.tmpl.html'
+            templateUrl: '/app/tasks/task-list.tmpl.html'
         };
     });
