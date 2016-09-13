@@ -1,6 +1,6 @@
 angular
     .module('projectTracker')
-    .controller('tasksController', function (Task) {
+    .controller('taskController', function (Task) {
         var self = this;
 
         self.newTask = {};

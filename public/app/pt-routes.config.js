@@ -22,12 +22,12 @@ angular
                 })
                 .state('tasks.list', {
                     url: 'list',
-                    controller: 'tasksController as tasksCtrl',
-                    templateUrl: '/app/tasks/tasks.list.tmpl.html'
+                    controller: 'taskController as taskCtrl',
+                    templateUrl: '/app/tasks/tasks-list.view.tmpl.html'
                 })
                 .state('tasks.details', {
                     url: 'details',
-                    templateUrl: '/app/tasks/tasks.details.tmpl.html'
+                    templateUrl: '/app/tasks/tasks-details.view.tmpl.html'
                 });
 
             $locationProvider.html5Mode(true);

@@ -1,0 +1,24 @@
+<div class="container">
+        <div pt-task-list 
+            title="Tasks to do:"
+            datasource="taskCtrl.tasks" 
+            initializing="taskCtrl.initializing"
+            loading="taskCtrl.loading"
+            update="taskCtrl.updateTask"
+            delete="taskCtrl.deleteTask"></div>
+            
+        <div id="todo-form" class="row">
+            <div class="col-sm-8 col-sm-offset-2 text-center">
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control input-lg text-center" placeholder="Enter new task's name" ng-model="taskCtrl.newTask.name">
+                    </div>
+
+                    <button type="submit" 
+                            class="btn btn-primary btn-lg" 
+                            ng-click="taskCtrl.createTask()"
+                            ng-disabled="!taskCtrl.newTask.name">Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
