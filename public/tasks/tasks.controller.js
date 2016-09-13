@@ -6,9 +6,8 @@ angular
         self.newTask = {};
         self.initializing = true;
 
-        Task.get().success(function (data) {
+        Task.query(function(data) {
             self.tasks = data;
-        }).finally(function () {
             self.initializing = false;
         });
 
@@ -22,12 +21,10 @@ angular
 
             self.loading = true;
 
-            return Task.save(self.newTask)
-                .success(function(data) {
+            return Task.save(self.newTask, function(data) {
                     self.tasks.push(data);
                     self.newTask = {};
-                })
-                .finally(function() {
+                }).$promise.finally(function() {
                     self.loading = false;
                 });
         }
@@ -36,7 +33,7 @@ angular
 
             self.loading = true;
             
-            return Task.update(task).finally(function () {                
+            return Task.save({id: task.id}, task).$promise.finally(function () {                
                 self.loading = false;
             });
         }
@@ -44,10 +41,10 @@ angular
         function _deleteTask(task) {
             self.loading = true;
             
-            Task.delete(task.id).success(function (data) {
-                _.remove(self.tasks, {id: task.id});
-            }).finally(function () {
-                self.loading = false;
-            });
+            Task.delete({id: task.id}, function (data) {
+                    _.remove(self.tasks, {id: task.id});
+                }).$promise.finally(function () {
+                    self.loading = false;
+                });
         }
     });
