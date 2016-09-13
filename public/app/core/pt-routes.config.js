@@ -1,5 +1,5 @@
 angular
-    .module('projectTracker', ['ui.router', 'ngResource'])
+    .module('projectTracker')
     .run(
     ['$rootScope', '$state', '$stateParams',
         function ($rootScope, $state, $stateParams) {
