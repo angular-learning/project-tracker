@@ -1,7 +1,10 @@
 (function () {
     angular
         .module('projectTracker')
-        .controller('mainController', function () {
-            var self = this;
-        });
+        .controller('mainController', _controller);
+    
+    function _controller()
+    { 
+        var self = this;
+    }
 })();

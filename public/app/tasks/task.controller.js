@@ -1,52 +1,54 @@
 (function () {
     angular
         .module('projectTracker')
-        .controller('taskController', function (Task) {
-            var self = this;
+        .controller('taskController', _controller);
 
-            self.newTask = {};
-            self.initializing = true;
+    function _controller(Task) {
+        var self = this;
 
-            Task.query(function (data) {
-                self.tasks = data;
-                self.initializing = false;
-            });
+        self.newTask = {};
+        self.initializing = true;
 
-            self.createTask = _createTask;
-            self.updateTask = _updateTask;
-            self.deleteTask = _deleteTask;
-
-            function _createTask() {
-                if (!self.newTask.name)
-                    return;
-
-                self.loading = true;
-
-                return Task.save(self.newTask, function (data) {
-                    self.tasks.push(data);
-                    self.newTask = {};
-                }).$promise.finally(function () {
-                    self.loading = false;
-                });
-            }
-
-            function _updateTask(task) {
-
-                self.loading = true;
-
-                return Task.save({ id: task.id }, task).$promise.finally(function () {
-                    self.loading = false;
-                });
-            }
-
-            function _deleteTask(task) {
-                self.loading = true;
-
-                Task.delete({ id: task.id }, function (data) {
-                    _.remove(self.tasks, { id: task.id });
-                }).$promise.finally(function () {
-                    self.loading = false;
-                });
-            }
+        Task.query(function (data) {
+            self.tasks = data;
+            self.initializing = false;
         });
+
+        self.createTask = _createTask;
+        self.updateTask = _updateTask;
+        self.deleteTask = _deleteTask;
+
+        function _createTask() {
+            if (!self.newTask.name)
+                return;
+
+            self.loading = true;
+
+            return Task.save(self.newTask, function (data) {
+                self.tasks.push(data);
+                self.newTask = {};
+            }).$promise.finally(function () {
+                self.loading = false;
+            });
+        }
+
+        function _updateTask(task) {
+
+            self.loading = true;
+
+            return Task.save({ id: task.id }, task).$promise.finally(function () {
+                self.loading = false;
+            });
+        }
+
+        function _deleteTask(task) {
+            self.loading = true;
+
+            Task.delete({ id: task.id }, function (data) {
+                _.remove(self.tasks, { id: task.id });
+            }).$promise.finally(function () {
+                self.loading = false;
+            });
+        }
+    }
 })();

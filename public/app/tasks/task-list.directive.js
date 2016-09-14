@@ -1,37 +1,39 @@
 (function () {
     angular
         .module('projectTracker')
-        .directive('ptTaskList', function () {
-            var controller = function () {
+        .directive('ptTaskList', _directive);
 
-                var self = this;
+    function _directive() {
+        var controller = function () {
 
-                self.updateTask = _update;
-                self.deleteTask = _delete;
+            var self = this;
 
-                function _update(task) {
-                    self.update()(task);
-                }
+            self.updateTask = _update;
+            self.deleteTask = _delete;
 
-                function _delete(task) {
-                    self.delete()(task);
-                }
-            };
+            function _update(task) {
+                self.update()(task);
+            }
 
-            return {
-                restrict: 'EA',
-                scope: {
-                    title: '@',
-                    datasource: '=',
-                    initializing: '=',
-                    loading: '=',
-                    update: '&',
-                    delete: '&'
-                },
-                controller: controller,
-                controllerAs: 'self',
-                bindToController: true,
-                templateUrl: '/app/tasks/task-list.tmpl.html'
-            };
-        });
+            function _delete(task) {
+                self.delete()(task);
+            }
+        };
+
+        return {
+            restrict: 'EA',
+            scope: {
+                title: '@',
+                datasource: '=',
+                initializing: '=',
+                loading: '=',
+                update: '&',
+                delete: '&'
+            },
+            controller: controller,
+            controllerAs: 'self',
+            bindToController: true,
+            templateUrl: '/app/tasks/task-list.tmpl.html'
+        };
+    }
 })();

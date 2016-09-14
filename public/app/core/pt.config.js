@@ -1,15 +1,8 @@
 (function () {
     angular
         .module('projectTracker')
-        .run(['$rootScope', '$state', '$stateParams',
-            function ($rootScope, $state, $stateParams) {
-                _run($rootScope, $state, $stateParams);
-            }])
-        .config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
-            function ($stateProvider, $urlRouterProvider, $locationProvider) {
-                _config($stateProvider, $urlRouterProvider, $locationProvider);
-            }    
-        ]);
+        .run(['$rootScope', '$state', '$stateParams', _run])
+        .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', _config]);
 
     function _run(rootScope, state, stateParams) {
         rootScope.$state = state;
