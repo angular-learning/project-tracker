@@ -1,23 +1,23 @@
 angular
-    .module('project-tracker')
-    .directive('ptTodoList', function() {
+    .module('projectTracker')
+    .directive('ptTaskList', function() {
         var controller = function () {
 
             var self = this;
 
-            self.updateTodo = _update;
-            self.deleteTodo = _delete;
+            self.updateTask = _update;
+            self.deleteTask = _delete;
             
-            function _update(todo) {
-                self.update()(todo);
+            function _update(task) {
+                self.update()(task);
             }
 
-            function _delete(todo) {
-                self.delete()(todo);
+            function _delete(task) {
+                self.delete()(task);
             }
         };
         
-        return {            
+        return {
             restrict: 'EA',
             scope: {
                 title: '@',
@@ -25,11 +25,11 @@ angular
                 initializing: '=',
                 loading: '=',
                 update: '&',
-                delete: '&'                
+                delete: '&'
             },
             controller: controller,
             controllerAs: 'self',
             bindToController: true,
-            templateUrl: '././templates/todo.list.tmpl.html'
-        }
+            templateUrl: '/app/tasks/task-list.tmpl.html'
+        };
     });

@@ -9,12 +9,12 @@ var Feature = require('./models/feature');
 module.exports = function () {
     var router = express.Router();
 
-    router.get('/task/:id', _getOne);
-    router.get('/task', _getAll);
+    router.get('/task', _getAll);    
     router.post('/task', _create);
+    router.get('/task/:id', _getOne);
+    router.post('/task/:id', _update);
     router.delete('/task/:id', _delete);
-    // router.post('/task/:id', _update);
-
+    
     return router;
 };
 
@@ -29,13 +29,14 @@ function _getOne(req, res) {
             }
 
             var taskModel = { _id: task.id };
-            res.json(_.extend(taskModel, _.pick(task, ['name', 'description', 'features'])));
+            res.json(_.extend(taskModel, _.pick(task, ['name', 'done', 'description', 'features'])));
         });
 }
 
 function _getAll(req, res) {
     Task
         .find()
+        .sort({createdAt: 1})
         // .populate('features')
         // .populate('createdBy')
         .exec(function (err, tasks) {
@@ -44,24 +45,27 @@ function _getAll(req, res) {
             }
 
             res.json(tasks.map(function (task) {
-                return _.pick(task, ['name']);
+                return _.pick(task, ['id', 'name', 'done']);
             }));
         });
 }
 
 function _update(req, res) {
+    var modifiedAt = new Date();
     Task.update({
         _id: req.params.id
     }, {
         $set: {
             name: req.body.name,
-            done: req.body.done
+            done: req.body.done,
+            description: req.body.description,
+            modifiedAt: modifiedAt
         }
-    }, function (err, todo) {
+    }, function (err, task) {
         if (err)
             return res.send(err);
 
-        res.json({ id: todo._id });
+        res.json({ id: req.params.id });
     });
 }
 
@@ -71,20 +75,20 @@ function _create(req, res) {
         name: req.body.name,
         description: req.body.description,
         createdAt: createdAt,
-        modifiedAt: createdAt
+        modifiedAt: createdAt        
     }, function (err, task) {
         if (err) {
             return res.send(err);
         }
 
-        res.json({ id: task._id });
+        res.json(_.pick(task, ['id', 'name', 'done', 'description', 'features']));
     });
 }
 
 function _delete(req, res) {
     Task.remove({
         _id: req.params.id
-    }, function (err, todo) {
+    }, function (err, task) {
         if (err) {
             return res.send(err);
         }

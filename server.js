@@ -48,7 +48,7 @@ app.use('/api', require('./app/core/task/routes')());
 // load the single view file (angular will handle the page changes on the front-end)
 app.route('/*')
     .get(function (req, res) {
-        res.sendFile(path.join(__dirname, './public/index.html'));
+        res.sendFile(path.join(__dirname, './public/app/index.html'));
     });
 
 // catch 404 and forward to error handler
