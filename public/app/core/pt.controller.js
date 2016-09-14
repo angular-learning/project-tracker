@@ -1,5 +1,7 @@
-angular
-    .module('projectTracker')
-    .controller('mainController', function () {
-        var self = this;
-    });
+(function () {
+    angular
+        .module('projectTracker')
+        .controller('mainController', function () {
+            var self = this;
+        });
+})();
