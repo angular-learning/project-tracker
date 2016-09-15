@@ -21,8 +21,17 @@
     "node": "6.4.0"
   },
   "scripts": {
+    "install": "npm install && bower install",
     "prestart": "npm install bower -g && bower install",
     "start": "node server.js",
-    "dev": "run.bat"
+    "dev": "SET NODE_ENV=dev& SET PORT=3001& node server",
+    "livereload": "gulp livereload",
+    "prebuild": "npm install gulp -g && npm install && bower install",
+    "build": "gulp",
+    "test": "gulp test"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-server-livereload": "^1.8.4"
   }
 }
