@@ -1,12 +1,15 @@
-angular
-    .module('projectTracker')
-    .controller('taskController', function (Task) {
+(function () {
+    angular
+        .module('projectTracker')
+        .controller('taskController', _controller);
+
+    function _controller(Task) {
         var self = this;
 
         self.newTask = {};
         self.initializing = true;
 
-        Task.query(function(data) {
+        Task.query(function (data) {
             self.tasks = data;
             self.initializing = false;
         });
@@ -21,30 +24,31 @@ angular
 
             self.loading = true;
 
-            return Task.save(self.newTask, function(data) {
-                    self.tasks.push(data);
-                    self.newTask = {};
-                }).$promise.finally(function() {
-                    self.loading = false;
-                });
+            return Task.save(self.newTask, function (data) {
+                self.tasks.push(data);
+                self.newTask = {};
+            }).$promise.finally(function () {
+                self.loading = false;
+            });
         }
 
         function _updateTask(task) {
 
             self.loading = true;
-            
-            return Task.save({id: task.id}, task).$promise.finally(function () {                
+
+            return Task.save({ id: task.id }, task).$promise.finally(function () {
                 self.loading = false;
             });
         }
 
         function _deleteTask(task) {
             self.loading = true;
-            
-            Task.delete({id: task.id}, function (data) {
-                    _.remove(self.tasks, {id: task.id});
-                }).$promise.finally(function () {
-                    self.loading = false;
-                });
+
+            Task.delete({ id: task.id }, function (data) {
+                _.remove(self.tasks, { id: task.id });
+            }).$promise.finally(function () {
+                self.loading = false;
+            });
         }
-    });
+    }
+})();

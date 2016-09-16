@@ -1,24 +1,33 @@
-<div class="container">
-        <div pt-task-list 
-            title="Tasks to do:"
-            datasource="taskCtrl.tasks" 
-            initializing="taskCtrl.initializing"
-            loading="taskCtrl.loading"
-            update="taskCtrl.updateTask"
-            delete="taskCtrl.deleteTask"></div>
-            
-        <div id="todo-form" class="row">
-            <div class="col-sm-8 col-sm-offset-2 text-center">
-                <form>
-                    <div class="form-group">
-                        <input type="text" class="form-control input-lg text-center" placeholder="Enter new task's name" ng-model="taskCtrl.newTask.name">
-                    </div>
+<div>
+    <div ng-show="!taskCtrl.initializing">
+        <h2>Active tasks: <span class="label label-info">{{ taskCtrl.tasks.length }}</span>
+        </h2>
+    </div>
 
-                    <button type="submit" 
-                            class="btn btn-primary btn-lg" 
-                            ng-click="taskCtrl.createTask()"
-                            ng-disabled="!taskCtrl.newTask.name">Add</button>
-                </form>
+    <div class="row tasks">
+        <div>
+            <div class="checkbox" ng-repeat="item in taskCtrl.tasks" ng-show="!taskCtrl.initializing">
+                <label>
+                        <input type="checkbox" ng-model="item.done" ng-click="taskCtrl.updateTask(item)"> {{ item.name }}
+                        <button ng-click="taskCtrl.deleteTask(item)">Delete</button>
+                    </label>
             </div>
+
+            <p ng-show="taskCtrl.loading">
+                <span class="fa fa-spinner fa-spin fa-3x"></span>
+            </p>
         </div>
     </div>
+
+    <div id="todo-form" class="row">
+        <div>
+            <form>
+                <div class="form-group col-md-10">
+                    <input type="text" class="form-control input-lg text-center" placeholder="Enter new task's name" ng-model="taskCtrl.newTask.name">
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg col-md-2" ng-click="taskCtrl.createTask()" ng-disabled="!taskCtrl.newTask.name">Add</button>
+            </form>
+        </div>
+    </div>
+</div>
