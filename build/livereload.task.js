@@ -8,7 +8,9 @@ var paths = {
 };
 
 var timeExpression = /.*(\d{2}:\d{2}:\d{2}).*/;
-var serverPort = process.env.NODE_ENV;
+var serverPort = process.env.SERVER_PORT;
+
+console.log("Port for proxy is " + serverPort);
 
 gulp.task('livereload', function () {
     var config = {

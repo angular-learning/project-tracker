@@ -25,7 +25,7 @@
     "prestart": "npm install bower -g && bower install",
     "start": "node server.js",
     "dev": "SET NODE_ENV=dev& SET PORT=3001& node server",
-    "livereload": "gulp livereload",
+    "livereload": "SET SERVER_PORT=3001& gulp livereload",
     "prebuild": "npm install gulp -g && npm install && bower install",
     "build": "gulp",
     "test": "gulp test"
