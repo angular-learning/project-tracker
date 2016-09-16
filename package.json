@@ -21,12 +21,11 @@
     "node": "6.4.0"
   },
   "scripts": {
-    "install": "npm install && bower install",
-    "prestart": "npm install bower -g && bower install",
+    "prestart": "npm i bower -g && bower i",
     "start": "node server.js",
     "dev": "SET NODE_ENV=dev& SET PORT=3001& node server",
     "livereload": "SET SERVER_PORT=3001& gulp livereload",
-    "prebuild": "npm install gulp -g && npm install && bower install",
+    "prebuild": "npm i gulp -g && npm i && bower i",
     "build": "gulp",
     "test": "gulp test"
   },
