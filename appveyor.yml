@@ -1,0 +1,39 @@
+version: 1.0.{build}
+
+pull_requests:
+  do_not_increment_build_number: true
+
+branches:
+  only:
+  - development
+  - master
+
+skip_tags: true
+skip_branch_with_pr: true
+
+environment:
+  nodejs_version: "4"
+  nodejs_version: "5"
+  nodejs_version: "6"
+
+platform:
+  - x64
+
+install:
+  - cmd: npm run-script prebuild
+
+build: off
+
+cache:
+  - C:\Users\appveyor\AppData\Roaming\npm\node_modules -> package.json  # global npm modules
+  - C:\Users\appveyor\AppData\Roaming\npm-cache -> package.json         # npm cache
+  - node_modules -> package.json
+  - public\vendors -> bower.json
+
+deploy: off
+
+notifications:
+- provider: GitHubPullRequest
+  on_build_success: true
+  on_build_failure: true
+  on_build_status_changed: true
