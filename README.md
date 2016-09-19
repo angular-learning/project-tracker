@@ -9,9 +9,8 @@
 
 ### Development
 
-- Change port if you want in the `dev` npm script.
-- Open `localhost:{PORT}` in browser - default is 3001
-- Run `npm run-script livereload` to run livereload server for client code
+- Run `npm run-script dev` to develop with `dev` environment (Change port if you want in the `dev` npm script). Open `localhost:{PORT}` in a browser - default is 3001
+- Run `npm run-script livereload` to run livereload server for client code. Open the url shown in the console after livereload running (`dev` script should be run also) 
 
 ## Servers
 
