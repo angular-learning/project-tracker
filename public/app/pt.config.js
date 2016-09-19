@@ -1,8 +1,8 @@
 (function () {
     
     _run.$inject = ['$rootScope', '$state', '$stateParams'];
-    _config.$inject = ['$urlRouterProvider', '$locationProvider'];
-    
+    _config.$inject = ['$urlRouterProvider', '$locationProvider', '$stateProvider'];
+
     angular
         .module('projectTracker')
         .run(_run)
@@ -13,9 +13,21 @@
         rootScope.$stateParams = stateParams;
     }
 
-    function _config(urlRouterProvider, locationProvider) {
+    function _config(urlRouterProvider, locationProvider, stateProvider) {
         urlRouterProvider
-            .otherwise('/list');
+            .otherwise('/tasks/');
+
+        stateProvider
+            .state("layout", {
+                abstract: true,
+                url: '/',
+                controller: 'layoutController as layoutCtrl',
+                views: {
+                    '': { templateUrl: '/app/layout.view.tmpl.html' },
+                    'header@layout': { templateUrl: '/app/header.view.tmpl.html' },
+                    'footer@layout': { templateUrl: '/app/footer.view.tmpl.html' }
+                }
+            });
 
         locationProvider.html5Mode(true);
     }
