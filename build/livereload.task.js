@@ -19,7 +19,7 @@ gulp.task('livereload', function () {
         open: false,
         host: '127.0.0.1',
         port: 3003,
-        fallback: 'app/index.html',
+        fallback: 'app/pt.index.html',
         log: 'debug',
         proxies: [
             { source: '/api', target: 'http://localhost:' + serverPort + '/api' }
