@@ -1,4 +1,7 @@
 (function () {
+
+    _controller.$inject = ['Task'];
+
     angular
         .module('projectTracker')
         .controller('taskController', _controller);

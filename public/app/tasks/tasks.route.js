@@ -1,7 +1,10 @@
 (function () {
+
+    _config.$inject = ['$stateProvider'];
+
     angular
         .module('projectTracker')
-        .config(['$stateProvider', _config]);
+        .config(_config);
 
     function _config(stateProvider) {
         stateProvider

@@ -1,8 +1,12 @@
 (function () {
+    
+    _run.$inject = ['$rootScope', '$state', '$stateParams'];
+    _config.$inject = ['$urlRouterProvider', '$locationProvider'];
+    
     angular
         .module('projectTracker')
-        .run(['$rootScope', '$state', '$stateParams', _run])
-        .config(['$urlRouterProvider', '$locationProvider', _config]);
+        .run(_run)
+        .config(_config);
 
     function _run(rootScope, state, stateParams) {
         rootScope.$state = state;
