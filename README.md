@@ -4,13 +4,17 @@
 
 ### Production
 
-- Run `npm run-script build` to prepare application to start. 
-- Run `npm start` command to start application.
+- Run `npm run-script prod` command to prepare and start the application.
 
 ### Development
 
+- Run `npm run-script prepare` to prepare your local environment
 - Run `npm run-script dev` to develop with `dev` environment (Change port if you want in the `dev` npm script). Open `localhost:{PORT}` in a browser - default is 3001
 - Run `npm run-script livereload` to run livereload server for client code. Open the url shown in the console after livereload running (`dev` script should be run also) 
+
+## CI
+
+- 
 
 ## Servers
 

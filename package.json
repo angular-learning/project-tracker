@@ -21,16 +21,23 @@
     "node": "6.4.0"
   },
   "scripts": {
-    "prestart": "npm i bower -g && npm i && bower i",
-    "start": "node server.js",
-    "dev": "SET NODE_ENV=dev& SET PORT=3001& node server",
-    "livereload": "SET SERVER_PORT=3001& gulp livereload",
-    "prebuild": "npm i gulp -g && npm run-script prestart",
-    "build": "gulp",
-    "test": "gulp test"
+    "local-packages": "npm i && bower i",
+    "global-packages": "npm i bower -g && npm i gulp -g",
+    "prepare": "npm run-script global-packages && npm run-script local-packages",
+    "prod": "npm run-script prepare && npm run-script build && node server.js",
+    "dev": "npm run-script build && SET NODE_ENV=dev& SET PORT=3001& node server",
+    "build": "gulp build",
+    "test": "gulp test",
+    "livereload": "SET SERVER_PORT=3001& gulp livereload"
   },
   "devDependencies": {
+    "event-stream": "^3.3.4",
     "gulp": "^3.9.1",
-    "gulp-server-livereload": "^1.8.4"
+    "gulp-angular-filesort": "^1.1.1",
+    "gulp-inject": "^4.1.0",
+    "gulp-server-livereload": "^1.8.4",
+    "gulp-util": "^3.0.7",
+    "karma": "^1.3.0",
+    "main-bower-files": "^2.13.1"
   }
 }

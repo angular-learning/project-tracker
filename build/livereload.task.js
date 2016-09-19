@@ -8,11 +8,12 @@ var paths = {
 };
 
 var timeExpression = /.*(\d{2}:\d{2}:\d{2}).*/;
-var serverPort = process.env.SERVER_PORT;
-
-console.log("Port for proxy is " + serverPort);
 
 gulp.task('livereload', function () {
+    var serverPort = process.env.SERVER_PORT;
+    console.log("Port for proxy is " + serverPort);
+
+    var apiEndpoint = { source: '/api', target: 'http://localhost:' + serverPort + '/api' };
     var config = {
         livereload: true,
         directoryListing: false,
@@ -21,9 +22,7 @@ gulp.task('livereload', function () {
         port: 3003,
         fallback: 'app/pt.index.html',
         log: 'debug',
-        proxies: [
-            { source: '/api', target: 'http://localhost:' + serverPort + '/api' }
-        ]
+        proxies: [apiEndpoint]
     };
 
     console.log(`[${_toTime(new Date())}] "${paths.app}" is tracking now.`);

@@ -18,7 +18,11 @@ platform:
   - x64
 
 install:
-  - cmd: npm run-script prebuild
+  - cmd: npm run-script prepare
+  - cmd: gulp build
+
+test_script:
+  - cmd: gulp test
 
 build: off
 
