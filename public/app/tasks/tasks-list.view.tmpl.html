@@ -7,10 +7,7 @@
     <div class="row tasks">
         <div>
             <div class="checkbox" ng-repeat="item in taskLstCtrl.tasks" ng-show="!taskLstCtrl.initializing">
-                <label>
-                        <input type="checkbox" ng-model="item.done" ng-click="taskLstCtrl.updateTask(item)"> {{ item.name }}
-                        <button ng-click="taskLstCtrl.deleteTask(item)">Delete</button>
-                    </label>
+                <div pt-task task="item" update="taskLstCtrl.updateTask" delete="taskLstCtrl.deleteTask"></div>
             </div>
 
             <p ng-show="taskLstCtrl.loading">
