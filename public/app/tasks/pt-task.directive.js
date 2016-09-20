@@ -1,25 +1,31 @@
 (function () {
 
+    _init.$inject = ['toastr'];
+
     angular
         .module('projectTracker')
         .directive('ptTask', _init);
 
-    function _init() {
+    function _init(toastr) {
 
         var controller = function () {
             var self = this;
 
-            self.check = _check;
-            // self.delete = _delete;
+            self.checkTask = _checkTask;
+            self.deleteTask = _deleteTask;
 
-            function _check() {
+            function _checkTask() {
                 self.task.done = !self.task.done;
                 self.update()(self.task);
+                
+                if (self.task.done)
+                    toastr.success('Task ' + self.task.name + ' completed!');
             }
 
-            // function _delete() {
-            //     self.delete()(task);
-            // }
+            function _deleteTask() {
+                 self.delete()(self.task);
+                 toastr.error('Task ' + self.task.name + ' deleted!');
+            }
         };
 
         return {            

@@ -1,18 +1,18 @@
 
     <div class="row well well-sm">
-        <div class="col-lg-1" ng-if="!self.task.done">
-            <button type="button" class="btn btn-labeled" ng-click="self.check()">
+        <div class="col-sm-1" ng-if="!self.task.done">
+            <button type="button" class="btn btn-labeled" ng-click="self.checkTask()">
                     <i class="glyphicon glyphicon glyphicon-ok"></i></button>
         </div>
-        <div class="col-lg-1" ng-if="self.task.done">
-            <button type="button" class="btn btn-labeled btn-success" ng-click="self.check()">
+        <div class="col-sm-1" ng-if="self.task.done">
+            <button type="button" class="btn btn-labeled btn-success" ng-click="self.checkTask()">
                     <i class="glyphicon glyphicon glyphicon-ok"></i></button>
         </div>
-        <div class="col-lg-9">
-            <h3>{{ self.task.name }}</h3>
+        <div class="col-sm-9">
+            <h4>{{ self.task.name }}</h4>
             </div>
-        <div class="col-lg-2">
-            <button type="button" class="btn btn-labeled btn-danger pull-right" ng-click="self.delete()(self.task)">
+        <div class="col-sm-2">
+            <button type="button" class="btn btn-labeled btn-danger pull-right" ng-click="self.deleteTask()(self.task)">
                     <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span> Delete</button>
         </div>
     </div>
