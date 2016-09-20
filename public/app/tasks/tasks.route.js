@@ -1,13 +1,16 @@
 (function () {
 
-    _config.$inject = ['$stateProvider'];
+    _config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
     angular
         .module('projectTracker')
         .config(_config);
 
-    function _config(stateProvider) {
-        stateProvider
+    function _config($stateProvider, $urlRouterProvider) {
+        $urlRouterProvider
+            .otherwise('/tasks/');
+
+        $stateProvider
             .state('layout.tasks', {
                 url: 'tasks/',
                 views: {

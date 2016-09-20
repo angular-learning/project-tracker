@@ -1,23 +1,20 @@
 (function () {
     
     _run.$inject = ['$rootScope', '$state', '$stateParams'];
-    _config.$inject = ['$urlRouterProvider', '$locationProvider', '$stateProvider'];
+    _config.$inject = ['$locationProvider', '$stateProvider'];
 
     angular
         .module('projectTracker')
         .run(_run)
         .config(_config);
 
-    function _run(rootScope, state, stateParams) {
-        rootScope.$state = state;
-        rootScope.$stateParams = stateParams;
+    function _run($rootScope, $state, $stateParams) {
+        $rootScope.$state = $state;
+        $rootScope.$stateParams = $stateParams;
     }
 
-    function _config(urlRouterProvider, locationProvider, stateProvider) {
-        urlRouterProvider
-            .otherwise('/tasks/');
-
-        stateProvider
+    function _config($locationProvider, $stateProvider) {
+        $stateProvider
             .state("layout", {
                 abstract: true,
                 url: '/',
@@ -29,6 +26,6 @@
                 }
             });
 
-        locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(true);
     }
 })();
