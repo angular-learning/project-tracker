@@ -1,19 +1,16 @@
 <div>
-    <div ng-show="!taskCtrl.initializing">
-        <h2>Active tasks: <span class="label label-info">{{ taskCtrl.tasks.length }}</span>
+    <div ng-show="!taskLstCtrl.initializing">
+        <h2>Active tasks: <span class="label label-info">{{ taskLstCtrl.tasks.length }}</span>
         </h2>
     </div>
 
     <div class="row tasks">
         <div>
-            <div class="checkbox" ng-repeat="item in taskCtrl.tasks" ng-show="!taskCtrl.initializing">
-                <label>
-                        <input type="checkbox" ng-model="item.done" ng-click="taskCtrl.updateTask(item)"> {{ item.name }}
-                        <button ng-click="taskCtrl.deleteTask(item)">Delete</button>
-                    </label>
+            <div class="checkbox" ng-repeat="item in taskLstCtrl.tasks" ng-show="!taskLstCtrl.initializing">
+                <div pt-task task="item" update="taskLstCtrl.updateTask" delete="taskLstCtrl.deleteTask"></div>
             </div>
 
-            <p ng-show="taskCtrl.loading">
+            <p ng-show="taskLstCtrl.loading">
                 <span class="fa fa-spinner fa-spin fa-3x"></span>
             </p>
         </div>
@@ -23,10 +20,10 @@
         <div>
             <form>
                 <div class="form-group col-md-10">
-                    <input type="text" class="form-control input-lg text-center" placeholder="Enter new task's name" ng-model="taskCtrl.newTask.name">
+                    <input type="text" class="form-control input-lg text-center" placeholder="Enter new task's name" ng-model="taskLstCtrl.newTask.name">
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-lg col-md-2" ng-click="taskCtrl.createTask()" ng-disabled="!taskCtrl.newTask.name">Add</button>
+                <button type="submit" class="btn btn-primary btn-lg col-md-2" ng-click="taskLstCtrl.createTask()" ng-disabled="!taskLstCtrl.newTask.name">Add</button>
             </form>
         </div>
     </div>

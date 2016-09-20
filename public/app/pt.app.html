@@ -1,0 +1,37 @@
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="projectTracker">
+<head>
+	<!-- META -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+    <!-- inject:css -->
+    <link rel="stylesheet" href="/vendors/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/app/content/tasks.css">
+    <!-- endinject -->
+
+    <base href="/"><!-- Angular ui router html5 mode -->
+</head>
+
+<body>    
+    <ui-view></ui-view><!-- Angular ui router start point-->
+
+    <!-- inject:js -->
+    <script src="/vendors/angular/angular.js"></script>
+    <script src="/vendors/lodash/lodash.js"></script>
+    <script src="/vendors/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="/vendors/jquery/dist/jquery.js"></script>
+    <script src="/vendors/angular-resource/angular-resource.js"></script>
+    <script src="/vendors/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/app/pt.app.js"></script>
+    <script src="/app/tasks/tasks.route.js"></script>
+    <script src="/app/tasks/task.resource.js"></script>
+    <script src="/app/tasks/pt-task.directive.js"></script>
+    <script src="/app/tasks/task-list.controller.js"></script>
+    <script src="/app/layout.controller.js"></script>
+    <script src="/app/pt.config.js"></script>
+    <!-- endinject -->
+</body>
+</html>

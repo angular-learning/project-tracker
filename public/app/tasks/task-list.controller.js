@@ -4,7 +4,7 @@
 
     angular
         .module('projectTracker')
-        .controller('taskController', _controller);
+        .controller('taskListController', _controller);
 
     function _controller(Task) {
         var self = this;
