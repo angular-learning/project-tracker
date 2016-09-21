@@ -1,12 +1,12 @@
 (function () {
 
-    _controller.$inject = ['Task'];
+    _controller.$inject = ['Task', 'toastr'];
 
     angular
         .module('projectTracker')
         .controller('taskListController', _controller);
 
-    function _controller(Task) {
+    function _controller(Task, toastr) {
         var self = this;
 
         self.newTask = {};
@@ -29,7 +29,8 @@
 
             return Task.save(self.newTask, function (data) {
                 self.tasks.push(data);
-                self.newTask = {};
+                toastr.info('Task ' + self.newTask.name + ' created!');
+                self.newTask = {};                
             }).$promise.finally(function () {
                 self.loading = false;
             });
