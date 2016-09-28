@@ -1,30 +1,23 @@
 <div>
-    <div ng-show="!taskLstCtrl.initializing">
-        <h2>Active tasks: <span class="label label-info">{{ taskLstCtrl.tasks.length }}</span>
-        </h2>
-    </div>
-
-    <div class="row tasks">
-        <div>
-            <div class="checkbox" ng-repeat="item in taskLstCtrl.tasks" ng-show="!taskLstCtrl.initializing">
-                <div pt-task task="item" update="taskLstCtrl.updateTask" delete="taskLstCtrl.deleteTask"></div>
-            </div>
-
-            <p ng-show="taskLstCtrl.loading">
-                <span class="fa fa-spinner fa-spin fa-3x"></span>
-            </p>
-        </div>
-    </div>
-
     <div id="todo-form" class="row">
         <div>
             <form>
                 <div class="form-group col-md-10">
-                    <input type="text" class="form-control input-lg text-center" placeholder="Enter new task's name" ng-model="taskLstCtrl.newTask.name">
+                    <input type="text" class="form-control input text-left" placeholder="Enter new task's name" ng-model="taskLstCtrl.newTask.name">
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-lg col-md-2" ng-click="taskLstCtrl.createTask()" ng-disabled="!taskLstCtrl.newTask.name">Add</button>
+                <button type="submit" class="btn btn-primary col-md-2" ng-click="taskLstCtrl.createTask()" ng-disabled="!taskLstCtrl.newTask.name">Add</button>
             </form>
         </div>
+    </div>
+
+    <div>
+        <div class="checkbox" ng-repeat="item in taskLstCtrl.tasks" ng-show="!taskLstCtrl.initializing">
+            <div pt-task task="item" update="taskLstCtrl.updateTask" delete="taskLstCtrl.deleteTask"></div>
+        </div>
+
+        <p ng-show="taskLstCtrl.loading">
+            <span class="fa fa-spinner fa-spin fa-3x"></span>
+        </p>
     </div>
 </div>
