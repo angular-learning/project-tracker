@@ -1,30 +1,28 @@
 (function () {
 
-    _config.$inject = ['$stateProvider'];
+    _config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
     angular
         .module('projectTracker')
         .config(_config);
 
-    function _config(stateProvider) {
-        stateProvider
-            .state("tasks", {
-                abstract: true,
-                url: '/',
-                controller: 'mainController as mainCtrl',
+    function _config($stateProvider, $urlRouterProvider) {
+        $urlRouterProvider
+            .otherwise('/tasks/');
+
+        $stateProvider
+            .state('layout.tasks', {
+                url: 'tasks/',
                 views: {
-                    '' : { templateUrl: '/app/tasks/tasks-main.view.tmpl.html' },
-                    'header@tasks': { templateUrl: '/app/tasks/tasks-header.view.tmpl.html' },
-                    'footer@tasks': { templateUrl: '/app/tasks/tasks-footer.view.tmpl.html' }
+                    '': {
+                        templateUrl: '/app/tasks/tasks-layout.view.tmpl.html',
+                        controller: 'taskListController as taskLstCtrl',
+                    },
+                    'list@layout.tasks': { templateUrl: '/app/tasks/tasks-list.view.tmpl.html' }
                 }
             })
-            .state('tasks.list', {
-                url: 'list',
-                controller: 'taskController as taskCtrl',
-                templateUrl: '/app/tasks/tasks-list.view.tmpl.html'
-            })
-            .state('tasks.details', {
-                url: 'details',
+            .state('layout.tasks.details', {
+                url: 'details/:id',
                 templateUrl: '/app/tasks/tasks-details.view.tmpl.html'
             });
     }
