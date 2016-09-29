@@ -1,26 +1,30 @@
-﻿.body {
-    height: 100%;
+﻿.vertical-divider > div[class^="col-"] {
+  border-right: 6px solid #F2F7F9;
+  padding-right: 30px;
+  height: 100%;
 }
 
-.content {
-    height: 100%;
-    position: relative;
-    padding: 60px 0px;
+.vertical-divider div[class^="col-"]:first-child {
+  border-left: none;
+}
+.vertical-divider div[class^="col-"]:last-child {
+  border-right: none;
 }
 
-.header {
-    width: 100%;
-    position: fixed;
-    top: 0;
+.w3-note {
+    background-color: #ffffcc;
+    border-left: 6px solid #ffeb3b!important;
+}
+.w3-panel {
+    padding: 4px 16px;
+    border-left: 6px solid #F2F7F9;
 }
 
-.footer {
-    width: 100%;
-    height: 40px;
-    position: fixed;
-    bottom: 0;
+.w3-borderless {
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    background-color: transparent;
+    border: 0 solid transparent;
 }
 
-.tasks {
-    padding: 20px;
-}
