@@ -21,7 +21,7 @@ module.exports = function () {
 function _getOne(req, res) {
     Task
         .findById(req.params.id)
-        .populate('features')
+        //.populate('features')
         // .populate('createdBy')
         .exec(function (err, task) {
             if (err) {
@@ -29,7 +29,7 @@ function _getOne(req, res) {
             }
 
             var taskModel = { _id: task.id };
-            res.json(_.extend(taskModel, _.pick(task, ['name', 'done', 'description', 'features'])));
+            res.json(_.pick(task, ['id', 'name', 'done']));
         });
 }
 

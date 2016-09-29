@@ -21,9 +21,11 @@
                     'list@layout.tasks': { templateUrl: '/app/tasks/tasks-list.view.tmpl.html' }
                 }
             })
-            .state('layout.tasks.details', {
+            .state('details', {
+                parent: 'layout.tasks',
                 url: 'details/:id',
-                templateUrl: '/app/tasks/tasks-details.view.tmpl.html'
+                templateUrl: '/app/tasks/tasks-details.view.tmpl.html',
+                controller: 'taskDetailsController as taskCtrl'
             });
     }
 })();

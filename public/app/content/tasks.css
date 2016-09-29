@@ -10,3 +10,21 @@
 .vertical-divider div[class^="col-"]:last-child {
   border-right: none;
 }
+
+.w3-note {
+    background-color: #ffffcc;
+    border-left: 6px solid #ffeb3b!important;
+}
+.w3-panel {
+    padding: 4px 16px;
+    border-left: 6px solid #F2F7F9;
+}
+
+.w3-borderless {
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    background-color: transparent;
+    border: 0 solid transparent;
+}
+
