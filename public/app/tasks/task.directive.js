@@ -38,7 +38,7 @@
             controller: controller,
             controllerAs: 'self',
             bindToController: true,
-            templateUrl: '/app/tasks/pt-task.tmpl.html'
+            templateUrl: '/app/tasks/task.tmpl.html'
         }
     }
 })();
