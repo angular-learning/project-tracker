@@ -11,14 +11,15 @@ var timeExpression = /.*(\d{2}:\d{2}:\d{2}).*/;
 
 gulp.task('livereload', function () {
     var serverPort = process.env.SERVER_PORT;
-    console.log("Port for proxy is " + serverPort);
+    console.log(`[${_toTime(new Date())}] Port for proxy is ${serverPort}`);
 
-    var apiEndpoint = { source: '/api', target: 'http://localhost:' + serverPort + '/api' };
+    var ip = '127.0.0.1';
+    var apiEndpoint = { source: '/api', target: `http://${ip}:${serverPort}/api` };
     var config = {
         livereload: true,
         directoryListing: false,
         open: false,
-        host: '127.0.0.1',
+        host: ip,
         port: 3003,
         fallback: 'app/pt.app.html',
         log: 'debug',

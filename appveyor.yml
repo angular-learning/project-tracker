@@ -18,7 +18,7 @@ platform:
   - x64
 
 install:
-  - cmd: npm run-script prepare
+  - cmd: npm run prepare
   - cmd: gulp build
 
 test_script:
