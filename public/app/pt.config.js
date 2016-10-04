@@ -20,9 +20,9 @@
                 url: '/',
                 controller: 'layoutController as layoutCtrl',
                 views: {
-                    '': { templateUrl: '/app/layout.view.tmpl.html' },
-                    'header@layout': { templateUrl: '/app/header.view.tmpl.html' },
-                    'footer@layout': { templateUrl: '/app/footer.view.tmpl.html' }
+                    '': { templateUrl: '/app/layout/layout.view.tmpl.html' },
+                    'header@layout': { templateUrl: '/app/layout/header.view.tmpl.html' },
+                    'footer@layout': { templateUrl: '/app/layout/footer.view.tmpl.html' }
                 }
             });
 
