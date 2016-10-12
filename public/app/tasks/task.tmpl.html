@@ -9,7 +9,10 @@
                         <i class="glyphicon glyphicon glyphicon-ok"></i></button>
         </div>
         <div class="col-md-8">
-            <input type="text" class="task-text form-control input text-left w3-borderless" ng-model="self.task.name">
+            <input class="task-text form-control input text-left w3-borderless" 
+                   ng-model="self.task.name"
+                   type="text"
+                   ng-change=self.updateTaskTitle()>
         </div>
         <div class="col-md-1">
             <button type="button" class="btn btn-labeled btn-danger" ng-click="self.deleteTask()(self.task)">
