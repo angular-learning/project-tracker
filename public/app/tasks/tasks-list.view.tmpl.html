@@ -16,7 +16,7 @@
         ng-repeat="item in taskLstCtrl.tasks" 
         ng-show="!taskLstCtrl.initializing"
         ng-click="taskLstCtrl.selectTask(item); $event.stopPropagation();" 
-        ng-class="{'w3-note': item.id === taskLstCtrl.idSelected}">
+        ng-class="{'w3-note': item.id === taskLstCtrl.selectedId}">
             <div pt-task task="item" update="taskLstCtrl.updateTask" delete="taskLstCtrl.deleteTask"></div>
         </div>
 

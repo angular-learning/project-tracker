@@ -1,11 +1,14 @@
 var mongoose = require('mongoose');
 
 module.exports = mongoose.model('Task', {
-    name: String,
-    done: Boolean,
+    title: String,
+    isDone: Boolean,
     description: String,
+    assignee: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    timeline: [{ userId: Boolean, timestamp: Date }],
     features: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Feature' }],
     createdAt: Date,
     modifiedAt: Date,
-    modifiedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+    modifiedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    access: [{ groupId: String, canEdit: Boolean}]
 });

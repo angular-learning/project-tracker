@@ -11,7 +11,7 @@
 
         self.newTask = {};
         self.initializing = true;
-        self.idSelected = null;
+        self.selectedId = $stateParams.selectedId;
 
         Task.query(function (data) {
             self.tasks = data;
@@ -59,11 +59,11 @@
 
         function _selectTask(task) {
             if (task) {
-                self.idSelected = task.id;
-                $state.go('details', {id: task.id});
+                self.selectedId = task.id;
+                $state.go('details', {selectedId: task.id});
             }
             else {
-                self.idSelected = undefined;
+                self.selectedId = undefined;
                 $state.go('layout.tasks');
             }
         }

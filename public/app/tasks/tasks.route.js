@@ -12,7 +12,7 @@
 
         $stateProvider
             .state('layout.tasks', {
-                url: 'tasks/',
+                url: 'tasks/?selectedId',
                 views: {
                     '': {
                         templateUrl: '/app/tasks/tasks-layout.view.tmpl.html',
@@ -23,7 +23,7 @@
             })
             .state('details', {
                 parent: 'layout.tasks',
-                url: 'details/:id',
+                url: 'details/',
                 templateUrl: '/app/tasks/tasks-details.view.tmpl.html',
                 controller: 'taskDetailsController as taskCtrl'
             });
