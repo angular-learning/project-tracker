@@ -17,13 +17,17 @@
         $stateProvider
             .state("layout", {
                 abstract: true,
-                url: '/',
-                controller: 'layoutController as layoutCtrl',
+                url: '/?search',                
                 views: {
                     '': { templateUrl: '/app/layout/layout.view.tmpl.html' },
-                    'header@layout': { templateUrl: '/app/layout/header.view.tmpl.html' },
-                    'footer@layout': { templateUrl: '/app/layout/footer.view.tmpl.html' }
-                }
+                    'header@layout': { 
+                        templateUrl: '/app/layout/header.view.tmpl.html',
+                        controller: 'layoutController as layoutCtrl' },
+                    'footer@layout': { 
+                        templateUrl: '/app/layout/footer.view.tmpl.html', 
+                        controller: 'layoutController as layoutCtrl'}
+                },
+                
             });
 
         $locationProvider.html5Mode(true);
