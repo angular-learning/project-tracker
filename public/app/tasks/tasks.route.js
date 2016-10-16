@@ -12,7 +12,7 @@
 
         $stateProvider
             .state('layout.tasks', {
-                url: 'tasks/?selectedId',
+                url: 'tasks/?id',
                 views: {
                     '': {
                         templateUrl: '/app/tasks/tasks-layout.view.tmpl.html',

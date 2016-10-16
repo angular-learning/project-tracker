@@ -11,7 +11,7 @@
 
         self.newTask = {};
         self.initializing = true;
-        self.selectedId = $stateParams.selectedId;
+        self.selectedId = $stateParams.id;
 
         Task.query(function (data) {
             self.tasks = data;
@@ -24,14 +24,14 @@
         self.selectTask = _selectTask;
 
         function _createTask() {
-            if (!self.newTask.name)
+            if (!self.newTask.title)
                 return;
 
             self.loading = true;
 
             return Task.save(self.newTask, function (data) {
                 self.tasks.push(data);
-                toastr.info('Task ' + self.newTask.name + ' created!');
+                toastr.info('Task ' + self.newTask.title + ' created!');
                 self.newTask = {};
             }).$promise.finally(function () {
                 self.loading = false;
@@ -60,7 +60,7 @@
         function _selectTask(task) {
             if (task) {
                 self.selectedId = task.id;
-                $state.go('details', {selectedId: task.id});
+                $state.go('details', {id: task.id});
             }
             else {
                 self.selectedId = undefined;

@@ -16,16 +16,16 @@
             self.updateTaskTitle = _updateTaskTitle;
 
             function _checkTask() {
-                self.task.done = !self.task.done;
+                self.task.isdone = !self.task.isdone;
                 self.update()(self.task);
                 
-                if (self.task.done)
-                    toastr.success('Task ' + self.task.name + ' completed!');
+                if (self.task.isdone)
+                    toastr.success('Task ' + self.task.title + ' completed!');
             }
 
             function _deleteTask() {
                  self.delete()(self.task);
-                 toastr.error('Task ' + self.task.name + ' deleted!');
+                 toastr.error('Task ' + self.task.title + ' deleted!');
             }
 
             function _updateTaskTitle() { 
