@@ -12,21 +12,18 @@
         self.newTask = {};
         self.initializing = true;
         self.selectedId = $stateParams.id;
-
-        Task.query(function (data) { self.searchIndex = _initSearchIndex(data); })
-            .$promise.finally(function () {
+ 
+        Task.query(function (data) { 
+            self.searchIndex = _initSearchIndex(data); 
             if ($stateParams.search) {
-                var qq = self.searchIndex.search($stateParams.search);
-                var tt = self.searchIndex.search($stateParams.search)
-                        .map(function(doc) { return doc.ref; });
-                Task.query({
-                    id: {$in: tt}
-                }, 
-                function (data) { _initList(data); });
+                var foundIds = self.searchIndex.search($stateParams.search)
+                    .map(function(doc) { return doc.ref; });
+                var filteredData = _(data).keyBy('id').at(foundIds).filter().value();
+                _initList(filteredData);   
             }
             else {
-                Task.query(function (data) { _initList(data); });   
-            } 
+                _initList(data);
+            }
         });    
 
         self.createTask = _createTask;
@@ -89,7 +86,7 @@
 
         function _initSearchIndex(data){
             var searchIndex = lunr(function () {
-                this.field('title');
+                this.field('title', {boost: 50});
                 this.ref('id');
             });
 
