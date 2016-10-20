@@ -4,7 +4,7 @@
 
     angular
         .module('projectTracker')
-        .controller('layoutController', _controller);
+        .controller('headerController', _controller);
     
     function _controller($state, $stateParams) {
         var self = this;
