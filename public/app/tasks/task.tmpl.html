@@ -1,10 +1,10 @@
 <div class="row">
     <form>
-        <div class="col-md-1" ng-if="!self.task.isdone">
+        <div class="col-md-1" ng-if="!self.task.isDone">
             <button type="button" class="btn btn-labeled" ng-click="self.checkTask()">
                         <i class="glyphicon glyphicon glyphicon-ok"></i></button>
         </div>
-        <div class="col-md-1" ng-if="self.task.isdone">
+        <div class="col-md-1" ng-if="self.task.isDone">
             <button type="button" class="btn btn-labeled btn-success" ng-click="self.checkTask()">
                         <i class="glyphicon glyphicon glyphicon-ok"></i></button>
         </div>

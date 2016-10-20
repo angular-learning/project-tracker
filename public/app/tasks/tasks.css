@@ -21,10 +21,10 @@
 }
 
 .w3-borderless {
-    box-shadow: none;
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-    background-color: transparent;
-    border: 0 solid transparent;
+    box-shadow: none!important;
+    -moz-box-shadow: none!important;
+    -webkit-box-shadow: none!important;
+    background-color: transparent!important;
+    border: 0 solid transparent!important;
 }
 
