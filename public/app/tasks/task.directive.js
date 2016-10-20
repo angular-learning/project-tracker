@@ -16,10 +16,10 @@
             self.updateTaskTitle = _updateTaskTitle;
 
             function _checkTask() {
-                self.task.isdone = !self.task.isdone;
+                self.task.isDone = !self.task.isDone;
                 self.update()(self.task);
                 
-                if (self.task.isdone)
+                if (self.task.isDone)
                     toastr.success('Task ' + self.task.title + ' completed!');
             }
 

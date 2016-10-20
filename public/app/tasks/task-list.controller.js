@@ -12,7 +12,7 @@
         self.newTask = {};
         self.initializing = true;
         self.selectedId = $stateParams.id;
- 
+                
         Task.query(function (data) { 
             self.searchIndex = _initSearchIndex(data); 
             if ($stateParams.search) {
@@ -76,7 +76,7 @@
         function _selectTask(task) {
             if (task) {
                 self.selectedId = task.id;
-                $state.go('details', {id: task.id});
+                $state.go('details', {id: task.id, task: task});
             }
             else {
                 self.selectedId = undefined;

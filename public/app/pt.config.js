@@ -22,10 +22,9 @@
                     '': { templateUrl: '/app/layout/layout.view.tmpl.html' },
                     'header@layout': { 
                         templateUrl: '/app/layout/header.view.tmpl.html',
-                        controller: 'layoutController as layoutCtrl' },
+                        controller: 'headerController as headerCtrl' },
                     'footer@layout': { 
-                        templateUrl: '/app/layout/footer.view.tmpl.html', 
-                        controller: 'layoutController as layoutCtrl'}
+                        templateUrl: '/app/layout/footer.view.tmpl.html'}
                 },
                 
             });

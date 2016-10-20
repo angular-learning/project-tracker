@@ -29,7 +29,7 @@ function _getOne(req, res) {
             }
 
             var taskModel = { _id: task.id };
-            res.json(_.pick(task, ['id', 'title', 'isdone']));
+            res.json(_.pick(task, ['id', 'title', 'isDone']));
         });
 }
 
@@ -45,7 +45,7 @@ function _getAll(req, res) {
             }
 
             res.json(tasks.map(function (task) {
-                return _.pick(task, ['id', 'title', 'isdone']);
+                return _.pick(task, ['id', 'title', 'isDone']);
             }));
         });
 }
@@ -57,7 +57,7 @@ function _update(req, res) {
     }, {
         $set: {
             title: req.body.title,
-            isdone: req.body.isdone,
+            isDone: req.body.isDone,
             description: req.body.description,
             modifiedAt: modifiedAt
         }
@@ -73,15 +73,16 @@ function _create(req, res) {
     var createdAt = new Date();
     Task.create({
         title: req.body.title,
+        isDone: false,
         description: req.body.description,
         createdAt: createdAt,
-        modifiedAt: createdAt        
+        modifiedAt: createdAt            
     }, function (err, task) {
         if (err) {
             return res.send(err);
         }
 
-        res.json(_.pick(task, ['id', 'title', 'isdone', 'description', 'features']));
+        res.json(_.pick(task, ['id', 'title', 'isDone', 'description', 'features']));
     });
 }
 

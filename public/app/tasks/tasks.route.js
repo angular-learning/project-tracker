@@ -12,18 +12,21 @@
 
         $stateProvider
             .state('layout.tasks', {
-                url: 'tasks/?id',
+                url: 'tasks/',
+                params: {
+                    id: null
+                },
                 views: {
                     '': {
-                        templateUrl: '/app/tasks/tasks-layout.view.tmpl.html',
-                        controller: 'taskListController as taskLstCtrl',
+                        templateUrl: '/app/tasks/tasks-layout.view.tmpl.html'
                     },
-                    'list@layout.tasks': { templateUrl: '/app/tasks/tasks-list.view.tmpl.html' }
+                    'list@layout.tasks': { templateUrl: '/app/tasks/tasks-list.view.tmpl.html',
+                        controller: 'taskListController as taskLstCtrl' }
                 }
             })
             .state('details', {
                 parent: 'layout.tasks',
-                url: 'details/',
+                url: ':id/details/',
                 templateUrl: '/app/tasks/tasks-details.view.tmpl.html',
                 controller: 'taskDetailsController as taskCtrl'
             });
