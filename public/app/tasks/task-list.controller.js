@@ -76,7 +76,7 @@
         function _selectTask(task) {
             if (task) {
                 self.selectedId = task.id;
-                $state.go('details', {id: task.id, task: task});
+                $state.go('details', {id: task.id, task: task}, {reload: 'details'});
             }
             else {
                 self.selectedId = undefined;
