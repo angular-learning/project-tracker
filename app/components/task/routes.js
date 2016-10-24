@@ -67,7 +67,7 @@ function _update(req, res) {
             if (err)
                 return res.send(err);
 
-            _writeAuditMessage('Task ' + req.params.id + ' was updated at ', modifiedAt);
+            _writeAuditMessage('Task ' + req.body.title + ' was updated at ', modifiedAt);
             res.json({ id: req.params.id });
         });
 }
@@ -85,7 +85,7 @@ function _create(req, res) {
             return res.send(err);
         }
 
-        _writeAuditMessage('Task ' + req.params.id + ' was created at ', createdAt);
+        _writeAuditMessage('Task ' + req.body.title + ' was created at ', createdAt);
         res.json(_.pick(task, ['id', 'title', 'isDone', 'description', 'features']));
     });
 }
@@ -105,7 +105,7 @@ function _delete(req, res) {
 }
 
 function _writeAuditMessage(message, timestamp) {
-    Audit.Task.create({
+    Audit.create({
         description: message + timestamp,
         modifiedAt: timestamp
     });
