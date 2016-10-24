@@ -13,19 +13,29 @@
 
             self.checkTask = _checkTask;
             self.deleteTask = _deleteTask;
+            self.updateTaskTitle = _debounceUpdateTaskTitle;
 
             function _checkTask() {
-                self.task.done = !self.task.done;
+                self.task.isDone = !self.task.isDone;
                 self.update()(self.task);
                 
-                if (self.task.done)
-                    toastr.success('Task ' + self.task.name + ' completed!');
+                if (self.task.isDone)
+                    toastr.success('Task ' + self.task.title + ' completed!');
             }
 
             function _deleteTask() {
                  self.delete()(self.task);
-                 toastr.error('Task ' + self.task.name + ' deleted!');
+                 toastr.error('Task ' + self.task.title + ' deleted!');
             }
+
+            function _debounceUpdateTaskTitle() { 
+                _.debounce(_updateTaskTitle(), 600); 
+            }
+
+            function _updateTaskTitle() { 
+                self.update()(self.task);
+            }
+
         };
 
         return {            
@@ -38,7 +48,7 @@
             controller: controller,
             controllerAs: 'self',
             bindToController: true,
-            templateUrl: '/app/tasks/pt-task.tmpl.html'
+            templateUrl: '/app/tasks/task.tmpl.html'
         }
     }
 })();

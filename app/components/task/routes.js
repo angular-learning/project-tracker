@@ -21,7 +21,7 @@ module.exports = function () {
 function _getOne(req, res) {
     Task
         .findById(req.params.id)
-        .populate('features')
+        //.populate('features')
         // .populate('createdBy')
         .exec(function (err, task) {
             if (err) {
@@ -29,7 +29,7 @@ function _getOne(req, res) {
             }
 
             var taskModel = { _id: task.id };
-            res.json(_.extend(taskModel, _.pick(task, ['name', 'done', 'description', 'features'])));
+            res.json(_.pick(task, ['id', 'title', 'isDone']));
         });
 }
 
@@ -45,7 +45,7 @@ function _getAll(req, res) {
             }
 
             res.json(tasks.map(function (task) {
-                return _.pick(task, ['id', 'name', 'done']);
+                return _.pick(task, ['id', 'title', 'isDone']);
             }));
         });
 }
@@ -56,8 +56,8 @@ function _update(req, res) {
         _id: req.params.id
     }, {
         $set: {
-            name: req.body.name,
-            done: req.body.done,
+            title: req.body.title,
+            isDone: req.body.isDone,
             description: req.body.description,
             modifiedAt: modifiedAt
         }
@@ -72,16 +72,17 @@ function _update(req, res) {
 function _create(req, res) {
     var createdAt = new Date();
     Task.create({
-        name: req.body.name,
+        title: req.body.title,
+        isDone: false,
         description: req.body.description,
         createdAt: createdAt,
-        modifiedAt: createdAt        
+        modifiedAt: createdAt            
     }, function (err, task) {
         if (err) {
             return res.send(err);
         }
 
-        res.json(_.pick(task, ['id', 'name', 'done', 'description', 'features']));
+        res.json(_.pick(task, ['id', 'title', 'isDone', 'description', 'features']));
     });
 }
 

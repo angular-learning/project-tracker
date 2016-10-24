@@ -1,0 +1,22 @@
+<div class="row">
+    <form>
+        <div class="col-md-1" ng-if="!self.task.isDone">
+            <button type="button" class="btn btn-labeled" ng-click="self.checkTask()">
+                        <i class="glyphicon glyphicon glyphicon-ok"></i></button>
+        </div>
+        <div class="col-md-1" ng-if="self.task.isDone">
+            <button type="button" class="btn btn-labeled btn-success" ng-click="self.checkTask()">
+                        <i class="glyphicon glyphicon glyphicon-ok"></i></button>
+        </div>
+        <div class="col-md-8">
+            <input class="task-text form-control input text-left w3-borderless" 
+                   ng-model="self.task.title"
+                   type="text"
+                   ng-change=self.updateTaskTitle()>
+        </div>
+        <div class="col-md-1">
+            <button type="button" class="btn btn-labeled btn-danger" ng-click="self.deleteTask()(self.task)">
+                        <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span> Delete</button>
+        </div>
+    </form>
+</div>
