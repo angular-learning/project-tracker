@@ -13,7 +13,7 @@
 
             self.checkTask = _checkTask;
             self.deleteTask = _deleteTask;
-            self.updateTaskTitle = _updateTaskTitle;
+            self.updateTaskTitle = _debounceUpdateTaskTitle;
 
             function _checkTask() {
                 self.task.isDone = !self.task.isDone;
@@ -28,8 +28,12 @@
                  toastr.error('Task ' + self.task.title + ' deleted!');
             }
 
+            function _debounceUpdateTaskTitle() { 
+                _.debounce(_updateTaskTitle(), 600); 
+            }
+
             function _updateTaskTitle() { 
-                _.debounce(self.update()(self.task), 300); 
+                self.update()(self.task);
             }
 
         };
