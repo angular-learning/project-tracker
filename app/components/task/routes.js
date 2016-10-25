@@ -3,7 +3,7 @@ var express = require('express');
 var _ = require('lodash');
 
 var Task = require('./models/task');
-var Audit = require('./models/audit');
+var Audit = require('../audit/models/audit');
 var Feature = require('./models/feature');
 
 // exports

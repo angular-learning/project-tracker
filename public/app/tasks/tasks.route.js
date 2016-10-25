@@ -23,7 +23,7 @@
                     'list@layout.tasks': { templateUrl: '/app/tasks/tasks-list.view.tmpl.html',
                         controller: 'taskListController as taskLstCtrl' },
                     'task@layout.tasks': { templateUrl: '/app/tasks/tasks-audit.view.tmpl.html',
-                        controller: 'taskListController as taskLstCtrl' }
+                        controller: 'taskAuditController as taskAdtCtrl' }
                 }
             })
             .state('details', {
