@@ -13,7 +13,7 @@
 
             self.checkTask = _checkTask;
             self.deleteTask = _deleteTask;
-            self.updateTaskTitle = _debounceUpdateTaskTitle;
+            self.updateTaskTitle = _.debounce(_updateTaskTitle, 600); 
 
             function _checkTask() {
                 self.task.isDone = !self.task.isDone;
@@ -29,7 +29,7 @@
             }
 
             function _debounceUpdateTaskTitle() { 
-                _.debounce(_updateTaskTitle(), 600); 
+                _.debounce(_updateTaskTitle, 600); 
             }
 
             function _updateTaskTitle() { 
