@@ -28,10 +28,6 @@
                  toastr.error('Task ' + self.task.title + ' deleted!');
             }
 
-            function _debounceUpdateTaskTitle() { 
-                _.debounce(_updateTaskTitle, 600); 
-            }
-
             function _updateTaskTitle() { 
                 self.update()(self.task);
             }

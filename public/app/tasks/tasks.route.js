@@ -21,14 +21,19 @@
                         templateUrl: '/app/tasks/tasks-layout.view.tmpl.html'
                     },
                     'list@layout.tasks': { templateUrl: '/app/tasks/tasks-list.view.tmpl.html',
+                        controller: 'taskListController as taskLstCtrl' },
+                    'task@layout.tasks': { templateUrl: '/app/tasks/tasks-audit.view.tmpl.html',
                         controller: 'taskListController as taskLstCtrl' }
                 }
             })
             .state('details', {
                 parent: 'layout.tasks',
                 url: ':id/details/',
-                templateUrl: '/app/tasks/tasks-details.view.tmpl.html',
-                controller: 'taskDetailsController as taskCtrl'
+                views: {
+                    'task@layout.tasks': {
+                        templateUrl: '/app/tasks/tasks-details.view.tmpl.html',
+                        controller: 'taskDetailsController as taskCtrl'
+                }}
             });
     }
 })();
