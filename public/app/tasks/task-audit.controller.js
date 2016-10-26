@@ -8,9 +8,16 @@
 
     function _controller(Audit) {
         var self = this;
+
+        self.clear = _clearAllItems;
                 
         Audit.query(function (data) { 
-             //self.source = data;
-        });    
+             self.source = data;
+            });    
+        
+        function _clearAllItems(){ 
+            Audit.delete();
+            self.source = undefined;
+        }
     }
 })();

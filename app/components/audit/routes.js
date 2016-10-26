@@ -8,7 +8,8 @@ var Audit = require('./models/audit');
 module.exports = function () {
     var router = express.Router();
 
-    router.get('/audit', _getAll);   
+    router.get('/audit', _getAll);
+    router.delete('/audit', _deleteAll);
     return router;
 };
 
@@ -23,5 +24,14 @@ function _getAll(req, res) {
             res.json(auditItems.map(function (audit) {
                 return _.pick(audit, ['id', 'description']);
             }));
+        });
+}
+
+function _deleteAll(req, res) {
+    Audit
+        .remove({}, function (err, auditItems) {
+            if (err) {
+                return res.send(err);
+            }
         });
 }
