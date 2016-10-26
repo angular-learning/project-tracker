@@ -5,7 +5,7 @@ module.exports = mongoose.model('Task', {
     isDone: Boolean,
     description: String,
     assignee: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    timeline: [{ userId: Boolean, timestamp: Date }],
+    timeline: [{ user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, timestamp: Date }],
     features: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Feature' }],
     createdAt: Date,
     modifiedAt: Date,
