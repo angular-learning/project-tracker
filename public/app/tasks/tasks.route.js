@@ -14,7 +14,16 @@
             .state('layout.tasks', {
                 url: 'tasks/',
                 params: {
-                    id: null
+                    id: null,
+                    selectedTask : null
+                },
+                resolve: {
+                    SelectedTask: function (Task, $route)
+                    { 
+                        return Task.get({ id: $route.current.params.id }, function (data) {
+                            $route.current.params.selectedTask = data;
+                        }).$promise;
+                    }    
                 },
                 views: {
                     '': {

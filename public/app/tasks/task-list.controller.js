@@ -6,30 +6,30 @@
         .module('projectTracker')
         .controller('taskListController', _controller);
 
-    function _controller(Task, toastr, $state, $stateParams) {
+    function _controller(Task, SelectedTask, toastr, $state, $stateParams) {
         var self = this;
-
-        self.newTask = {};
-        self.initializing = true;
-        self.selectedId = $stateParams.id;
-                
-        Task.query(function (data) { 
-            self.searchIndex = _initSearchIndex(data); 
-            if ($stateParams.search) {
-                var foundIds = self.searchIndex.search($stateParams.search)
-                    .map(function(doc) { return doc.ref; });
-                var filteredData = _(data).keyBy('id').at(foundIds).filter().value();
-                _initList(filteredData);   
-            }
-            else {
-                _initList(data);
-            }
-        });    
 
         self.createTask = _createTask;
         self.updateTask = _updateTask;
         self.deleteTask = _deleteTask;
         self.selectTask = _selectTask;
+
+        self.newTask = {};
+        self.initializing = true;
+        self.selectedId = $stateParams.id;
+
+        Task.query(function (data) {
+            self.searchIndex = _initSearchIndex(data);
+            if ($stateParams.search) {
+                var foundIds = self.searchIndex.search($stateParams.search)
+                    .map(function (doc) { return doc.ref; });
+                var filteredData = _(data).keyBy('id').at(foundIds).filter().value();
+                _initList(filteredData);
+            }
+            else {
+                _initList(data);
+            }
+        });
 
         function _initList(data) {
             self.tasks = data;
@@ -76,7 +76,7 @@
         function _selectTask(task) {
             if (task) {
                 self.selectedId = task.id;
-                $state.go('details', {id: task.id, task: task}, {reload: 'details'});
+                $state.go('details', { id: task.id }, { reload: 'details' });
             }
             else {
                 self.selectedId = undefined;
@@ -84,9 +84,9 @@
             }
         }
 
-        function _initSearchIndex(data){
+        function _initSearchIndex(data) {
             var searchIndex = lunr(function () {
-                this.field('title', {boost: 50});
+                this.field('title', { boost: 50 });
                 this.ref('id');
             });
 

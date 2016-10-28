@@ -6,10 +6,10 @@
         .module('projectTracker')
         .controller('taskDetailsController', _controller);
 
-    function _controller($stateParams, Task, toastr) {
+    function _controller($stateParams, Task, SelectedTask, toastr) {
         var self = this;
-
-        Task.get({ id: $stateParams.id }, function (data) {
+        
+        SelectedTask.then(function (data) {
             self.task = data;
         });
     }
