@@ -15,24 +15,25 @@
                 url: 'tasks/',
                 params: {
                     id: null,
-                    selectedTask : null
+                    selectedTask: null
                 },
                 resolve: {
-                    SelectedTask: function (Task, $route)
-                    { 
-                        return Task.get({ id: $route.current.params.id }, function (data) {
-                            $route.current.params.selectedTask = data;
-                        }).$promise;
-                    }    
+                    GetSelectedTask: function (Task, $stateParams) {
+                        return Task.get({ id: $stateParams.id }).$promise;
+                    }
                 },
                 views: {
                     '': {
                         templateUrl: '/app/tasks/tasks-layout.view.tmpl.html'
                     },
-                    'list@layout.tasks': { templateUrl: '/app/tasks/tasks-list.view.tmpl.html',
-                        controller: 'taskListController as taskLstCtrl' },
-                    'task@layout.tasks': { templateUrl: '/app/tasks/tasks-audit.view.tmpl.html',
-                        controller: 'taskAuditController as taskAdtCtrl' }
+                    'list@layout.tasks': {
+                        templateUrl: '/app/tasks/tasks-list.view.tmpl.html',
+                        controller: 'taskListController as taskLstCtrl'
+                    },
+                    'task@layout.tasks': {
+                        templateUrl: '/app/tasks/tasks-audit.view.tmpl.html',
+                        controller: 'taskAuditController as taskAdtCtrl'
+                    }
                 }
             })
             .state('details', {
@@ -42,7 +43,8 @@
                     'task@layout.tasks': {
                         templateUrl: '/app/tasks/tasks-details.view.tmpl.html',
                         controller: 'taskDetailsController as taskCtrl'
-                }}
+                    }
+                }
             });
     }
 })();

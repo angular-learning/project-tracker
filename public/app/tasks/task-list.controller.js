@@ -6,7 +6,7 @@
         .module('projectTracker')
         .controller('taskListController', _controller);
 
-    function _controller(Task, SelectedTask, toastr, $state, $stateParams) {
+    function _controller(Task, toastr, $state, $stateParams) {
         var self = this;
 
         self.createTask = _createTask;
