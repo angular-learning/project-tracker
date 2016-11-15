@@ -18,9 +18,10 @@
                     selectedTask: null
                 },
                 resolve: {
-                    GetSelectedTask: function (Task, $stateParams) {
-                        return Task.get({ id: $stateParams.id }).$promise;
-                    }
+                    GetSelectedTask: ['$http', '$stateParams', function ($http, $stateParams) {
+                        var currentTaskId = $stateParams ? $stateParams.id : null; 
+                        return $http.get('/api/task/' + currentTaskId);
+                    }]
                 },
                 views: {
                     '': {

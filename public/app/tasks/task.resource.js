@@ -10,25 +10,25 @@
             'get': {
                 method: 'GET', interceptor: {
                     responseError: _resourceErrorHandler,
-                    response: _resourceHandler,
+                    //response: _resourceHandler,
                 }
             },
             'save': {
                 method: 'POST', interceptor: {
                     responseError: _resourceErrorHandler,
-                    response: _resourceHandler,
+                    //response: _resourceHandler,
                 }
             },
             'query': {
                 method: 'GET', isArray: true, interceptor: {
                     responseError: _resourceErrorHandler,
-                    response: _resourceHandler,
+                    //response: _resourceHandler,
                 }
             },
             'delete': {
                 method: 'DELETE', interceptor: {
                     responseError: _resourceErrorHandler,
-                    response: _resourceHandler,
+                    //response: _resourceHandler,
                 }
             }
         });
