@@ -1,42 +1,40 @@
 (function () {
     angular
         .module('projectTracker')
-        .factory('Task', _resourceInitializer);
+        .factory('Task', _initializer);
 
-    _resourceInitializer.$inject = ['$resource', 'toastr'];
+    _initializer.$inject = ['$resource', 'toastr'];
 
-    function _resourceInitializer($resource, toastr) {
-        return $resource('/api/task/:id', {}, {
-            'get': {
-                method: 'GET', interceptor: {
-                    responseError: _resourceErrorHandler,
-                    //response: _resourceHandler,
-                }
+    function _initializer($resource, toastr) {
+        var _task = $resource('/api/task/:id');
+        var getListPromise;
+        var savePromise;
+        var updatePromise;
+        var deletePromise;
+
+        var _service = {            
+            getList: function () {
+                if (!getListPromise) 
+                    getListPromise = _task.query();
+                return getListPromise.$promise;
+            },            
+            create: function (data) { 
+                if (!savePromise) 
+                    savePromise = _task.save(data);                
+                return savePromise.$promise;
             },
-            'save': {
-                method: 'POST', interceptor: {
-                    responseError: _resourceErrorHandler,
-                    //response: _resourceHandler,
-                }
+            update: function (index, data) { 
+                if (!updatePromise) 
+                    updatePromise = _task.save({id: index}, data);                
+                return updatePromise.$promise;
             },
-            'query': {
-                method: 'GET', isArray: true, interceptor: {
-                    responseError: _resourceErrorHandler,
-                    //response: _resourceHandler,
-                }
-            },
-            'delete': {
-                method: 'DELETE', interceptor: {
-                    responseError: _resourceErrorHandler,
-                    //response: _resourceHandler,
-                }
+            delete: function (index) { 
+                if (!deletePromise) 
+                    deletePromise = _task.delete({id: index});                
+                return deletePromise.$promise;
             }
-        });
+        };
+        
+        return _service;
     }
-
-    function _resourceHandler(response) {
-        return response.resource;
-    }
-
-    function _resourceErrorHandler(response) { }
 })();
