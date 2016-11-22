@@ -19,15 +19,15 @@
         self.selectedId = $stateParams.id;
 
         Task.getList().then(function(data) {
-            self.searchIndex = _initSearchIndex(data);
+            self.searchIndex = _initSearchIndex(data.tasks);
             if ($stateParams.search) {
                 var foundIds = self.searchIndex.search($stateParams.search)
                     .map(function (doc) { return doc.ref; });
-                var filteredData = _(data).keyBy('id').at(foundIds).filter().value();
+                var filteredData = _(data.tasks).keyBy('id').at(foundIds).filter().value();
                 _initList(filteredData);
             }
             else {
-                _initList(data);
+                _initList(data.tasks);
             }
         });
 

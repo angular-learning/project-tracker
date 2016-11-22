@@ -14,14 +14,7 @@
             .state('layout.tasks', {
                 url: 'tasks/',
                 params: {
-                    id: null,
-                    selectedTask: null
-                },
-                resolve: {
-                    GetSelectedTask: ['$http', '$stateParams', function ($http, $stateParams) {
-                        var currentTaskId = $stateParams ? $stateParams.id : null; 
-                        return $http.get('/api/task/' + currentTaskId);
-                    }]
+                    id: null
                 },
                 views: {
                     '': {

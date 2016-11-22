@@ -1,13 +1,15 @@
 (function () {
 
-    _controller.$inject = ['GetSelectedTask', '$stateParams', 'Task', 'toastr'];
+    _controller.$inject = ['$stateParams', 'Task', 'toastr'];
 
     angular
         .module('projectTracker')
         .controller('taskDetailsController', _controller);
 
-    function _controller(GetSelectedTask, $stateParams, Task, toastr) {
+    function _controller($stateParams, Task, toastr) {
         var self = this;
-        self.task = GetSelectedTask.data;        
+        Task.getSelected($stateParams.id).then(function (data) { 
+            self.task = data.task;
+        });        
     }
 })();
