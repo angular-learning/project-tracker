@@ -56,7 +56,7 @@
 
         function _updateTask(task) {
             self.loading = true;
-            return Task.update(task.id, task)
+            return Task.update(task)
                 .finally(function () {
                     self.searchIndex.update(task);
                     self.loading = false;
@@ -66,7 +66,7 @@
         function _deleteTask(task) {
             self.loading = true;
 
-            Task.delete({ id: task.id })
+            Task.delete(task.id)
                 .then(function (data) {
                     _.remove(self.tasks, { id: task.id });
                     self.searchIndex.remove(task);

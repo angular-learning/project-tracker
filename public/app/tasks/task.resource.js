@@ -46,25 +46,30 @@
         }
 
         function _deleteTask(id) {
+            return _deferRequest(_task.delete({ id: id }));
+        }
+
+        function _updateTask(data) {
+            return _deferRequest(_task.save({ id: data.id }, data));
+        }
+
+        function _createTask(data) {
+            return _deferRequest(_task.save(data));
+        }
+
+        function _deferRequest(action)
+        { 
             var defer = $q.defer();
-            defer.resolve(_task.delete({ id: id }));
+            defer.resolve(action);
             return defer.promise;
         }
 
         var _service = {
             getList: _getList,
             getSelected: _getSelectedTask,
-            create: function (data) {
-                if (!savePromise)
-                    savePromise = _task.save(data);
-                return savePromise.$promise;
-            },
-            update: function (index, data) {
-                if (!updatePromise)
-                    updatePromise = _task.save({ id: index }, data);
-                return updatePromise.$promise;
-            },
-            delete: _deleteTask
+            delete: _deleteTask,
+            create: _createTask,
+            update: _updateTask
         };
 
         return _service;
