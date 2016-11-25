@@ -6,6 +6,7 @@
     _initializer.$inject = ['$resource', 'toastr', '$q'];
 
     function _initializer($resource, toastr, $q) {
+        var self = this;
         var _task = $resource('/api/task/:id');
 
         var getListPromise;
@@ -14,30 +15,45 @@
         var updatePromise;
         var deletePromise;
 
+        function _getList() {
+            var defer = $q.defer();
+
+            if (!self._tasks) {
+                _task.query(function (data) {
+                    self._tasks = data;
+                }).$promise.then(function (data) {
+                    defer.resolve(self._tasks);
+                });
+            }
+            else defer.resolve(self._tasks);
+            getListPromise = defer.promise;
+
+            return getListPromise;
+        }
+
+        function _getSelectedTask(index) {
+            var defer = $q.defer();
+
+            getListPromise.then(function () {
+                defer.resolve(_initSelectedTaskWithId(index));
+            });
+            return defer.promise;
+        }
+
+        function _initSelectedTaskWithId(id) {
+            self.task = _.find(self._tasks, { id: id });
+            return self.task;
+        }
+
+        function _deleteTask(id) {
+            var defer = $q.defer();
+            defer.resolve(_task.delete({ id: id }));
+            return defer.promise;
+        }
+
         var _service = {
-            getList: function () {
-                if (!getListPromise) {
-                    getListPromise = _task.query(function (data) {
-                        this._tasks = data;
-                    }).$promise.then(function (data) {
-                        return {
-                            tasks: this._tasks
-                        };
-                    });
-                }
-                return getListPromise;
-            },
-            getSelected: function (index) {                
-                getSelectedPromise = _task.query(function (data) {
-                        this._tasks = data;
-                    }).$promise.then(function (data) {
-                        return {
-                            task: _.find(this._tasks, { id: index })
-                        };
-                    });
-                
-                return getSelectedPromise;
-            },
+            getList: _getList,
+            getSelected: _getSelectedTask,
             create: function (data) {
                 if (!savePromise)
                     savePromise = _task.save(data);
@@ -48,11 +64,7 @@
                     updatePromise = _task.save({ id: index }, data);
                 return updatePromise.$promise;
             },
-            delete: function (index) {
-                if (!deletePromise)
-                    deletePromise = _task.delete({ id: index });
-                return deletePromise.$promise;
-            }
+            delete: _deleteTask
         };
 
         return _service;
