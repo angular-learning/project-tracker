@@ -92,10 +92,12 @@ function _create(req, res) {
 
 function _delete(req, res) {
     var deletedAt = new Date();
+    _writeAuditMessage('Tryig to delete task ' + req.params.id);
     Task.remove({
         _id: req.params.id
     }, function (err, task) {
         if (err) {
+            _writeAuditMessage('Error deleting task ' + req.params.id + ': ' + err);
             return res.send(err);
         }
 

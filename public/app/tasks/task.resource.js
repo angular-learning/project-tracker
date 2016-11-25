@@ -1,42 +1,77 @@
 (function () {
     angular
         .module('projectTracker')
-        .factory('Task', _resourceInitializer);
+        .factory('Task', _initializer);
 
-    _resourceInitializer.$inject = ['$resource', 'toastr'];
+    _initializer.$inject = ['$resource', 'toastr', '$q'];
 
-    function _resourceInitializer($resource, toastr) {
-        return $resource('/api/task/:id', {}, {
-            'get': {
-                method: 'GET', interceptor: {
-                    responseError: _resourceErrorHandler,
-                    response: _resourceHandler,
-                }
-            },
-            'save': {
-                method: 'POST', interceptor: {
-                    responseError: _resourceErrorHandler,
-                    response: _resourceHandler,
-                }
-            },
-            'query': {
-                method: 'GET', isArray: true, interceptor: {
-                    responseError: _resourceErrorHandler,
-                    response: _resourceHandler,
-                }
-            },
-            'delete': {
-                method: 'DELETE', interceptor: {
-                    responseError: _resourceErrorHandler,
-                    response: _resourceHandler,
-                }
+    function _initializer($resource, toastr, $q) {
+        var self = this;
+        var _task = $resource('/api/task/:id');
+
+        var getListPromise;
+        var getSelectedPromise;
+        var savePromise;
+        var updatePromise;
+        var deletePromise;
+
+        function _getList() {
+            var defer = $q.defer();
+
+            if (!self._tasks) {
+                _task.query(function (data) {
+                    self._tasks = data;
+                }).$promise.then(function (data) {
+                    defer.resolve(self._tasks);
+                });
             }
-        });
-    }
+            else defer.resolve(self._tasks);
+            getListPromise = defer.promise;
 
-    function _resourceHandler(response) {
-        return response.resource;
-    }
+            return getListPromise;
+        }
 
-    function _resourceErrorHandler(response) { }
+        function _getSelectedTask(index) {
+            var defer = $q.defer();
+
+            getListPromise.then(function () {
+                defer.resolve(_initSelectedTaskWithId(index));
+            });
+            return defer.promise;
+        }
+
+        function _initSelectedTaskWithId(id) {
+            self.task = _.find(self._tasks, { id: id });
+            return self.task;
+        }
+
+        function _deleteTask(id) {
+            return _deferRequest(_task.delete({ id: id }));
+        }
+
+        function _updateTask(data) {
+            return _deferRequest(_task.save({ id: data.id }, data));
+        }
+
+        function _createTask(data) {
+            return _deferRequest(_task.save(data));
+        }
+
+        function _deferRequest(action)
+        { 
+            var defer = $q.defer();
+            defer.resolve(action);
+            return defer.promise;
+        }
+
+        var _service = {
+            getList: _getList,
+            getSelected: _getSelectedTask,
+            delete: _deleteTask,
+            create: _createTask,
+            update: _updateTask
+        };
+
+        return _service;
+    }
 })();

@@ -8,9 +8,8 @@
 
     function _controller($stateParams, Task, toastr) {
         var self = this;
-
-        Task.get({ id: $stateParams.id }, function (data) {
+        Task.getSelected($stateParams.id).then(function (data) { 
             self.task = data;
-        });
+        });        
     }
 })();
