@@ -301,3 +301,6 @@ paket-files/
 __pycache__/
 *.pyc
 .vs/project-tracker/v14/.suo
+
+# Project specific files
+/public/app/pt.app.html

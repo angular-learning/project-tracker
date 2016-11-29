@@ -3,27 +3,10 @@ var http = require('http');
 
 // exports
 module.exports = {
-    normalizePort: _normalizePort,
     startServer: _startServer
 };
 
 // private functions
-
-function _normalizePort(val) {
-    var port = parseInt(val, 10);
-
-    if (isNaN(port)) {
-        // named pipe
-        return val;
-    }
-
-    if (port >= 0) {
-        // port number
-        return port;
-    }
-
-    return false;
-}
 
 function _startServer(port, app) {
     var server = http.createServer(app);
@@ -31,6 +14,8 @@ function _startServer(port, app) {
     server.listen(port);
     server.on('error', _handleError.bind(null, port));
     server.on('listening', _handlePort.bind(server));
+
+    return server;
 }
 
 function _handlePort() {
