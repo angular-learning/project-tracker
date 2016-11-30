@@ -1,12 +1,12 @@
 (function () {
 
-    _controller.$inject = ['Task', 'toastr', '$state', '$stateParams'];
+    _controller.$inject = ['TaskService', 'toastr', '$state', '$stateParams'];
 
     angular
         .module('projectTracker')
         .controller('taskListController', _controller);
 
-    function _controller(Task, toastr, $state, $stateParams) {
+    function _controller(TaskService, toastr, $state, $stateParams) {
         var self = this;
 
         self.createTask = _createTask;
@@ -16,20 +16,23 @@
 
         self.newTask = {};
         self.initializing = true;
-        self.selectedId = $stateParams.id;
 
-        Task.getList().then(function(data) {
+        TaskService.getList().then(function (data) {
+            self.selectedId = $stateParams.id;
             self.searchIndex = _initSearchIndex(data);
             if ($stateParams.search) {
-                var foundIds = self.searchIndex.search($stateParams.search)
-                    .map(function (doc) { return doc.ref; });
-                var filteredData = _(data).keyBy('id').at(foundIds).filter().value();
-                _initList(filteredData);
+                _initList(_initSearch(data));
             }
             else {
                 _initList(data);
             }
         });
+
+        function _initSearch(data) {
+            var foundIds = self.searchIndex.search($stateParams.search)
+                .map(function (doc) { return doc.ref; });
+            return _(data).keyBy('id').at(foundIds).filter().value();
+        }
 
         function _initList(data) {
             self.tasks = data;
@@ -42,7 +45,7 @@
 
             self.loading = true;
 
-            return Task.create(self.newTask)
+            return TaskService.create(self.newTask)
                 .then(function (task) {
                     self.tasks.push(task);
                     toastr.info('Task ' + self.newTask.title + ' created!');
@@ -56,7 +59,7 @@
 
         function _updateTask(task) {
             self.loading = true;
-            return Task.update(task)
+            return TaskService.update(task)
                 .finally(function () {
                     self.searchIndex.update(task);
                     self.loading = false;
@@ -66,10 +69,14 @@
         function _deleteTask(task) {
             self.loading = true;
 
-            Task.delete(task.id)
+            TaskService.delete(task.id)
                 .then(function (data) {
                     _.remove(self.tasks, { id: task.id });
                     self.searchIndex.remove(task);
+
+                    if (self.selectedId = task.id) {
+                        _selectTask(undefined);
+                    }
                 })
                 .finally(function () {
                     self.loading = false;
