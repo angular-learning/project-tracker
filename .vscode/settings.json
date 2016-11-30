@@ -1,0 +1,7 @@
+// Поместите параметры в этот файл, чтобы перезаписать параметры по умолчанию и пользовательские параметры.
+{
+    // Adds the file extension to a import statements
+    "path-intellisense.extensionOnImport": true,
+    // Автоматически обновлять расширения
+    "extensions.autoUpdate": true
+}
