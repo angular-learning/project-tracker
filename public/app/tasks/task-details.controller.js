@@ -10,10 +10,10 @@
         var self = this;
         TaskService.getSelected($stateParams.id).then(function (data) {
             self.task = data;
-            self.updateTask = _.debounce(_updateTaskTitle, 200);
+            self.updateTask = _.debounce(_updateTask, 200);
         });
 
-        function _updateTaskTitle() {
+        function _updateTask() {
             TaskService.update(self.task);
         }
     }
