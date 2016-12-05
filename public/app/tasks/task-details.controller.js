@@ -8,8 +8,13 @@
 
     function _controller($stateParams, TaskService, toastr) {
         var self = this;
-        TaskService.getSelected($stateParams.id).then(function (data) { 
+        TaskService.getSelected($stateParams.id).then(function (data) {
             self.task = data;
-        });        
+            self.updateTask = _.debounce(_updateTask, 200);
+        });
+
+        function _updateTask() {
+            TaskService.update(self.task);
+        }
     }
 })();
