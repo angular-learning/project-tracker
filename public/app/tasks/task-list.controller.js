@@ -17,16 +17,7 @@
         self.newTask = {};
         self.initializing = true;
 
-        TaskService.getList().then(function (data) {
-            self.selectedId = $stateParams.id;
-            self.searchIndex = _initSearchIndex(data);
-            if ($stateParams.search) {
-                _initList(_initSearch(data));
-            }
-            else {
-                _initList(data);
-            }
-        });
+        _initList();
 
         function _initSearch(data) {
             var foundIds = self.searchIndex.search($stateParams.search)
@@ -34,9 +25,19 @@
             return _(data).keyBy('id').at(foundIds).filter().value();
         }
 
-        function _initList(data) {
-            self.tasks = data;
-            self.initializing = false;
+        function _initList() {
+            TaskService.getList().then(function (data) {
+                self.selectedId = $stateParams.id;
+                self.searchIndex = _initSearchIndex(data);
+                if ($stateParams.search) {
+                    self.tasks = _initSearch(data);
+                }
+                else {
+                    self.tasks = data;
+                }
+
+                self.initializing = false;
+            });
         }
 
         function _createTask() {
@@ -47,7 +48,8 @@
 
             return TaskService.create(self.newTask)
                 .then(function (task) {
-                    self.tasks.push(task);
+                    //                    self.tasks.push(task);
+                    _initList();
                     toastr.info('Task ' + self.newTask.title + ' created!');
                     self.searchIndex.add(task);
                     self.newTask = {};
