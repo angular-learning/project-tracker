@@ -1,17 +1,4 @@
-﻿.vertical-divider > div[class^="col-"] {
-  border-right: 6px solid #F2F7F9;
-  padding-right: 30px;
-  height: 100%;
-}
-
-.vertical-divider div[class^="col-"]:first-child {
-  border-left: none;
-}
-.vertical-divider div[class^="col-"]:last-child {
-  border-right: none;
-}
-
-.task-highlited {
+﻿.task-highlited {
     background-color: #ffffcc;
     border-left: 6px solid #ffeb3b!important;
 }
@@ -27,4 +14,3 @@
     background-color: transparent!important;
     border: 0 solid transparent!important;
 }
-
