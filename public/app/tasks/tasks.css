@@ -1,10 +1,14 @@
 ﻿.task-highlited {
     background-color: #ffffcc;
-    border-left: 6px solid #ffeb3b!important;
+    border-left: 21px solid #ffeb3b!important;
 }
 .task-default {
-    padding: 4px 16px;
-    border-left: 6px solid #F2F7F9;
+    padding: 4px 0px;
+    border-left: 21px solid #F2F7F9;    
+}
+
+.col-md-10 {
+    padding: 0px;
 }
 
 .input-borderless {
@@ -13,4 +17,14 @@
     -webkit-box-shadow: none!important;
     background-color: transparent!important;
     border: 0 solid transparent!important;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
 }

@@ -48,12 +48,4 @@
 
 .vertical-divider > div[class^="col-"] {
   border-right: 6px solid #F2F7F9;
-  padding-right: 30px;
-}
-
-.vertical-divider div[class^="col-"]:first-child {
-  border-left: none;
-}
-.vertical-divider div[class^="col-"]:last-child {
-  border-right: none;
 }
