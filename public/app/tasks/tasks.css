@@ -11,16 +11,16 @@
   border-right: none;
 }
 
-.w3-note {
+.task-highlited {
     background-color: #ffffcc;
     border-left: 6px solid #ffeb3b!important;
 }
-.w3-panel {
+.task-default {
     padding: 4px 16px;
     border-left: 6px solid #F2F7F9;
 }
 
-.w3-borderless {
+.input-borderless {
     box-shadow: none!important;
     -moz-box-shadow: none!important;
     -webkit-box-shadow: none!important;
