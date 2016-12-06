@@ -4,7 +4,8 @@
 }
 .task-default {
     padding: 4px 0px;
-    border-left: 6px solid #F2F7F9;    
+    border-left: 6px solid #f4f4f4; 
+    border-bottom: 1px solid #dddddd;  
 }
 
 .col-md-10 {
