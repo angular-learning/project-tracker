@@ -2,10 +2,9 @@
     height:100%;
 }
 
-.container-fluid {
+.container {
     display:table;
     width: 100%;
-    padding: 50px 0 0 0; /*set left/right padding according to needs*/
     box-sizing: border-box;
 }
 
