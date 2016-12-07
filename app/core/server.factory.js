@@ -11,7 +11,9 @@ module.exports = {
 function _startServer(port, app) {
     var server = http.createServer(app);
 
-    server.listen(port);
+    server.listen(port, function () {
+        console.log('Listening on ' + port);
+    });
     server.on('error', _handleError.bind(null, port));
     server.on('listening', _handlePort.bind(server));
 
