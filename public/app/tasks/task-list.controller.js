@@ -48,7 +48,6 @@
 
             return TaskService.create(self.newTask)
                 .then(function (task) {
-                    //_initList();
                     self.selectedId = $stateParams.id;
                     TaskService.getList().then(function (data) {
                         self.tasks = data;
