@@ -21,20 +21,22 @@
 
         function _initSearch(data) {
             var foundIds = self.searchIndex.search($stateParams.search)
-                .map(function (doc) { return doc.ref; });
+                .map(function(doc) { return doc.ref; });
+
             return _(data).keyBy('id').at(foundIds).filter().value();
         }
 
         function _initList() {
-            TaskService.getList().then(function (data) {
-                self.selectedId = $stateParams.id;
+            TaskService.getList().then(function(data) {
                 self.searchIndex = _initSearchIndex(data);
                 if ($stateParams.search) {
-                    self.tasks = _initSearch(data);
+                    self.tasks = _initSearch(data);                    
                 }
-                else {
+                else {                                
                     self.tasks = data;
                 }
+
+                _selectTask(_.find(self.tasks, { id: $stateParams.id }));
 
                 self.initializing = false;
             });
@@ -48,7 +50,6 @@
 
             return TaskService.create(self.newTask)
                 .then(function (task) {
-                    //_initList();
                     self.selectedId = $stateParams.id;
                     TaskService.getList().then(function (data) {
                         self.tasks = data;
@@ -89,7 +90,7 @@
         }
 
         function _selectTask(task) {
-            if (task) {
+            if (task) {                
                 self.selectedId = task.id;
                 $state.go('details', { id: task.id }, { reload: 'details' });
             }

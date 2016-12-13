@@ -42,9 +42,9 @@
             return defer.promise;
         }
 
-        function _initSelectedTaskWithId(id) {
+        function _initSelectedTaskWithId(id) {            
             self.selectedTask = _.find(self.taskList, { id: id });
-            return self.selectedTask;
+            return self.selectedTask;         
         }
 
         function _deleteTask(id) {
@@ -59,6 +59,10 @@
             return Task.save(task).$promise;
         }
 
+        function _switchSelection(isSelectionEnabled) {
+            self.isSelectedTaskDisabled = !isSelectionEnabled; 
+        }
+        
         return service;
     }
 })();
