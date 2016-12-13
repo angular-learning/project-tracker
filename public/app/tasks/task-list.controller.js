@@ -48,8 +48,11 @@
 
             return TaskService.create(self.newTask)
                 .then(function (task) {
-                    //                    self.tasks.push(task);
-                    _initList();
+                    //_initList();
+                    self.selectedId = $stateParams.id;
+                    TaskService.getList().then(function (data) {
+                        self.tasks = data;
+                    });
                     toastr.info('Task ' + self.newTask.title + ' created!');
                     self.searchIndex.add(task);
                     self.newTask = {};
