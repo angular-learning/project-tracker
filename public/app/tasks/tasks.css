@@ -3,13 +3,13 @@
     border-left: 6px solid #ffeb3b!important;
 }
 .task-default {
-    padding: 4px 0px;
+    padding: 4px 0px !important;
     border-left: 6px solid #f4f4f4; 
     border-bottom: 1px solid #dddddd;  
 }
 
 .col-md-10 {
-    padding: 0px;
+    padding: 0px !important;
 }
 
 .input-borderless {
@@ -23,9 +23,9 @@
 .btn-circle {
   width: 30px;
   height: 30px;
-  text-align: center;
+  text-align: center!important;
   padding: 6px 0!important;
-  font-size: 12px;
-  line-height: 1.428571429;
+  font-size: 12px!important;
+  line-height: 1.428571429!important;
   border-radius: 15px!important;
 }
