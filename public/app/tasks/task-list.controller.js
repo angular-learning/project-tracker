@@ -76,7 +76,7 @@
                     _.remove(self.tasks, { id: task.id });
                     self.searchIndex.remove(task);
 
-                    if (self.selectedId = task.id) {
+                    if (self.selectedId == task.id) {
                         _selectTask(undefined);
                     }
                 })
