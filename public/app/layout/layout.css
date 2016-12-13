@@ -1,6 +1,6 @@
 ﻿.container {
     display:table;
-    width: 100%;
+    width: 100%!important;
     min-height: calc(100% - 120px);
     box-sizing: border-box;
     overflow-y: scroll;
