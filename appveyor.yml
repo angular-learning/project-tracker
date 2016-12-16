@@ -22,7 +22,7 @@ install:
   - cmd: npm run build
 
 test_script:
-  - cmd: gulp test
+  - cmd: npm run test
 
 build: off
 
