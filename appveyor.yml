@@ -19,10 +19,10 @@ platform:
 
 install:
   - cmd: npm run prepare
-  - cmd: gulp build
+  - cmd: npm run build
 
 test_script:
-  - cmd: gulp test
+  - cmd: npm run test
 
 build: off
 

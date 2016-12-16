@@ -1,27 +1,22 @@
 <div ng-click="taskLstCtrl.selectTask()">
-    <div id="todo-form" class="row">
-        <div>
-            <form>
-                <div class="form-group col-md-10">
-                    <input type="text" class="form-control input text-left" placeholder="Enter new task's title" ng-model="taskLstCtrl.newTask.title">
-                </div>
-
-                <button type="submit" class="btn btn-primary col-md-2" ng-click="taskLstCtrl.createTask()" ng-disabled="!taskLstCtrl.newTask.title">Add</button>
-            </form>
-        </div>
+    <div class="row task-default">
+        <form>
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <input type="text" class="form-control input text-left" placeholder="Enter new task's title" ng-model="taskLstCtrl.newTask.title">
+            </div>
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-primary btn-labeled btn-circle" ng-click="taskLstCtrl.createTask()" ng-disabled="!taskLstCtrl.newTask.title">
+                <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span></button>
+            </div>
+        </form>
+    </div>
+    <div class="row task-default" ng-repeat="item in taskLstCtrl.tasks" ng-show="!taskLstCtrl.initializing" ng-click="taskLstCtrl.selectTask(item); $event.stopPropagation();"
+        ng-class="{'task-highlited': item.id === taskLstCtrl.selectedId}">
+        <div pt-task task="item" update="taskLstCtrl.updateTask" delete="taskLstCtrl.deleteTask"></div>
     </div>
 
-    <div>
-        <div class="w3-panel"
-        ng-repeat="item in taskLstCtrl.tasks" 
-        ng-show="!taskLstCtrl.initializing"
-        ng-click="taskLstCtrl.selectTask(item); $event.stopPropagation();" 
-        ng-class="{'w3-note': item.id === taskLstCtrl.selectedId}">
-            <div pt-task task="item" update="taskLstCtrl.updateTask" delete="taskLstCtrl.deleteTask"></div>
-        </div>
-
-        <p ng-show="taskLstCtrl.loading">
-            <span class="fa fa-spinner fa-spin fa-3x"></span>
-        </p>
-    </div>
+    <p ng-show="taskLstCtrl.loading">
+        <span class="fa fa-spinner fa-spin fa-3x"></span>
+    </p>
 </div>

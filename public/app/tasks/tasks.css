@@ -1,26 +1,18 @@
-﻿.vertical-divider > div[class^="col-"] {
-  border-right: 6px solid #F2F7F9;
-  padding-right: 30px;
-  height: 100%;
-}
-
-.vertical-divider div[class^="col-"]:first-child {
-  border-left: none;
-}
-.vertical-divider div[class^="col-"]:last-child {
-  border-right: none;
-}
-
-.w3-note {
+﻿.task-highlited {
     background-color: #ffffcc;
     border-left: 6px solid #ffeb3b!important;
 }
-.w3-panel {
-    padding: 4px 16px;
-    border-left: 6px solid #F2F7F9;
+.task-default {
+    padding: 4px 0px !important;
+    border-left: 6px solid #f4f4f4; 
+    border-bottom: 1px solid #dddddd;  
 }
 
-.w3-borderless {
+.col-md-10 {
+    padding: 0px !important;
+}
+
+.input-borderless {
     box-shadow: none!important;
     -moz-box-shadow: none!important;
     -webkit-box-shadow: none!important;
@@ -28,3 +20,12 @@
     border: 0 solid transparent!important;
 }
 
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center!important;
+  padding: 6px 0!important;
+  font-size: 12px!important;
+  line-height: 1.428571429!important;
+  border-radius: 15px!important;
+}

@@ -1,13 +1,9 @@
-<div class="content container-fluid">
-	<div class="row col-md-12">
-		<div class="row header">
-			<div ui-view="header"></div>
-		</div>
-		<div class="row">
-			<div ui-view></div>
-		</div>
-		<div class="row footer">
-			<div ui-view="footer"></div>
-		</div>
+<div class="container">
+	<div class="row header">
+		<div ui-view="header"></div>
+	</div>
+	<div ui-view class="row content tasks-list pre-scrollable"></div>
+	<div class="row footer">
+		<div ui-view="footer"></div>
 	</div>
 </div>
