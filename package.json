@@ -33,7 +33,6 @@
     "postinstall": "npm run bower:install"
   },
   "devDependencies": {
-    "lodash": "^4.15.0",
     "event-stream": "^3.3.4",
     "gulp": "^3.9.1",
     "gulp-angular-filesort": "^1.1.1",
