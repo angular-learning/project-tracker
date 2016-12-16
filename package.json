@@ -21,7 +21,8 @@
     "node": "6.4.0"
   },
   "scripts": {
-    "start": "npm i && npm run build && npm run run-server",
+    "start": "npm run prepare && npm run build && npm run run-server",
+    "prepare": "npm i",
     "run-server": "node run.js",
     "dev": "npm run build && SET NODE_ENV=dev& SET PORT=3001& npm run run-server",
     "build": "npm run gulp build",
