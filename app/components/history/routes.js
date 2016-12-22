@@ -2,34 +2,34 @@
 var express = require('express');
 var _ = require('lodash');
 
-var Audit = require('./models/audit');
+var History = require('./models/history');
 
 // exports
 module.exports = function () {
     var router = express.Router();
 
-    router.get('/audit', _getAll);
-    router.delete('/audit', _deleteAll);
+    router.get('/history', _getAll);
+    router.delete('/history', _deleteAll);
     return router;
 };
 
 function _getAll(req, res) {
-    Audit
+    History
         .find()
-        .exec(function (err, auditItems) {
+        .exec(function (err, historyItems) {
             if (err) {
                 return res.send(err);
             }
 
-            res.json(auditItems.map(function (audit) {
-                return _.pick(audit, ['id', 'description']);
+            res.json(historyItems.map(function (history) {
+                return _.pick(history, ['id', 'description']);
             }));
         });
 }
 
 function _deleteAll(req, res) {
-    Audit
-        .remove({}, function (err, auditItems) {
+    History
+        .remove({}, function (err, historyItems) {
             if (err) {
                 return res.send(err);
             }

@@ -1,0 +1,7 @@
+<div>
+    <button type="button" class="btn btn-labeled" ng-click="taskHstCtrl.clear()">
+                        <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span> Clear history</button>
+	<div ng-repeat="item in taskHstCtrl.source">
+		<div>{{item.description}}</div>
+	</div>
+</div>

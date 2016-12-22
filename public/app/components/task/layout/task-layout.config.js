@@ -18,15 +18,15 @@
                 },
                 views: {
                     '': {
-                        templateUrl: '/app/tasks/tasks-layout.view.tmpl.html'
+                        templateUrl: '/app/components/task/layout/task-layout.view.tmpl.html'
                     },
                     'list@layout.tasks': {
-                        templateUrl: '/app/tasks/tasks-list.view.tmpl.html',
+                        templateUrl: '/app/components/task/list/task-list.view.tmpl.html',
                         controller: 'taskListController as taskLstCtrl'
                     },
                     'task@layout.tasks': {
-                        templateUrl: '/app/tasks/tasks-audit.view.tmpl.html',
-                        controller: 'taskAuditController as taskAdtCtrl'
+                        templateUrl: '/app/components/task/history/task-history.view.tmpl.html',
+                        controller: 'taskHistoryController as taskHstCtrl'
                     }
                 }
             })
@@ -35,7 +35,7 @@
                 url: ':id/details/',
                 views: {
                     'task@layout.tasks': {
-                        templateUrl: '/app/tasks/tasks-details.view.tmpl.html',
+                        templateUrl: '/app/components/task/details/task-details.view.tmpl.html',
                         controller: 'taskDetailsController as taskCtrl'
                     }
                 }

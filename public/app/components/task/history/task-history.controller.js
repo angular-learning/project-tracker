@@ -1,22 +1,22 @@
 (function () {
 
-    _controller.$inject = ['Audit'];
+    _controller.$inject = ['History'];
 
     angular
         .module('projectTracker')
-        .controller('taskAuditController', _controller);
+        .controller('taskHistoryController', _controller);
 
-    function _controller(Audit) {
+    function _controller(History) {
         var self = this;
 
         self.clear = _clearAllItems;
                 
-        Audit.query(function (data) { 
+        History.query(function (data) { 
              self.source = data;
             });    
         
         function _clearAllItems(){ 
-            Audit.delete();
+            History.delete();
             self.source = undefined;
         }
     }
