@@ -2,7 +2,7 @@
 var express = require('express');
 var _ = require('lodash');
 
-var Audit = require('./models/audit');
+var History = require('./models/audit');
 
 // exports
 module.exports = function () {
@@ -14,7 +14,7 @@ module.exports = function () {
 };
 
 function _getAll(req, res) {
-    Audit
+    History
         .find()
         .exec(function (err, auditItems) {
             if (err) {
@@ -28,7 +28,7 @@ function _getAll(req, res) {
 }
 
 function _deleteAll(req, res) {
-    Audit
+    History
         .remove({}, function (err, auditItems) {
             if (err) {
                 return res.send(err);

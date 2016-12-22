@@ -3,7 +3,7 @@ var express = require('express');
 var _ = require('lodash');
 
 var Task = require('./models/task');
-var Audit = require('../audit/models/audit');
+var History = require('../audit/models/audit');
 var Feature = require('./models/feature');
 
 // exports
@@ -107,7 +107,7 @@ function _delete(req, res) {
 }
 
 function _writeAuditMessage(message, timestamp) {
-    Audit.create({
+    History.create({
         description: message,
         modifiedAt: timestamp
     });

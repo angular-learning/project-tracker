@@ -1,7 +1,7 @@
 (function () {
     angular
         .module('projectTracker')
-        .factory('Audit', function ($resource) {
+        .factory('History', function ($resource) {
             return $resource('/api/audit/:id');
         });
 })();

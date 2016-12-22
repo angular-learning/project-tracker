@@ -25,8 +25,8 @@
                         controller: 'taskListController as taskLstCtrl'
                     },
                     'task@layout.tasks': {
-                        templateUrl: '/app/components/task/audit/tasks-audit.view.tmpl.html',
-                        controller: 'taskAuditController as taskAdtCtrl'
+                        templateUrl: '/app/components/task/history/task-history.view.tmpl.html',
+                        controller: 'taskHistoryController as taskHstCtrl'
                     }
                 }
             })
