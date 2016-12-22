@@ -3,7 +3,7 @@ var express = require('express');
 var _ = require('lodash');
 
 var Task = require('./models/task');
-var History = require('../audit/models/audit');
+var History = require('../history/models/history');
 var Feature = require('./models/feature');
 
 // exports
@@ -67,7 +67,7 @@ function _update(req, res) {
             if (err)
                 return res.send(err);
 
-            _writeAuditMessage('Task ' + req.body.title + ' was updated', modifiedAt);
+            _writeHistoryMessage('Task ' + req.body.title + ' was updated', modifiedAt);
             res.json({ id: req.params.id });
         });
 }
@@ -85,28 +85,28 @@ function _create(req, res) {
             return res.send(err);
         }
 
-        _writeAuditMessage('Task ' + req.body.title + ' was created', createdAt);
+        _writeHistoryMessage('Task ' + req.body.title + ' was created', createdAt);
         res.json(_.pick(task, ['id', 'title', 'isDone', 'description', 'features']));
     });
 }
 
 function _delete(req, res) {
     var deletedAt = new Date();
-    _writeAuditMessage('Tryig to delete task ' + req.params.id);
+    _writeHistoryMessage('Tryig to delete task ' + req.params.id);
     Task.remove({
         _id: req.params.id
     }, function (err, task) {
         if (err) {
-            _writeAuditMessage('Error deleting task ' + req.params.id + ': ' + err);
+            _writeHistoryMessage('Error deleting task ' + req.params.id + ': ' + err);
             return res.send(err);
         }
 
-        _writeAuditMessage('Task ' + req.params.id + ' was deleted', deletedAt);
+        _writeHistoryMessage('Task ' + req.params.id + ' was deleted', deletedAt);
         res.json({ id: req.params.id });
     });
 }
 
-function _writeAuditMessage(message, timestamp) {
+function _writeHistoryMessage(message, timestamp) {
     History.create({
         description: message,
         modifiedAt: timestamp

@@ -47,7 +47,7 @@ function _create(env) {
     app.use(express.static(path.join(__dirname, '../../public')));
 
     app.use('/api', require('./../components/task/routes')());
-    app.use('/api', require('./../components/audit/routes')());
+    app.use('/api', require('./../components/history/routes')());
 
     app.route('/*').get(_sendMainHtmlFile); // load the single view file (angular will handle the page changes on the front-end)
     app.use(_handle404Error); // catch 404 and forward to error handler

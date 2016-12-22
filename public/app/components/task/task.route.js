@@ -18,10 +18,10 @@
                 },
                 views: {
                     '': {
-                        templateUrl: '/app/components/task/tasks-layout.view.tmpl.html'
+                        templateUrl: '/app/components/task/task-layout.view.tmpl.html'
                     },
                     'list@layout.tasks': {
-                        templateUrl: '/app/components/task/list/tasks-list.view.tmpl.html',
+                        templateUrl: '/app/components/task/list/task-list.view.tmpl.html',
                         controller: 'taskListController as taskLstCtrl'
                     },
                     'task@layout.tasks': {
