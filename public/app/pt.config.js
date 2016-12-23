@@ -8,9 +8,21 @@
         .run(_run)
         .config(_config);
 
-    function _run($rootScope, $state, $stateParams) {
+    function _run($rootScope, $state, $stateParams, $cookieStore, $http) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
+
+        $rootScope.globals = $cookieStore.get('globals') || {};
+        if ($rootScope.globals.currentUser) {
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
+        }
+  
+        $rootScope.$on('$locationChangeStart', function (event, next, current) {
+            // redirect to login page if not logged in
+            if ($state !== 'login' && !$rootScope.globals.currentUser) {
+                $state.go('login');
+            }
+        });
     }
 
     function _config($locationProvider, $stateProvider) {
