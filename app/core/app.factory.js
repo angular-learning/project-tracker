@@ -1,11 +1,18 @@
 // dependencies
-var path = require('path');
-
 var express = require('express');
-var morgan = require('morgan');
-var mongoose = require('mongoose');
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var expressSession = require('express-session');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var Account = require('./models/account');
+
+var routes = require('./routes/index');
+var users = require('./routes/users');
 
 // exports
 
@@ -42,8 +49,15 @@ function _create(env) {
     }
 
     app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({extended: false}));
+    app.use(bodyParser.urlencoded({ extended: false }));
     app.use(cookieParser());
+    app.use(expressSession({
+        secret: 'keyboard cat',
+        resave: false,
+        saveUninitialized: false
+    }));
+    app.use(passport.initialize());
+    app.use(passport.session());
     app.use(express.static(path.join(__dirname, '../../public')));
 
     app.use('/api', require('./../modules/task/routes')());
@@ -52,6 +66,11 @@ function _create(env) {
     app.route('/*').get(_sendMainHtmlFile); // load the single view file (angular will handle the page changes on the front-end)
     app.use(_handle404Error); // catch 404 and forward to error handler
     app.use(_internalErrorHandler); // general error handlers
+
+    // passport config
+    passport.use(new LocalStrategy(Account.authenticate()));
+    passport.serializeUser(Account.serializeUser());
+    passport.deserializeUser(Account.deserializeUser());
 
     return app;
 }
