@@ -46,7 +46,7 @@ function _getAll(req, res) {
             }
 
             res.json(tasks.map(function (task) {
-                return _.pick(task, ['id', 'title', 'isDone', 'description', 'createdAt']);
+                return _.pick(task, ['id', 'title', 'isDone', 'createdAt']);
             }));
         });
 }
