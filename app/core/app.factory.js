@@ -1,4 +1,5 @@
-// dependencies
+// set up ======================================================================
+// get all the tools we need
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
@@ -7,27 +8,17 @@ var expressSession = require('express-session');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var Account = require('../modules/account/models/account');
+var app = express();
 
-//var routes = require('./routes/index');
-//var users = require('./routes/users');
-
-// exports
-
-module.exports = {
-    create: _create
-};
-
-// private functions
+// configuration ===============================================================
+require('../../config/passport')(passport); // pass passport for configuration
 
 function _create(env) {
-    var databaseConfiguration = require('../../config/database');
-
     var environmentType = env.NODE_ENV;
-
     console.log("environment type - " + environmentType);
 
+    // connect to database 
+    var databaseConfiguration = require('../../config/database');
     mongoose.connect(databaseConfiguration.url, function (err) {
         if (err) {
             console.error('Connection to db failed: ' + err + '; ' + (err.stack || ''));
@@ -37,14 +28,12 @@ function _create(env) {
         console.log('database connected successfully');
     });
 
-    var app = express();
-
     // register HTTP logs by env type
     if (environmentType === "dev") {
-        app.use(morgan('dev'));
+        app.use(logger('dev'));
     }
     else {
-        app.use(morgan('combined'));
+        app.use(logger('combined'));
     }
 
     app.use(bodyParser.json());
@@ -59,17 +48,19 @@ function _create(env) {
     app.use(passport.session());
     app.use(express.static(path.join(__dirname, '../../public')));
 
+    app.use('/api', require('./../modules/user/routes')());    
     app.use('/api', require('./../modules/task/routes')());
     app.use('/api', require('./../modules/history/routes')());
 
-    app.route('/*').get(_sendMainHtmlFile); // load the single view file (angular will handle the page changes on the front-end)
-    app.use(_handle404Error); // catch 404 and forward to error handler
-    app.use(_internalErrorHandler); // general error handlers
+    // load the single view file 
+    // (angular will handle the page changes on the front-end)    
+    app.route('/*').get(_sendMainHtmlFile); 
 
-    // passport config
-    passport.use(new LocalStrategy(Account.authenticate()));
-    passport.serializeUser(Account.serializeUser());
-    passport.deserializeUser(Account.deserializeUser());
+    // catch 404 and forward to error handler
+    app.use(_handle404Error); 
+    
+    // general error handlers
+    app.use(_internalErrorHandler); 
 
     return app;
 }
@@ -86,6 +77,9 @@ function _handle404Error(req, res, next) {
 
 function _internalErrorHandler(err, req, res, next) {
     console.error(err);
-
     res.status(err.status || 500).end();
 }
+
+module.exports = {
+    create: _create
+};

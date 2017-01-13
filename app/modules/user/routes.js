@@ -1,90 +1,60 @@
-// dependencies
 var express = require('express');
-var _ = require('lodash');
-
-var User = require('./models/user');
+var passport = require('passport');
+var User = require('./models/user.js');
 
 // exports
 module.exports = function () {
     var router = express.Router();
 
-    router.get('/user', _getAll);    
-    router.post('/user', _create);
-    router.get('/user/:id', _getOne);
-    router.post('/user/:id', _update);
-    router.delete('/user/:id', _delete);
-    
+    router.post('/register', _register);
+    router.post('/login', _login);
+    router.post('/logout', _logout);
+
     return router;
 };
 
-function _getOne(req, res) {
-    User
-        .findById(req.params.id)
-        .exec(function (err, user) {
+function _register(req, res) {
+    User.register(new User({ login: req.body.login }),
+        req.body.password, function (err, account) {
             if (err) {
-                return res.send(err);
+                return res.status(500).json({
+                    err: err
+                });
             }
-
-            var userModel = { _id: user.id };
-            res.json(_.pick(user, ['id', 'name']));
+            passport.authenticate('local')(req, res, function () {
+                return res.status(200).json({
+                    status: 'Registration successful!'
+                });
+            });
         });
 }
 
-function _getAll(req, res) {
-    User
-        .find()
-        .exec(function (err, users) {
+function _login(req, res, next) {
+    passport.authenticate('local', function (err, user, info) {
+        if (err) {
+            return next(err);
+        }
+        if (!user) {
+            return res.status(401).json({
+                err: info
+            });
+        }
+        req.logIn(user, function (err) {
             if (err) {
-                return res.send(err);
+                return res.status(500).json({
+                    err: 'Could not log in user'
+                });
             }
-
-            res.json(users.map(function (user) {
-                return _.pick(user, ['id', 'name']);
-            }));
+            res.status(200).json({
+                status: 'Login successful!'
+            });
         });
+    })(req, res, next);
 }
 
-function _update(req, res) {
-    var modifiedAt = new Date();
-    User.update({
-        _id: req.params.id
-    }, {
-        $set: {
-            name: req.body.name,
-            displayName: req.body.displayName,
-            modifiedAt: modifiedAt
-        }
-    }, function (err, user) {
-        if (err)
-            return res.send(err);
-
-        res.json({ id: req.params.id });
-    });
-}
-
-function _create(req, res) {
-    var createdAt = new Date();
-    User.create({
-        name: req.body.name,
-        displayName: req.body.displayName,
-        createdAt: createdAt              
-    }, function (err, user) {
-        if (err) {
-            return res.send(err);
-        }
-
-        res.json(_.pick(user, ['id', 'name']));
-    });
-}
-
-function _delete(req, res) {
-    user.remove({
-        _id: req.params.id
-    }, function (err, user) {
-        if (err) {
-            return res.send(err);
-        }
-
-        res.json({ id: req.params.id });
+function _logout(req, res) {
+    req.logout();
+    res.status(200).json({
+        status: 'Bye!'
     });
 }
