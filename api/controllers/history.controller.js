@@ -2,7 +2,7 @@
 var express = require('express');
 var _ = require('lodash');
 
-var History = require('./models/history.model');
+var History = require('../models/history.model');
 
 // exports
 module.exports = function () {

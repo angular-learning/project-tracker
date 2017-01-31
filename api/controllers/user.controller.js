@@ -1,16 +1,20 @@
 var express = require('express');
 var passport = require('passport');
-var User = require('./models/user.model');
+var User = require('../models/user.model');
 
-// exports
-module.exports = function () {
-    var router = express.Router();
+// // exports
+// module.exports = function () {
+//     var router = express.Router();
 
-    router.post('/register', _register);
-    router.post('/login', _login);
-    router.post('/logout', _logout);
+//     router.post('/register', _register);
+//     router.post('/login', _login);
+//     router.post('/logout', _logout);
 
-    return router;
+//     return router;
+// };
+
+module.exports = {
+    status: _status
 };
 
 function _register(req, res) {
@@ -56,5 +60,11 @@ function _logout(req, res) {
     req.logout();
     res.status(200).json({
         status: 'Bye!'
+    });
+}
+
+function _status(req, res) {
+    res.status(200).json({
+        status: 'You are not logged in' 
     });
 }

@@ -2,9 +2,9 @@
 var express = require('express');
 var _ = require('lodash');
 
-var Task = require('./models/task.model');
-var History = require('./models/history.model');
-var Feature = require('./models/feature.model');
+var Task = require('../models/task.model');
+var History = require('../models/history.model');
+var Feature = require('../models/feature.model');
 
 // exports
 module.exports = function () {
