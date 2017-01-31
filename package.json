@@ -9,6 +9,7 @@
   "description": "An app written using Node.js, Angular and MongoDB is supposed to be learning modern technologies app",
   "main": "run.js",
   "dependencies": {
+    "bcrypt-nodejs": "latest",
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
@@ -20,7 +21,7 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^1.0.0",
     "q": "^1.4.1",
-    "bcrypt-nodejs" : "latest"
+    "swagger-tools": "^0.10.1"
   },
   "engines": {
     "node": "6.4.0"

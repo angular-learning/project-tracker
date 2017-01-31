@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var app = express();
+var cors = require('cors')
 
 // configuration ===============================================================
 require('../../config/passport')(passport); // pass passport for configuration
@@ -28,6 +29,8 @@ function _create(env) {
         console.log('database connected successfully');
     });
 
+    app.use(cors());
+
     // register HTTP logs by env type
     if (environmentType === "dev") {
         app.use(logger('dev'));
@@ -44,41 +47,25 @@ function _create(env) {
         resave: false,
         saveUninitialized: false
     }));
-    app.use(passport.initialize());
-    app.use(passport.session());
+    //app.use(passport.initialize());
+    //app.use(passport.session());
     app.use(express.static(path.join(__dirname, '../../public')));
 
-    app.use('/api', require('./../modules/user/routes')());    
-    app.use('/api', require('./../modules/task/routes')());
-    app.use('/api', require('./../modules/history/routes')());
+    // app.use('/api', require('./../modules/user/routes')());    
+    // app.use('/api', require('./../modules/task/routes')());
+    // app.use('/api', require('./../modules/history/routes')());
 
-    // load the single view file 
-    // (angular will handle the page changes on the front-end)    
-    app.route('/*').get(_sendMainHtmlFile); 
-
-    // catch 404 and forward to error handler
-    app.use(_handle404Error); 
-    
-    // general error handlers
-    app.use(_internalErrorHandler); 
+    app.use((req, res, next) => {
+    if (req.headers['content-length'] === '0' && req.headers['content-type'] == null) {
+        req.headers['content-type'] = 'application/json' // or whatever your api consumes
+    }
+    next()
+    })
 
     return app;
 }
 
-function _sendMainHtmlFile(req, res) {
-    res.sendFile(path.join(__dirname, '../../public/app/pt.app.html'));
-}
 
-function _handle404Error(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-}
-
-function _internalErrorHandler(err, req, res, next) {
-    console.error(err);
-    res.status(err.status || 500).end();
-}
 
 module.exports = {
     create: _create
