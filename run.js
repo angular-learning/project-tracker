@@ -1,14 +1,10 @@
-// dependencies
-
-var appFactory = require('./app/core/app.factory.js');
-var runner = require('./app/www');
+// setting up dependencies
+//var runner = require('./app/www');
+var runner = require('./app/core/server.js');
 
 // initialization
-
 var env = process.env;
-
 var port = env.PORT || 3000;
 
-runner.start(port, appFactory.create(env));
-
-// private methods
+// starting server
+runner.run(port, env);
