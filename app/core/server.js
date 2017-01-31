@@ -1,64 +1,56 @@
 // This file contains the server side JavaScript code for your application.
 
-// get all the tools we need
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var expressSession = require('express-session');
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var passport = require('passport');
-var app = express();
-var cors = require('cors')
+// setting up dependencies
+// core 
+var express             = require('express');
+var bodyParser          = require('body-parser');
+var http                = require('http');
+var cookieParser        = require('cookie-parser');
+var expressSession      = require('express-session');
+var app                 = express();
 
-var q = require('q');
-var portTool = require('../tools/port.tool.js');
+// tools
+var q                   = require('q');
+var path                = require('path');
+var cors                = require('cors')
+var logger              = require('morgan');
+var portTool            = require('../tools/port.tool.js');
 
-// dependencies
-var http = require('http');
-var SwaggerExpress = require('swagger-express-mw');
-var SwaggerUi = require('swagger-tools/middleware/swagger-ui');
+// database
+var mongoose            = require('mongoose');
+// authentication 
+var passport            = require('passport');
 
-// exports
+// api middleware
+var SwaggerExpress      = require('swagger-express-mw');
+var SwaggerUi           = require('swagger-tools/middleware/swagger-ui');
+// ****************************************************************************
+
+// configuration
+// module interface
 module.exports = {
     run: _runServer
 };
 
-// for swagger
+// swagger
 var swaggerConfig = {
     appRoot: './'
 };
 
-// configuration ===============================================================
-require('../../config/passport')(passport); // pass passport for configuration
+// passport
+require('../../config/passport')(passport);
 
-// private functions
+// database
+var databaseConfig = require('../../config/database');
+
+// ****************************************************************************
+// setup express application
 function _runServer(port, env) {
-    var environmentType = env.NODE_ENV;
-    console.log("environment type - " + environmentType);
+    _connectToDatabase(databaseConfig);
+    _registerHttpLogs(env);
 
-    // connect to database 
-    var databaseConfiguration = require('../../config/database');
-    mongoose.connect(databaseConfiguration.url, function (err) {
-        if (err) {
-            console.error('Connection to db failed: ' + err + '; ' + (err.stack || ''));
-            process.exit(1);
-            return;
-        }
-        console.log('database connected successfully');
-    });
-
+    // setup middleware
     app.use(cors());
-
-    // register HTTP logs by env type
-    if (environmentType === "dev") {
-        app.use(logger('dev'));
-    }
-    else {
-        app.use(logger('combined'));
-    }
-
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(cookieParser());
@@ -68,11 +60,13 @@ function _runServer(port, env) {
         saveUninitialized: false
     }));
 
+    // setup authentication via passport
     app.use(passport.initialize());
     app.use(passport.session());
 
     app.use(express.static(path.join(__dirname, '../../public')));
 
+    // fix of swagger issue when validation empty request params
     app.use((req, res, next) => {
         if (req.headers['content-length'] === '0' && req.headers['content-type'] == null) {
             req.headers['content-type'] = 'application/json' // or whatever your api consumes
@@ -80,17 +74,13 @@ function _runServer(port, env) {
         next()
     })
 
-    var normalizedPort = portTool.normalizePort(port);
-    // Plugging mongoose in Promises Library (http://mongoosejs.com/docs/promises.html)
-    mongoose.Promise = q.Promise;
+    var normalizedPort = portTool.normalizePort(port);    
     app.set('port', normalizedPort);
 
     SwaggerExpress.create(swaggerConfig, function (err, swaggerExpress) {
         if (err) { throw err; }
 
         app.use(SwaggerUi(swaggerExpress.runner.swagger));
-
-        // install middleware
         swaggerExpress.register(app);
 
         // load the single view file 
@@ -115,6 +105,7 @@ function _runServer(port, env) {
     });
 }
 
+// ****************************************************************************
 function _sendMainHtmlFile(req, res) {
     res.sendFile(path.join(__dirname, '../../public/app/pt.app.html'));
 }
@@ -160,5 +151,30 @@ function _handleError(port, error) {
             break;
         default:
             throw error;
+    }
+}
+
+function _connectToDatabase(config){    
+    mongoose.connect(config.url, function (err) {
+        if (err) {
+            console.error('Connection to db failed: ' + err + '; ' + (err.stack || ''));
+            process.exit(1);
+            return;
+        }
+        console.log('database connected successfully');
+    });
+    mongoose.Promise = q.Promise;
+}
+
+function _registerHttpLogs(env){
+    var environmentType = env.NODE_ENV;
+    console.log("environment type - " + environmentType);
+
+    // register HTTP logs by env type
+    if (environmentType === "dev") {
+        app.use(logger('dev'));
+    }
+    else {
+        app.use(logger('combined'));
     }
 }
