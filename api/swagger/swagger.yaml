@@ -1,13 +1,10 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  version: "0.0.1"
+  version: 0.0.1
   title: Hello World App
-# during dev, should point to your local machine
-host: localhost:3000
+host: 'localhost:3001'
 basePath: /
-# 
 schemes:
-  # tip: remove http to make production-grade
   - http
   - https
 consumes:
@@ -16,30 +13,25 @@ produces:
   - application/json
 paths:
   /user/status:
-    x-swagger-router-controller: "user.controller"
+    x-swagger-router-controller: user.controller
     post:
       operationId: status
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/MessageResponse"
+            required:
+              - message
+            properties:
+              message:
+                type: string
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            required:
+              - message
+            properties:
+              message:
+                type: string
   /swagger:
     x-swagger-pipe: swagger_raw
-definitions:
-  MessageResponse:
-    required:
-      - message
-    properties:
-      message:
-        type: string
-  ErrorResponse:
-    required:
-      - message
-    properties:
-      message:
-        type: string
