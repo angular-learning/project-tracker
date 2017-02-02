@@ -6,8 +6,20 @@ var History = require('../models/history.model');
 
 module.exports = {
     all: _getAll,
-    delete: _deleteAll
+    delete: _deleteAll,
+    create: _create
 };
+
+function _create(req, res) {
+    History.create({
+        description: req.body.description,
+        modifiedAt: new Date()
+    }, function (err, item) {
+        if (err) { return res.send(err); }
+
+        res.status(204).json(_.pick(item, ['id', 'description']));
+    });
+}
 
 function _getAll(req, res) {
     History
@@ -27,7 +39,7 @@ function _deleteAll(req, res) {
     History
         .remove({}, function (err, historyItems) {
             if (err) {
-                res.status(500).json({ error: err});
+                res.send(err);
             }
             res.status(200).json({ status: 'History cleaned' });
         });

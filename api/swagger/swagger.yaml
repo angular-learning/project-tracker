@@ -19,7 +19,7 @@ paths:
       responses:
         '200':
           description: Success
-          schema:
+          schema: &ref_1
             required:
               - message
             properties:
@@ -42,7 +42,7 @@ paths:
           description: A list of history items
           schema:
             type: array
-            items:
+            items: &ref_2
               properties:
                 id:
                   type: string
@@ -54,6 +54,29 @@ paths:
     delete:
       operationId: delete
       responses:
+        '200':
+          description: A list of history items
+          schema: *ref_1
+        default:
+          description: Error
+          schema: *ref_0
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+        - text/xml
+        - text/html
+      operationId: create
+      parameters:
+        - name: history
+          in: body
+          required: true
+          schema: *ref_2
+      responses:
+        '204':
+          description: History item created
+          schema: *ref_2
         default:
           description: Error
           schema: *ref_0
