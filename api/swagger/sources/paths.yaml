@@ -2,7 +2,7 @@ paths:
   /task:
     $ref: "./controllers/task.controller.yaml#/task"
   /task/{id}:
-    $ref: "./controllers/task.controller.yaml#/task_id"
+    $ref: "./controllers/task.controller.yaml#/task-id"
   /user/status:
     $ref: "./controllers/user.controller.yaml#/status"
   /history:

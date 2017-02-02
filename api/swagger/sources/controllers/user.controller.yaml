@@ -6,8 +6,8 @@ status:
       "200":
         description: Success
         schema:
-          $ref: "../responses/message.response.yaml#/MessageResponse"
+          $ref: "../definitions.yaml#/MessageResponse"
       default:
         description: Error
         schema:
-          $ref: "../responses/error.response.yaml#/ErrorResponse"
+          $ref: "../definitions.yaml#/ErrorResponse"

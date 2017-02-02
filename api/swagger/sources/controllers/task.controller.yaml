@@ -12,7 +12,7 @@ task:
       default:
         description: Error
         schema:
-          $ref: "../responses/error.response.yaml#/ErrorResponse"
+          $ref: "../definitions.yaml#/ErrorResponse"
   post:    
     operationId: create
     parameters:
@@ -27,8 +27,8 @@ task:
       default:
         description: Error
         schema:
-          $ref: "../responses/error.response.yaml#/ErrorResponse"
-task_id:
+          $ref: "../definitions.yaml#/ErrorResponse"
+task-id:
   x-swagger-router-controller: "task.controller"
   get:
     operationId: one
@@ -45,7 +45,7 @@ task_id:
       default:
         description: Error
         schema:
-          $ref: "../responses/error.response.yaml#/ErrorResponse"
+          $ref: "../definitions.yaml#/ErrorResponse"
   post:    
     operationId: update
     parameters:
@@ -64,7 +64,7 @@ task_id:
       default:
         description: Error
         schema:
-          $ref: "../responses/error.response.yaml#/ErrorResponse"
+          $ref: "../definitions.yaml#/ErrorResponse"
   delete:
     operationId: delete
     parameters:
@@ -78,4 +78,4 @@ task_id:
       default:
         description: Error
         schema:
-          $ref: "../responses/error.response.yaml#/ErrorResponse"
+          $ref: "../definitions.yaml#/ErrorResponse"

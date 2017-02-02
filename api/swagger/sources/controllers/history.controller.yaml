@@ -12,18 +12,18 @@ history:
       default:
         description: Error
         schema:
-          $ref: "../responses/error.response.yaml#/ErrorResponse"
+          $ref: "../definitions.yaml#/ErrorResponse"
   delete:
     operationId: delete
     responses:
       "200":
         description: A list of history items
         schema:
-          $ref: "../responses/message.response.yaml#/MessageResponse"
+          $ref: "../definitions.yaml#/MessageResponse"
       default:
         description: Error
         schema:
-          $ref: "../responses/error.response.yaml#/ErrorResponse"
+          $ref: "../definitions.yaml#/ErrorResponse"
   post:    
     operationId: create
     parameters:
@@ -40,4 +40,4 @@ history:
       default:
         description: Error
         schema:
-          $ref: "../responses/error.response.yaml#/ErrorResponse"
+          $ref: "../definitions.yaml#/ErrorResponse"
