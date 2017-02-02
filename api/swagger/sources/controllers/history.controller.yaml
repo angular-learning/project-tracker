@@ -24,13 +24,7 @@ history:
         description: Error
         schema:
           $ref: "../responses/error.response.yaml#/ErrorResponse"
-  post:
-    consumes:
-      - application/json
-    produces:
-      - application/json
-      - text/xml
-      - text/html
+  post:    
     operationId: create
     parameters:
       - name: history

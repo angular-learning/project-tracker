@@ -16,7 +16,7 @@ module.exports = {
 
 function _getOne(req, res) {
     Task
-        .findById(req.params.id)
+        .findById(req.swagger.params.id.value)
         //.populate('features')
         // .populate('createdBy')
         .exec(function (err, task) {
@@ -50,7 +50,7 @@ function _update(req, res) {
     var modifiedAt = new Date();
 
     Task.update({
-        _id: req.params.id
+        _id: req.swagger.params.id.value
     }, {
             $set: {
                 title: req.body.title,
@@ -87,17 +87,18 @@ function _create(req, res) {
 
 function _delete(req, res) {
     var deletedAt = new Date();
-    _writeHistoryMessage('Tryig to delete task ' + req.params.id);
+    var id = req.swagger.params.id.value;
+    _writeHistoryMessage('Tryig to delete task ' + id);
     Task.remove({
-        _id: req.params.id
+        _id: id
     }, function (err, task) {
         if (err) {
-            _writeHistoryMessage('Error deleting task ' + req.params.id + ': ' + err);
+            _writeHistoryMessage('Error deleting task ' + id + ': ' + err);
             return res.send(err);
         }
 
-        _writeHistoryMessage('Task ' + req.params.id + ' was deleted', deletedAt);
-        res.json({ id: req.params.id });
+        _writeHistoryMessage('Task ' + id + ' was deleted', deletedAt);
+        res.json({ id: id });
     });
 }
 

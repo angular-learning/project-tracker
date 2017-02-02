@@ -1,13 +1,81 @@
-tasks:
+task:
   x-swagger-router-controller: "task.controller"
   get:
-    operationId: getAll
+    operationId: all
     responses:
       "200":
-        description: Success
+        description: A list of task items
         schema:
-          $ref: "../models/message.response.yaml#/MessageResponse"
+          type: array
+          items:
+            $ref: "../models/task.model.yaml#/Task"
       default:
         description: Error
         schema:
-          $ref: "../models/error.response.yaml#/ErrorResponse"
+          $ref: "../responses/error.response.yaml#/ErrorResponse"
+  post:    
+    operationId: create
+    parameters:
+      - name: task
+        in: body
+        required: true
+        schema:
+          $ref: "../models/task.model.yaml#/Task"
+    responses:
+      "200":
+        description: Task created
+      default:
+        description: Error
+        schema:
+          $ref: "../responses/error.response.yaml#/ErrorResponse"
+task_id:
+  x-swagger-router-controller: "task.controller"
+  get:
+    operationId: one
+    parameters:
+      - name: id
+        in: path
+        type: string
+        required: true        
+    responses:
+      "200":
+        description: Task item
+        schema:
+          $ref: "../models/task.model.yaml#/Task"
+      default:
+        description: Error
+        schema:
+          $ref: "../responses/error.response.yaml#/ErrorResponse"
+  post:    
+    operationId: update
+    parameters:
+      - name: id
+        in: path
+        type: string
+        required: true 
+      - name: task
+        in: body
+        required: true
+        schema:
+          $ref: "../models/task.model.yaml#/Task"
+    responses:
+      "200":
+        description: Success
+      default:
+        description: Error
+        schema:
+          $ref: "../responses/error.response.yaml#/ErrorResponse"
+  delete:
+    operationId: delete
+    parameters:
+      - name: id
+        in: path
+        type: string
+        required: true
+    responses:
+      "200":
+        description: Success
+      default:
+        description: Error
+        schema:
+          $ref: "../responses/error.response.yaml#/ErrorResponse"

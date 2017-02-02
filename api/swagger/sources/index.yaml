@@ -4,7 +4,7 @@ info:
   title: Project tracker
 # replaced during gulp compileSwagger script to localhost: + PORT
 host: localhost:3000
-basePath: "/"
+basePath: "/api"
 schemes:
   # tip: remove http to make production-grade
   - http
@@ -14,10 +14,5 @@ consumes:
 produces:
   - application/json
 paths:
-  /user/status:
-    $ref: "./controllers/user.controller.yaml#/status"
-  /history:
-    $ref: "./controllers/history.controller.yaml#/history"
-  /swagger:
-    x-swagger-pipe: swagger_raw
+  $ref: "./paths.yaml#/paths"
 

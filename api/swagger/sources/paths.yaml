@@ -1,0 +1,12 @@
+paths:
+  /task:
+    $ref: "./controllers/task.controller.yaml#/task"
+  /task/{id}:
+    $ref: "./controllers/task.controller.yaml#/task_id"
+  /user/status:
+    $ref: "./controllers/user.controller.yaml#/status"
+  /history:
+    $ref: "./controllers/history.controller.yaml#/history"
+  /swagger:
+    x-swagger-pipe: swagger_raw
+

@@ -1,6 +1,16 @@
-ErrorResponse:
-  required:
-    - message
+Task:
   properties:
-    message:
+    id:
       type: string
+    title:
+      type: string
+    isDone:
+      type: boolean
+    description:
+      type: string
+    createdAt:
+      type: string
+      format: date-time
+    modifiedAt:
+      type: string
+      format: date-time
