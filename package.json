@@ -22,8 +22,10 @@
     "passport-local-mongoose": "^1.0.0",
     "q": "^1.4.1",
     "swagger": "latest",
-    "swagger-ui": "latest",
-    "swagger-tools": "^0.10.1"
+    "swagger-express-mw": "^0.7.0",
+    "swagger-parser": "^3.4.1",
+    "swagger-tools": "^0.10.1",
+    "swagger-ui": "latest"
   },
   "engines": {
     "node": "6.4.0"
