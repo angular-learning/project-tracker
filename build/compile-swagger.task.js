@@ -21,11 +21,11 @@ module.exports = {};
 
 // private methods
 gulp.task('compileSwagger', function () {
-    SwaggerParser.dereference(swaggerIndex)
+    return SwaggerParser.dereference(swaggerIndex)
         .then(function (api) {
             api.host = 'localhost:' + process.env.PORT;            
-            fs.writeFile(swaggerCompiled, YAML.stringify(api), console.error);
-            _validateFile(swaggerCompiled);
+            fs.writeFileSync(swaggerCompiled, YAML.stringify(api));
+            return _validateFile(swaggerCompiled);
         })
         .catch(function (err) {
             console.error('Compilation of swagger failed! ' + err.message);
