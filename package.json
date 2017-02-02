@@ -36,7 +36,7 @@
     "run-server": "node run.js",
     "run-server-dev": "SET NODE_ENV=dev& SET PORT=3001& node --nolazy --debug-brk=3001 run.js",
     "dev": "SET NODE_ENV=dev& SET PORT=3001& npm run build && npm run run-server",
-    "build": "npm run gulp build",
+    "build": "SET PORT=3001& npm run gulp build",
     "test": "npm run gulp test",
     "livereload": "SET SERVER_PORT=3001& npm run gulp livereload",
     "gulp": "./node_modules/.bin/gulp",
