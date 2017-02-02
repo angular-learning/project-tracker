@@ -1,0 +1,22 @@
+history:
+  x-swagger-router-controller: "history.controller"
+  get:
+    operationId: all
+    responses:
+      "200":
+        description: A list of history items
+        schema:
+            type: array
+            items:
+              $ref: "../models/history.model.yaml#/History"
+      default:
+        description: Error
+        schema:
+          $ref: "../responses/error.response.yaml#/ErrorResponse"
+  delete:
+    operationId: delete
+    responses:
+      default:
+        description: Error
+        schema:
+          $ref: "../responses/error.response.yaml#/ErrorResponse"

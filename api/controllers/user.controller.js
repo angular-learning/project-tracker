@@ -2,18 +2,10 @@ var express = require('express');
 var passport = require('passport');
 var User = require('../models/user.model');
 
-// // exports
-// module.exports = function () {
-//     var router = express.Router();
-
-//     router.post('/register', _register);
-//     router.post('/login', _login);
-//     router.post('/logout', _logout);
-
-//     return router;
-// };
-
 module.exports = {
+    register: _register,
+    login: _login,
+    logout: _logout,
     status: _status
 };
 

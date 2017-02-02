@@ -4,13 +4,9 @@ var _ = require('lodash');
 
 var History = require('../models/history.model');
 
-// exports
-module.exports = function () {
-    var router = express.Router();
-
-    router.get('/history', _getAll);
-    router.delete('/history', _deleteAll);
-    return router;
+module.exports = {
+    all: _getAll,
+    delete: _deleteAll
 };
 
 function _getAll(req, res) {
@@ -31,7 +27,9 @@ function _deleteAll(req, res) {
     History
         .remove({}, function (err, historyItems) {
             if (err) {
-                return res.send(err);
+                res.status(500);
             }
+            res.status(200);
         });
+        res.status(200);
 }

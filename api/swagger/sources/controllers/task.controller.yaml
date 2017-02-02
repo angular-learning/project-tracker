@@ -1,0 +1,13 @@
+tasks:
+  x-swagger-router-controller: "task.controller"
+  get:
+    operationId: getAll
+    responses:
+      "200":
+        description: Success
+        schema:
+          $ref: "../models/message.response.yaml#/MessageResponse"
+      default:
+        description: Error
+        schema:
+          $ref: "../models/error.response.yaml#/ErrorResponse"

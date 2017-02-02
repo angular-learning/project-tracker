@@ -1,0 +1,13 @@
+status:
+  x-swagger-router-controller: "user.controller"
+  post:
+    operationId: status
+    responses:
+      "200":
+        description: Success
+        schema:
+          $ref: "../responses/message.response.yaml#/MessageResponse"
+      default:
+        description: Error
+        schema:
+          $ref: "../responses/error.response.yaml#/ErrorResponse"

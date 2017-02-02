@@ -6,17 +6,12 @@ var Task = require('../models/task.model');
 var History = require('../models/history.model');
 var Feature = require('../models/feature.model');
 
-// exports
-module.exports = function () {
-    var router = express.Router();
-
-    router.get('/task', _getAll);
-    router.post('/task', _create);
-    router.get('/task/:id', _getOne);
-    router.post('/task/:id', _update);
-    router.delete('/task/:id', _delete);
-
-    return router;
+module.exports = {
+    all: _getAll,
+    create: _create,
+    one: _getOne,
+    update: _update,
+    delete: _delete
 };
 
 function _getOne(req, res) {

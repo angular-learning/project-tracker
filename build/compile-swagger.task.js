@@ -12,6 +12,7 @@ var fs = require('fs');
 
 var swaggerDir = './api/swagger';
 var swaggerIndex = `${swaggerDir}/sources/index.yaml`;
+var swaggerCompiled = `${swaggerDir}/swagger.yaml`;
 
 // exports
 module.exports = {};
@@ -22,13 +23,24 @@ module.exports = {};
 gulp.task('compileSwagger', function () {
     SwaggerParser.dereference(swaggerIndex)
         .then(function (api) {
-            api.host = 'localhost:' + process.env.PORT;
-            fs.writeFile(`${swaggerDir}/swagger.yaml`, YAML.stringify(api), console.error);
+            api.host = 'localhost:' + process.env.PORT;            
+            fs.writeFile(swaggerCompiled, YAML.stringify(api), console.error);
+            _validateFile(swaggerCompiled);
         })
         .catch(function (err) {
             console.error('Compilation of swagger failed! ' + err.message);
         });
 });
+
+function _validateFile(file) {
+    SwaggerParser.validate(file)
+        .then(function (api) {
+            console.log("API name: %s, Version: %s", api.info.title, api.info.version);
+        })
+        .catch(function (err) {
+            console.error(err);
+        });
+}
 
 
 
