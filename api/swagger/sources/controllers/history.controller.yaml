@@ -16,6 +16,10 @@ history:
   delete:
     operationId: delete
     responses:
+    responses:
+      "200":
+        description: A list of history items
+        schema:
       default:
         description: Error
         schema:

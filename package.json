@@ -34,7 +34,7 @@
     "start": "npm run prepare && npm run build && npm run run-server",
     "prepare": "npm i",
     "run-server": "node run.js",
-    "run-server-dev": "SET NODE_ENV=dev& SET PORT=3001& node --nolazy --debug-brk=3001 run.js",
+    "run-server-dev": "SET NODE_ENV=dev& SET PORT=3001& node --nolazy --debug-brk=3000 run.js",
     "dev": "SET NODE_ENV=dev& SET PORT=3001& npm run build && npm run run-server",
     "build": "SET PORT=3001& npm run gulp build",
     "test": "npm run gulp test",

@@ -27,9 +27,8 @@ function _deleteAll(req, res) {
     History
         .remove({}, function (err, historyItems) {
             if (err) {
-                res.status(500);
+                res.status(500).json({ error: err});
             }
-            res.status(200);
+            res.status(200).json({ status: 'History cleaned' });
         });
-        res.status(200);
 }
