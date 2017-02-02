@@ -4,7 +4,6 @@
 // setup dependencies
 var gulp = require('gulp');
 
-//var YAML = require('yaml-js');
 var SwaggerParser = require('swagger-parser');
 var YAML = SwaggerParser.YAML;
 var resolve = require('json-refs').resolveRefs;
