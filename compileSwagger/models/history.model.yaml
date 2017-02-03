@@ -1,0 +1,8 @@
+History:
+  properties:
+    id:
+      type: string
+    description:
+      type: string
+    # modifiedAt:
+    #   type: dateTime

@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  version: "0.0.2"
+  version: "0.0.1"
   title: Project tracker
 # replaced during gulp compileSwagger script to localhost: + PORT
 host: localhost:3000
