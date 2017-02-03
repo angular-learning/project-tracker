@@ -1,0 +1,165 @@
+swagger: '2.0'
+info:
+  version: 0.0.1
+  title: Project tracker
+host: 'localhost:3001'
+basePath: /api
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /task:
+    x-swagger-router-controller: task.controller
+    get:
+      operationId: all
+      responses:
+        '200':
+          description: A list of task items
+          schema:
+            type: array
+            items: &ref_0
+              properties:
+                id:
+                  type: string
+                title:
+                  type: string
+                isDone:
+                  type: boolean
+                description:
+                  type: string
+                createdAt:
+                  type: string
+                  format: date-time
+                modifiedAt:
+                  type: string
+                  format: date-time
+        default:
+          description: Error
+          schema: &ref_1
+            required:
+              - message
+            properties:
+              message:
+                type: string
+    post:
+      operationId: create
+      parameters:
+        - name: task
+          in: body
+          required: true
+          schema: *ref_0
+      responses:
+        '200':
+          description: Task created
+        default:
+          description: Error
+          schema: *ref_1
+  '/task/{id}':
+    x-swagger-router-controller: task.controller
+    get:
+      operationId: one
+      parameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+      responses:
+        '200':
+          description: Task item
+          schema: *ref_0
+        default:
+          description: Error
+          schema: *ref_1
+    post:
+      operationId: update
+      parameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: task
+          in: body
+          required: true
+          schema: *ref_0
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          schema: *ref_1
+    delete:
+      operationId: delete
+      parameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          schema: *ref_1
+  /user/status:
+    x-swagger-router-controller: user.controller
+    post:
+      operationId: status
+      responses:
+        '200':
+          description: Success
+          schema: &ref_2
+            required:
+              - message
+            properties:
+              message:
+                type: string
+        default:
+          description: Error
+          schema: *ref_1
+  /history:
+    x-swagger-router-controller: history.controller
+    get:
+      operationId: all
+      responses:
+        '200':
+          description: A list of history items
+          schema:
+            type: array
+            items: &ref_3
+              properties:
+                id:
+                  type: string
+                description:
+                  type: string
+        default:
+          description: Error
+          schema: *ref_1
+    delete:
+      operationId: delete
+      responses:
+        '200':
+          description: A list of history items
+          schema: *ref_2
+        default:
+          description: Error
+          schema: *ref_1
+    post:
+      operationId: create
+      parameters:
+        - name: history
+          in: body
+          required: true
+          schema: *ref_3
+      responses:
+        '204':
+          description: History item created
+          schema: *ref_3
+        default:
+          description: Error
+          schema: *ref_1
+  /swagger:
+    x-swagger-pipe: swagger_raw

@@ -3,5 +3,6 @@
     // Adds the file extension to a import statements
     "path-intellisense.extensionOnImport": true,
     // Автоматически обновлять расширения
-    "extensions.autoUpdate": true
+    "extensions.autoUpdate": true,
+    "vsicons.presets.angular": false
 }

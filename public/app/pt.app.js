@@ -1,3 +1,4 @@
 (function () {
-    angular.module('projectTracker', ['ui.router', 'ngResource', 'ngAnimate', 'toastr']);
+    angular
+        .module('projectTracker', ['ui.router', 'ngResource', 'ngAnimate', 'toastr']);
 })();

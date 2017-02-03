@@ -1,0 +1,18 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Project tracker
+# replaced during gulp compileSwagger script to localhost: + PORT
+host: localhost:3000
+basePath: "/api"
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  $ref: "./paths.yaml#/paths"
+

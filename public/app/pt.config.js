@@ -8,7 +8,7 @@
         .run(_run)
         .config(_config);
 
-    function _run($rootScope, $state, $stateParams) {
+    function _run($rootScope, $state, $stateParams, $cookieStore, $http) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
     }
@@ -17,16 +17,17 @@
         $stateProvider
             .state("layout", {
                 abstract: true,
-                url: '/?search',                
+                url: '/?search',
                 views: {
                     '': { templateUrl: '/app/layout/layout.view.tmpl.html' },
-                    'header@layout': { 
+                    'header@layout': {
                         templateUrl: '/app/layout/header.view.tmpl.html',
-                        controller: 'headerController as headerCtrl' },
-                    'footer@layout': { 
-                        templateUrl: '/app/layout/footer.view.tmpl.html'}
+                        controller: 'headerController as headerCtrl'
+                    },
+                    'footer@layout': {
+                        templateUrl: '/app/layout/footer.view.tmpl.html'
+                    }
                 },
-                
             });
 
         $locationProvider.html5Mode(true);
