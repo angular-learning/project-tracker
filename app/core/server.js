@@ -80,6 +80,7 @@ function _runServer(port, env) {
     SwaggerExpress.create(swaggerConfig, function (err, swaggerExpress) {
         if (err) { throw err; }
 
+        swaggerExpress.runner.swagger.host = 'localhost:' + process.env.PORT;
         app.use(SwaggerUi(swaggerExpress.runner.swagger));
         swaggerExpress.register(app);
 

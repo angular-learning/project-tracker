@@ -8,6 +8,6 @@ module.exports = {};
 
 // initialization
 
-gulp.task('build', ['inject', 'compileSwagger', 'watchSwagger']);
+gulp.task('build', ['inject', 'swagger']);
 
 // private methods

@@ -19,10 +19,9 @@ module.exports = {};
 // initialization
 
 // private methods
-gulp.task('compileSwagger', function () {
+gulp.task('swagger', function () {
     return SwaggerParser.dereference(swaggerIndex)
-        .then(function (api) {
-            api.host = 'localhost:' + process.env.PORT;            
+        .then(function (api) {            
             fs.writeFileSync(swaggerCompiled, YAML.stringify(api));
             return _validateFile(swaggerCompiled);
         })

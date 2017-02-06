@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   version: 0.0.2
   title: Project tracker
-host: 'localhost:3001'
+host: 'localhost:3000'
 basePath: /api
 schemes:
   - http
