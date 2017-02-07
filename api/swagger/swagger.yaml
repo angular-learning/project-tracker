@@ -59,7 +59,7 @@ paths:
       responses: &ref_2
         '200':
           description: Success
-          schema: &ref_3
+          schema: &ref_4
             required:
               - message
             properties:
@@ -116,7 +116,14 @@ paths:
       tags:
         - User
       operationId: status
-      responses: *ref_2
+      responses:
+        '200':
+          description: Is logined
+          schema:
+            type: boolean
+        default:
+          description: Error
+          schema: *ref_1
   /user/register:
     x-swagger-router-controller: user.controller
     post:
@@ -127,12 +134,31 @@ paths:
         - name: user
           in: body
           required: true
-          schema:
+          schema: &ref_3
             properties:
-              login:
+              username:
                 type: string
               password:
                 type: string
+      responses: *ref_2
+  /user/login:
+    x-swagger-router-controller: user.controller
+    post:
+      tags:
+        - User
+      operationId: login
+      parameters:
+        - name: user
+          in: body
+          required: true
+          schema: *ref_3
+      responses: *ref_2
+  /user/logout:
+    x-swagger-router-controller: user.controller
+    post:
+      tags:
+        - User
+      operationId: logout
       responses: *ref_2
   /history:
     x-swagger-router-controller: history.controller
@@ -145,7 +171,7 @@ paths:
           description: A list of history items
           schema:
             type: array
-            items: &ref_4
+            items: &ref_5
               properties:
                 id:
                   type: string
@@ -161,7 +187,7 @@ paths:
       responses:
         '200':
           description: A list of history items
-          schema: *ref_3
+          schema: *ref_4
         default:
           description: Error
           schema: *ref_1
@@ -173,11 +199,11 @@ paths:
         - name: history
           in: body
           required: true
-          schema: *ref_4
+          schema: *ref_5
       responses:
         '204':
           description: History item created
-          schema: *ref_4
+          schema: *ref_5
         default:
           description: Error
           schema: *ref_1

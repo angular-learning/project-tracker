@@ -5,7 +5,7 @@ gulp.task('api-livereload', function () {
     return nodemon({
         script: 'run.js',
         watch: ['api/swagger/sources/'],
-        ext: 'yaml',
+        ext: 'yaml js',
         //nodeArgs: ['--nolazy', '--debug-brk=3000'],
         // env: {
         //     'NODE_ENV': 'dev',

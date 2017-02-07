@@ -12,6 +12,28 @@ register:
           $ref: "../models/user.model.yaml#/Register"
     responses:
       $ref: "../responses/default.response.yaml"
+login:
+  x-swagger-router-controller: "user.controller"
+  post:
+    tags:
+      - User 
+    operationId: login
+    parameters:
+      - name: user
+        in: body
+        required: true
+        schema:
+          $ref: "../models/user.model.yaml#/Register"
+    responses:
+      $ref: "../responses/default.response.yaml"
+logout:
+  x-swagger-router-controller: "user.controller"
+  post:
+    tags:
+      - User 
+    operationId: logout
+    responses:
+      $ref: "../responses/default.response.yaml"
 status:
   x-swagger-router-controller: "user.controller"
   post:
@@ -19,4 +41,11 @@ status:
       - User 
     operationId: status
     responses:
-      $ref: "../responses/default.response.yaml"
+      "200":
+        description: Is logined
+        schema:
+          type: boolean
+      default:
+        description: Error
+        schema:
+          $ref: "../definitions.yaml#/ErrorResponse"

@@ -1,4 +1,4 @@
-// This file contains the server side JavaScript code for your application.
+// This file contains the code to configurate and run nodejs application
 
 // setting up dependencies
 // core 
@@ -12,7 +12,8 @@ var app                 = express();
 // tools
 var q                   = require('q');
 var path                = require('path');
-var cors                = require('cors')
+var cors                = require('cors');
+var flash               = require('connect-flash')
 var logger              = require('morgan');
 var portTool            = require('../tools/port.tool.js');
 
@@ -20,6 +21,8 @@ var portTool            = require('../tools/port.tool.js');
 var mongoose            = require('mongoose');
 // authentication 
 var passport            = require('passport');
+var localStrategy       = require('passport-local').Strategy;
+var User                = require('../../api/models/user.model');
 
 // api middleware
 var SwaggerExpress      = require('swagger-express-mw');
@@ -37,9 +40,6 @@ var swaggerConfig = {
     appRoot: './'
 };
 
-// passport
-require('../../config/passport')(passport);
-
 // database
 var databaseConfig = require('../../config/database');
 
@@ -51,6 +51,7 @@ function _runServer(port, env) {
 
     // setup middleware
     app.use(cors());
+    app.use(flash());
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(cookieParser());
@@ -65,6 +66,11 @@ function _runServer(port, env) {
     app.use(passport.session());
 
     app.use(express.static(path.join(__dirname, '../../public')));
+
+    // configure passport
+    passport.use(new localStrategy(User.authenticate()));
+    passport.serializeUser(User.serializeUser());
+    passport.deserializeUser(User.deserializeUser());
 
     // fix of swagger issue when validation empty request params
     app.use((req, res, next) => {

@@ -10,7 +10,7 @@ module.exports = {
 };
 
 function _register(req, res) {
-    User.register(new User({ login: req.body.login }),
+    User.register(new User({ username: req.body.username }),
         req.body.password, function (err, account) {
             if (err) {
                 return res.status(500).json({
@@ -56,7 +56,12 @@ function _logout(req, res) {
 }
 
 function _status(req, res) {
+    if (!req.isAuthenticated()) {
+        return res.status(200).json({
+            status: false
+        });
+    }
     res.status(200).json({
-        status: 'You are not logged in' 
+        status: true
     });
 }

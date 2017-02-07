@@ -7,6 +7,10 @@ paths:
     $ref: "./controllers/user.controller.yaml#/status"
   /user/register:
     $ref: "./controllers/user.controller.yaml#/register"
+  /user/login:
+    $ref: "./controllers/user.controller.yaml#/login"
+  /user/logout:
+    $ref: "./controllers/user.controller.yaml#/logout"
   /history:
     $ref: "./controllers/history.controller.yaml#/history"
   /swagger:
