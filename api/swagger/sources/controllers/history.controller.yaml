@@ -1,6 +1,8 @@
 history:
   x-swagger-router-controller: "history.controller"
   get:
+    tags:
+      - History  
     operationId: all
     responses:
       "200":
@@ -13,7 +15,9 @@ history:
         description: Error
         schema:
           $ref: "../definitions.yaml#/ErrorResponse"
-  delete:
+  delete:    
+    tags:
+      - History 
     operationId: delete
     responses:
       "200":
@@ -24,7 +28,9 @@ history:
         description: Error
         schema:
           $ref: "../definitions.yaml#/ErrorResponse"
-  post:    
+  post:  
+    tags:
+      - History   
     operationId: create
     parameters:
       - name: history

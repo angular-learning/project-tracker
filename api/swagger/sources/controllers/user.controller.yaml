@@ -1,12 +1,50 @@
+register:
+  x-swagger-router-controller: "user.controller"
+  post:
+    tags:
+      - User 
+    operationId: register
+    parameters:
+      - name: user
+        in: body
+        required: true
+        schema:
+          $ref: "../models/user.model.yaml#/Register"
+    responses:
+      $ref: "../responses/default.response.yaml"
+login:
+  x-swagger-router-controller: "user.controller"
+  post:
+    tags:
+      - User 
+    operationId: login
+    parameters:
+      - name: user
+        in: body
+        required: true
+        schema:
+          $ref: "../models/user.model.yaml#/Register"
+    responses:
+      $ref: "../responses/default.response.yaml"
+logout:
+  x-swagger-router-controller: "user.controller"
+  post:
+    tags:
+      - User 
+    operationId: logout
+    responses:
+      $ref: "../responses/default.response.yaml"
 status:
   x-swagger-router-controller: "user.controller"
   post:
+    tags:
+      - User 
     operationId: status
     responses:
       "200":
-        description: Success
+        description: Is logined
         schema:
-          $ref: "../definitions.yaml#/MessageResponse"
+          type: boolean
       default:
         description: Error
         schema:

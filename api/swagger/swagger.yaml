@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   version: 0.0.1
   title: Project tracker
-host: 'localhost:3001'
+host: 'localhost:3000'
 basePath: /api
 schemes:
   - http
@@ -15,6 +15,8 @@ paths:
   /task:
     x-swagger-router-controller: task.controller
     get:
+      tags:
+        - Task
       operationId: all
       responses:
         '200':
@@ -46,21 +48,31 @@ paths:
               message:
                 type: string
     post:
+      tags:
+        - Task
       operationId: create
       parameters:
         - name: task
           in: body
           required: true
           schema: *ref_0
-      responses:
+      responses: &ref_2
         '200':
-          description: Task created
+          description: Success
+          schema: &ref_4
+            required:
+              - message
+            properties:
+              message:
+                type: string
         default:
           description: Error
           schema: *ref_1
   '/task/{id}':
     x-swagger-router-controller: task.controller
     get:
+      tags:
+        - Task
       operationId: one
       parameters:
         - name: id
@@ -75,6 +87,8 @@ paths:
           description: Error
           schema: *ref_1
     post:
+      tags:
+        - Task
       operationId: update
       parameters:
         - name: id
@@ -85,51 +99,79 @@ paths:
           in: body
           required: true
           schema: *ref_0
-      responses:
-        '200':
-          description: Success
-        default:
-          description: Error
-          schema: *ref_1
+      responses: *ref_2
     delete:
+      tags:
+        - Task
       operationId: delete
       parameters:
         - name: id
           in: path
           type: string
           required: true
-      responses:
-        '200':
-          description: Success
-        default:
-          description: Error
-          schema: *ref_1
+      responses: *ref_2
   /user/status:
     x-swagger-router-controller: user.controller
     post:
+      tags:
+        - User
       operationId: status
       responses:
         '200':
-          description: Success
-          schema: &ref_2
-            required:
-              - message
-            properties:
-              message:
-                type: string
+          description: Is logined
+          schema:
+            type: boolean
         default:
           description: Error
           schema: *ref_1
+  /user/register:
+    x-swagger-router-controller: user.controller
+    post:
+      tags:
+        - User
+      operationId: register
+      parameters:
+        - name: user
+          in: body
+          required: true
+          schema: &ref_3
+            properties:
+              username:
+                type: string
+              password:
+                type: string
+      responses: *ref_2
+  /user/login:
+    x-swagger-router-controller: user.controller
+    post:
+      tags:
+        - User
+      operationId: login
+      parameters:
+        - name: user
+          in: body
+          required: true
+          schema: *ref_3
+      responses: *ref_2
+  /user/logout:
+    x-swagger-router-controller: user.controller
+    post:
+      tags:
+        - User
+      operationId: logout
+      responses: *ref_2
   /history:
     x-swagger-router-controller: history.controller
     get:
+      tags:
+        - History
       operationId: all
       responses:
         '200':
           description: A list of history items
           schema:
             type: array
-            items: &ref_3
+            items: &ref_5
               properties:
                 id:
                   type: string
@@ -139,25 +181,29 @@ paths:
           description: Error
           schema: *ref_1
     delete:
+      tags:
+        - History
       operationId: delete
       responses:
         '200':
           description: A list of history items
-          schema: *ref_2
+          schema: *ref_4
         default:
           description: Error
           schema: *ref_1
     post:
+      tags:
+        - History
       operationId: create
       parameters:
         - name: history
           in: body
           required: true
-          schema: *ref_3
+          schema: *ref_5
       responses:
         '204':
           description: History item created
-          schema: *ref_3
+          schema: *ref_5
         default:
           description: Error
           schema: *ref_1

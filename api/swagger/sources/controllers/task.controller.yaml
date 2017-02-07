@@ -1,6 +1,8 @@
 task:
   x-swagger-router-controller: "task.controller"
   get:
+    tags:
+      - Task
     operationId: all
     responses:
       "200":
@@ -13,7 +15,9 @@ task:
         description: Error
         schema:
           $ref: "../definitions.yaml#/ErrorResponse"
-  post:    
+  post:
+    tags:
+      - Task    
     operationId: create
     parameters:
       - name: task
@@ -22,15 +26,12 @@ task:
         schema:
           $ref: "../models/task.model.yaml#/Task"
     responses:
-      "200":
-        description: Task created
-      default:
-        description: Error
-        schema:
-          $ref: "../definitions.yaml#/ErrorResponse"
+      $ref: "../responses/default.response.yaml"
 task-id:
   x-swagger-router-controller: "task.controller"
   get:
+    tags:
+      - Task
     operationId: one
     parameters:
       - name: id
@@ -46,7 +47,9 @@ task-id:
         description: Error
         schema:
           $ref: "../definitions.yaml#/ErrorResponse"
-  post:    
+  post:
+    tags:
+      - Task      
     operationId: update
     parameters:
       - name: id
@@ -59,13 +62,10 @@ task-id:
         schema:
           $ref: "../models/task.model.yaml#/Task"
     responses:
-      "200":
-        description: Success
-      default:
-        description: Error
-        schema:
-          $ref: "../definitions.yaml#/ErrorResponse"
+      $ref: "../responses/default.response.yaml"
   delete:
+    tags:
+      - Task  
     operationId: delete
     parameters:
       - name: id
@@ -73,9 +73,4 @@ task-id:
         type: string
         required: true
     responses:
-      "200":
-        description: Success
-      default:
-        description: Error
-        schema:
-          $ref: "../definitions.yaml#/ErrorResponse"
+      $ref: "../responses/default.response.yaml"

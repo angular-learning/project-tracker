@@ -1,11 +1,10 @@
 // user model
 var mongoose = require('mongoose');
-var bcrypt   = require('bcrypt-nodejs');
 var Schema = mongoose.Schema;
 var passportLocalMongoose = require('passport-local-mongoose');
 
 var User = new Schema({    
-    login: String,
+    username: String,
     password: String,
     displayName: String,
     createdAt: Date
