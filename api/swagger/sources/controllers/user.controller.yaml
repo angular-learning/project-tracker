@@ -1,3 +1,17 @@
+register:
+  x-swagger-router-controller: "user.controller"
+  post:
+    tags:
+      - User 
+    operationId: register
+    parameters:
+      - name: user
+        in: body
+        required: true
+        schema:
+          $ref: "../models/user.model.yaml#/Register"
+    responses:
+      $ref: "../responses/default.response.yaml"
 status:
   x-swagger-router-controller: "user.controller"
   post:
@@ -5,11 +19,4 @@ status:
       - User 
     operationId: status
     responses:
-      "200":
-        description: Success
-        schema:
-          $ref: "../definitions.yaml#/MessageResponse"
-      default:
-        description: Error
-        schema:
-          $ref: "../definitions.yaml#/ErrorResponse"
+      $ref: "../responses/default.response.yaml"

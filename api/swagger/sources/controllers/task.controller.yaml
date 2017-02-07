@@ -26,12 +26,7 @@ task:
         schema:
           $ref: "../models/task.model.yaml#/Task"
     responses:
-      "200":
-        description: Task created
-      default:
-        description: Error
-        schema:
-          $ref: "../definitions.yaml#/ErrorResponse"
+      $ref: "../responses/default.response.yaml"
 task-id:
   x-swagger-router-controller: "task.controller"
   get:
@@ -67,12 +62,7 @@ task-id:
         schema:
           $ref: "../models/task.model.yaml#/Task"
     responses:
-      "200":
-        description: Success
-      default:
-        description: Error
-        schema:
-          $ref: "../definitions.yaml#/ErrorResponse"
+      $ref: "../responses/default.response.yaml"
   delete:
     tags:
       - Task  
@@ -83,9 +73,4 @@ task-id:
         type: string
         required: true
     responses:
-      "200":
-        description: Success
-      default:
-        description: Error
-        schema:
-          $ref: "../definitions.yaml#/ErrorResponse"
+      $ref: "../responses/default.response.yaml"

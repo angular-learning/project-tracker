@@ -5,6 +5,8 @@ paths:
     $ref: "./controllers/task.controller.yaml#/task-id"
   /user/status:
     $ref: "./controllers/user.controller.yaml#/status"
+  /user/register:
+    $ref: "./controllers/user.controller.yaml#/register"
   /history:
     $ref: "./controllers/history.controller.yaml#/history"
   /swagger:
