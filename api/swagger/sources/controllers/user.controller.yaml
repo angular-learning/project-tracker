@@ -1,6 +1,8 @@
 status:
   x-swagger-router-controller: "user.controller"
   post:
+    tags:
+      - User 
     operationId: status
     responses:
       "200":
