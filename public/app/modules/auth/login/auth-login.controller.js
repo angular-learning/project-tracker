@@ -1,12 +1,12 @@
 (function () {
 
-    _controller.$inject = ['$scope', '$location', 'AuthService'];
+    _controller.$inject = ['$scope', '$state', 'AuthService'];
 
     angular
         .module('projectTracker')
         .controller('loginController', _controller);
 
-    function _controller($scope, $location, AuthService) {
+    function _controller($scope, $state, AuthService) {
         $scope.login = function () {
 
             // initial values
@@ -17,7 +17,7 @@
             AuthService.login($scope.loginForm.username, $scope.loginForm.password)
                 // handle success
                 .then(function () {
-                    $location.path('/');
+                    $state.go('layout.tasks');
                     $scope.disabled = false;
                     $scope.loginForm = {};
                 })
