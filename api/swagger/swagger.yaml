@@ -112,7 +112,7 @@ paths:
       responses: *ref_2
   /user/status:
     x-swagger-router-controller: user.controller
-    post:
+    get:
       tags:
         - User
       operationId: status

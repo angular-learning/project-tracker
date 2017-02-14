@@ -1,19 +1,19 @@
 (function () {
 
-    _run.$inject = ['$rootScope', '$state', '$stateParams', 'AuthService'];
-    _config.$inject = ['$locationProvider', '$state', '$stateProvider', 'AuthService'];
+    _run.$inject = ['$rootScope', '$stateParams'];
+    _config.$inject = ['$locationProvider', '$stateProvider'];
 
     angular
         .module('projectTracker')
         .run(_run)
         .config(_config);
 
-    function _run($rootScope, $state, $stateParams) {
-        $rootScope.$state = $state;
+    function _run($rootScope, $stateProvider, $stateParams) {
+        $rootScope.$state = $stateProvider.state;
         $rootScope.$stateParams = $stateParams;
     }
 
-    function _config($locationProvider, $stateProvider, $state, AuthService) {
+    function _config($locationProvider, $stateProvider) {
         $stateProvider
             .state("layout", {
                 abstract: true,

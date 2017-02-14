@@ -36,7 +36,7 @@ logout:
       $ref: "../responses/default.response.yaml"
 status:
   x-swagger-router-controller: "user.controller"
-  post:
+  get:
     tags:
       - User 
     operationId: status

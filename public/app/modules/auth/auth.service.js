@@ -28,7 +28,7 @@
         }
 
         function _getUserStatus() {
-            return $http.get('/user/status')
+            return $http.get('api/user/status')
                 // handle success
                 .success(function (data) {
                     if (data.status) {
@@ -48,7 +48,7 @@
             var deferred = $q.defer();
 
             // send a post request to the server
-            $http.post('/user/login',
+            $http.post('api/user/login',
                 { username: username, password: password })
                 // handle success
                 .success(function (data, status) {
@@ -75,7 +75,7 @@
             var deferred = $q.defer();
 
             // send a get request to the server
-            $http.get('/user/logout')
+            $http.get('api/user/logout')
                 // handle success
                 .success(function (data) {
                     user = false;
@@ -96,7 +96,7 @@
             var deferred = $q.defer();
 
             // send a post request to the server
-            $http.post('/user/register',
+            $http.post('api/user/register',
                 { username: username, password: password })
                 // handle success
                 .success(function (data, status) {
@@ -114,5 +114,5 @@
             // return promise object
             return deferred.promise;
         }
-    };
+    }
 })();
