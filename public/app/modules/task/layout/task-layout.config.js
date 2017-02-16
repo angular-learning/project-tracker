@@ -7,9 +7,6 @@
         .config(_config);
 
     function _config($stateProvider, $urlRouterProvider) {
-        // $urlRouterProvider
-        //     .otherwise('/tasks/');
-
         $stateProvider
             .state('layout.tasks', {
                 url: 'tasks/',

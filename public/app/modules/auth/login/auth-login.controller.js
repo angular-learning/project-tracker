@@ -7,6 +7,12 @@
         .controller('loginController', _controller);
 
     function _controller($scope, $state, AuthService) {
+        AuthService.getUserStatus().then(function () {
+            if (AuthService.isLoggedIn()) {
+                $state.go('layout.tasks');
+            }
+        });
+
         $scope.login = function () {
 
             // initial values

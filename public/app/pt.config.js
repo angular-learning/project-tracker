@@ -1,7 +1,7 @@
 (function () {
 
     _run.$inject = ['$rootScope', '$stateParams'];
-    _config.$inject = ['$locationProvider', '$stateProvider'];
+    _config.$inject = ['$locationProvider', '$stateProvider', '$urlRouterProvider'];
 
     angular
         .module('projectTracker')
@@ -13,7 +13,7 @@
         $rootScope.$stateParams = $stateParams;
     }
 
-    function _config($locationProvider, $stateProvider) {
+    function _config($locationProvider, $stateProvider, $urlRouterProvider) {
         $stateProvider
             .state("layout", {
                 abstract: true,
