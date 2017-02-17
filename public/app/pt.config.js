@@ -1,23 +1,26 @@
 (function () {
-    
-    _run.$inject = ['$rootScope', '$state', '$stateParams'];
-    _config.$inject = ['$locationProvider', '$stateProvider'];
+
+    _run.$inject = ['$rootScope', '$stateParams'];
+    _config.$inject = ['$locationProvider', '$stateProvider', '$urlRouterProvider'];
 
     angular
         .module('projectTracker')
         .run(_run)
         .config(_config);
 
-    function _run($rootScope, $state, $stateParams, $cookieStore, $http) {
-        $rootScope.$state = $state;
+    function _run($rootScope, $stateProvider, $stateParams) {
+        $rootScope.$state = $stateProvider.state;
         $rootScope.$stateParams = $stateParams;
     }
 
-    function _config($locationProvider, $stateProvider) {
+    function _config($locationProvider, $stateProvider, $urlRouterProvider) {
         $stateProvider
             .state("layout", {
                 abstract: true,
                 url: '/?search',
+                resolve: {
+                    resolvedUser: _checkForAuthenticatedUser
+                },
                 views: {
                     '': { templateUrl: '/app/layout/layout.view.tmpl.html' },
                     'header@layout': {
@@ -31,5 +34,13 @@
             });
 
         $locationProvider.html5Mode(true);
+    }
+
+    function _checkForAuthenticatedUser(AuthService, $state) {
+        AuthService.getUserStatus().then(function () {
+            if (!AuthService.isLoggedIn()) {
+                $state.go('login');
+            }
+        });
     }
 })();

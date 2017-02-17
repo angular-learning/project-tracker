@@ -4,4 +4,9 @@
 			<input type="text" class="form-control" placeholder="Search" ng-model="headerCtrl.searchRequest" ng-change=headerCtrl.updateSearchRequest()>
 		</div>
 	</form>
+	<form class="navbar-form navbar-right">
+		<div class="form-group">
+			<button type="button" class="btn btn-labeled" ng-click="headerCtrl.logout()">Logout</button>
+		</div>
+	</form>
 </nav>
